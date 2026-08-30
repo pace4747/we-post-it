@@ -36,6 +36,10 @@
       "destination": "/api/feedback"
     },
     {
+      "source": "/s/rr-electric",
+      "destination": "/s/rr-electric.html"
+    },
+    {
       "source": "/s/:slug",
       "destination": "/api/shop-page?slug=:slug"
     },
