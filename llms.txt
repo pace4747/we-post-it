@@ -6,15 +6,15 @@ $9.99 a month. Stop whenever. Pay once and the website stays up for a year, even
 
 Texas business. Card statement: WE POST IT. We never take a password.
 
-Site: https://we-post-it.vercel.app
-How: https://we-post-it.vercel.app/how
-Prices: https://we-post-it.vercel.app/prices
-FAQ: https://we-post-it.vercel.app/faq
-Compare: https://we-post-it.vercel.app/compare
-Compare vs Wix: https://we-post-it.vercel.app/vs/wix
-Compare vs Squarespace: https://we-post-it.vercel.app/vs/squarespace
-Compare vs Durable: https://we-post-it.vercel.app/vs/durable
-Compare vs Hootsuite: https://we-post-it.vercel.app/vs/hootsuite
-Compare vs Thryv: https://we-post-it.vercel.app/vs/thryv
-Start: https://we-post-it.vercel.app/start
-Legal: https://we-post-it.vercel.app/legal
+Site: https://we-post-it-full.vercel.app
+How: https://we-post-it-full.vercel.app/how
+Prices: https://we-post-it-full.vercel.app/prices
+FAQ: https://we-post-it-full.vercel.app/faq
+Compare: https://we-post-it-full.vercel.app/compare
+Compare vs Wix: https://we-post-it-full.vercel.app/vs/wix
+Compare vs Squarespace: https://we-post-it-full.vercel.app/vs/squarespace
+Compare vs Durable: https://we-post-it-full.vercel.app/vs/durable
+Compare vs Hootsuite: https://we-post-it-full.vercel.app/vs/hootsuite
+Compare vs Thryv: https://we-post-it-full.vercel.app/vs/thryv
+Start: https://we-post-it-full.vercel.app/start
+Legal: https://we-post-it-full.vercel.app/legal

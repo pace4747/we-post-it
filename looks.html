@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f7f4">
+<title>Looks — We Post It</title>
+<meta name="description" content="Three palettes for your shop page: Yard, Night, Granite. Simple, clean looks.">
+<link rel="canonical" href="https://we-post-it-full.vercel.app/looks">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="Looks — We Post It">
+<meta property="og:description" content="Three palettes for your shop page: Yard, Night, Granite.">
+<meta property="og:url" content="https://we-post-it-full.vercel.app/looks">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/site.css">
+<style>
+.palette-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+.palette-card {
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.palette-card h2 {
+  font-size: 1.5rem;
+  font-weight: 750;
+  margin: 0 0 0.5rem;
+}
+.palette-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+</style>
+</head>
+<body>
+
+<!-- Competitor ads -->
+<div class="comp-ads" aria-hidden="true">
+  <div class="comp-ad comp-ad-left-1">
+    <strong>Wix</strong>
+    <div class="old-price" data-en="$17/mo" data-es="$17 al mes">$17/mo</div>
+    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
+  </div>
+  <div class="comp-ad comp-ad-left-2">
+    <strong>Squarespace</strong>
+    <div class="old-price" data-en="$16/mo" data-es="$16 al mes">$16/mo</div>
+    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
+  </div>
+  <div class="comp-ad comp-ad-left-3">
+    <strong>Durable</strong>
+    <div class="old-price" data-en="$22/mo" data-es="$22 al mes">$22/mo</div>
+    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
+  </div>
+  <div class="comp-ad comp-ad-right-1">
+    <strong>Hootsuite</strong>
+    <div class="old-price" data-en="$99/mo" data-es="$99 al mes">$99/mo</div>
+    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
+  </div>
+  <div class="comp-ad comp-ad-right-2">
+    <strong>Thryv</strong>
+    <div class="old-price" data-en="$99/mo" data-es="$99 al mes">$99/mo</div>
+    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
+  </div>
+</div>
+
+<!-- ONE HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <nav class="header-nav" aria-label="Site">
+      <a href="/" data-en="We Post It" data-es="We Post It">We Post It</a>
+      <a href="/how" data-en="How" data-es="Cómo">How</a>
+      <a href="/prices" data-en="Prices" data-es="Precios">Prices</a>
+      <a href="/faq" data-en="FAQ" data-es="FAQ">FAQ</a>
+      <a href="/feedback" data-en="Feedback" data-es="Feedback">Feedback</a>
+    </nav>
+    <div class="header-sale" data-en="Online Presence for only $9.99 a month" data-es="Presencia en línea por solo $9.99 al mes">Online Presence for only $9.99 a month</div>
+    <div class="header-actions">
+      <a class="header-start" href="/#checkout" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
+      <button type="button" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button>
+    </div>
+  </div>
+</header>
+
+<!-- Main content -->
+<main class="wrap">
+  <h1 data-en="Looks" data-es="Estilos">Looks</h1>
+  
+  <p class="lead" data-en="Three palettes for your shop page. Simple, clean looks." data-es="Tres paletas para su página de negocio. Estilos simples y limpios.">Three palettes for your shop page. Simple, clean looks.</p>
+
+  <div class="palette-grid">
+    <div class="palette-card">
+      <h2 data-en="Yard" data-es="Patio">Yard</h2>
+      <p data-en="Light, open, classic." data-es="Claro, abierto, clásico.">Light, open, classic.</p>
+    </div>
+
+    <div class="palette-card">
+      <h2 data-en="Night" data-es="Noche">Night</h2>
+      <p data-en="Dark, modern, bold." data-es="Oscuro, moderno, atrevido.">Dark, modern, bold.</p>
+    </div>
+
+    <div class="palette-card">
+      <h2 data-en="Granite" data-es="Granito">Granite</h2>
+      <p data-en="Neutral, solid, professional." data-es="Neutral, sólido, profesional.">Neutral, solid, professional.</p>
+    </div>
+  </div>
+
+  <p class="muted" data-en="Pick when you start. Text us to change anytime." data-es="Elija cuando empiece. Mándenos un mensaje para cambiar en cualquier momento.">Pick when you start. Text us to change anytime.</p>
+
+  <div style="margin-top: 1.5rem;">
+    <a class="btn" href="/#checkout" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
+    <a class="btn btn-ghost" href="/how" data-en="How it works" data-es="Cómo funciona">How it works</a>
+  </div>
+</main>
+
+<!-- ONE BOTTOM BAR -->
+<div id="bottomBar">
+  <div class="bottom-left" id="cookieRow">
+    <span data-en="We only remember if you picked English or Spanish." data-es="Solo recordamos si eligió inglés o español.">We only remember if you picked English or Spanish.</span>
+    <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a>
+    <a href="/cookies" data-en="Cookies" data-es="Cookies">Cookies</a>
+  </div>
+  <div class="bottom-right">
+    <button id="cookieOk" data-en="OK" data-es="OK">OK</button>
+  </div>
+</div>
+
+<div id="helpBox">
+  <p class="help-head" id="helpHead">Got a question? Ask us.</p>
+  <div class="help-log" id="helpLog"></div>
+  <form class="help-form" id="helpForm">
+    <div class="help-field" id="helpField">
+      <input type="text" id="helpIn" autocomplete="off">
+      <span class="help-hint" id="helpHint">Type it here.</span>
+    </div>
+    <button type="submit" id="helpGo">Send</button>
+  </form>
+</div>
+
+<script src="/js/site.js"></script>
+<script src="/js/visit.js"></script>
+<script src="/js/help.js"></script>
+<script>
+(function() {
+  function hideCookies() {
+    document.body.classList.add("cookies-off");
+    var bar = document.getElementById("bottomBar");
+    if (bar) bar.hidden = true;
+  }
+  if (localStorage.getItem("wpi-cookie-ok")) hideCookies();
+  var btn = document.getElementById("cookieOk");
+  if (btn) btn.addEventListener("click", function () {
+    localStorage.setItem("wpi-cookie-ok", "1");
+    hideCookies();
+  });
+})();
+</script>
+</body>
+</html>
