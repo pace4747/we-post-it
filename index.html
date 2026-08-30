@@ -52,13 +52,13 @@
 <!-- ONE HEADER - Always visible -->
 <header class="header">
   <div class="header-inner">
-    <div class="header-sale" data-en="Online Presence for only $9.99 a month" data-es="Presencia en línea por solo $9.99 al mes">Online Presence for only $9.99 a month</div>
     <nav class="header-nav" aria-label="Site">
       <a href="/" aria-current="page" data-en="We Post It" data-es="We Post It">We Post It</a>
       <a href="/how" data-en="How" data-es="Cómo">How</a>
       <a href="/prices" data-en="Prices" data-es="Precios">Prices</a>
       <a href="/faq" data-en="FAQ" data-es="FAQ">FAQ</a>
     </nav>
+    <div class="header-sale" data-en="Online Presence for only $9.99 a month" data-es="Presencia en línea por solo $9.99 al mes">Online Presence for only $9.99 a month</div>
     <div class="header-actions">
       <a class="header-start" href="/#checkout" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
       <button type="button" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button>
@@ -69,7 +69,7 @@
 <!-- Main content column -->
 <div class="wrap">
   <div id="form">
-    <h1 data-en="We get your Google, Facebook page, and website started." data-es="Empezamos su Google, su Facebook y su página web.">We get your Google, Facebook page, and website started.</h1>
+    <h1 data-en="We get your Google, Facebook page, and website started and updated." data-es="Empezamos y actualizamos su Google, su Facebook y su página web.">We get your Google, Facebook page, and website started and updated.</h1>
     
     <p class="lead" data-en="We maintain them and post on Facebook for you. People can find you. Same name, town, phone on Google, Facebook, Apple Maps, Bing, and your page." data-es="Las mantenemos y publicamos en Facebook por usted. La gente puede encontrarlo. Mismo nombre, pueblo, teléfono en Google, Facebook, Apple Maps, Bing y su página.">We maintain them and post on Facebook for you. People can find you. Same name, town, phone on Google, Facebook, Apple Maps, Bing, and your page.</p>
 
@@ -156,19 +156,18 @@
 
 <!-- ONE BOTTOM BAR - Cookies + Help combined -->
 <div id="bottomBar">
-  <div class="bottom-left">
+  <div class="bottom-left" id="cookieRow">
     <span data-en="We only remember if you picked English or Spanish." data-es="Solo recordamos si eligió inglés o español.">We only remember if you picked English or Spanish.</span>
     <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a>
     <a href="/cookies" data-en="Cookies" data-es="Cookies">Cookies</a>
   </div>
   <div class="bottom-right">
     <button id="cookieOk" data-en="OK" data-es="OK">OK</button>
-    <button id="helpToggle" type="button">Ask us</button>
   </div>
 </div>
 
 <!-- Help box - opens above bottom bar -->
-<div id="helpBox" hidden>
+<div id="helpBox">
   <p class="help-head" id="helpHead">Got a question? Ask us.</p>
   <div class="help-log" id="helpLog"></div>
   <form class="help-form" id="helpForm">
@@ -354,16 +353,21 @@
   setPayLabel();
   syncProof();
 
-  if (!localStorage.getItem("wpi-cookie-ok")) {
-    document.getElementById("bottomBar").hidden = false;
-  } else {
-    document.getElementById("bottomBar").hidden = true;
+  function hideCookieRow() {
+    var row = document.getElementById("cookieRow");
+    if (row) row.hidden = true;
+    document.body.classList.add("cookies-off");
   }
-
-  document.getElementById("cookieOk").addEventListener("click", function () {
-    localStorage.setItem("wpi-cookie-ok", "1");
-    document.getElementById("bottomBar").hidden = true;
-  });
+  if (localStorage.getItem("wpi-cookie-ok")) {
+    hideCookieRow();
+  }
+  var cookieOk = document.getElementById("cookieOk");
+  if (cookieOk) {
+    cookieOk.addEventListener("click", function () {
+      localStorage.setItem("wpi-cookie-ok", "1");
+      hideCookieRow();
+    });
+  }
 })();
 </script>
 <script src="/js/help.js"></script>
