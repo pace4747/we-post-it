@@ -260,7 +260,7 @@ body {
 <body>
 
 <div class="hero">
-  <h1>${escapeHTML(shop).toUpperCase()}</h1>
+  <h1>${escapeHTML(shop)}</h1>
   ${category && locationLine ? `<div class="tagline">${escapeHTML(category)} in ${escapeHTML(locationLine)}</div>` : ""}
   <div class="cta">
     ${phone ? `<a href="tel:${escapeHTML(phoneLink)}" class="btn btn-primary">Call ${escapeHTML(phoneDisplay)}</a>` : ""}

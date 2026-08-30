@@ -19,7 +19,6 @@
     return sid;
   }
 
-  var bottomBar = document.getElementById("bottomBar");
   var helpBox = document.getElementById("helpBox");
   var helpToggle = document.getElementById("helpToggle");
   var helpHead = document.getElementById("helpHead");
