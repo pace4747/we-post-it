@@ -145,17 +145,6 @@
   </div>
 </main>
 
-<!-- ONE BOTTOM BAR -->
-<div id="bottomBar">
-  <div class="bottom-left" id="cookieRow">
-    <span data-en="We only remember if you picked English or Spanish." data-es="Solo recordamos si eligió inglés o español.">We only remember if you picked English or Spanish.</span>
-    <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a>
-    <a href="/cookies" data-en="Cookies" data-es="Cookies">Cookies</a>
-  </div>
-  <div class="bottom-right">
-    <button id="cookieOk" data-en="OK" data-es="OK">OK</button>
-  </div>
-</div>
 
 <div id="helpBox">
   <p class="help-head" id="helpHead">Got a question? Ask us.</p>
@@ -224,17 +213,6 @@
     });
   });
 
-  function hideCookies() {
-    document.body.classList.add("cookies-off");
-    var bar = document.getElementById("bottomBar");
-    if (bar) bar.hidden = true;
-  }
-  if (localStorage.getItem("wpi-cookie-ok")) hideCookies();
-  var btn = document.getElementById("cookieOk");
-  if (btn) btn.addEventListener("click", function () {
-    localStorage.setItem("wpi-cookie-ok", "1");
-    hideCookies();
-  });
 })();
 </script>
 </body>
