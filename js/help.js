@@ -19,35 +19,22 @@
     return sid;
   }
 
-  var bottomBar = document.getElementById("bottomBar");
-  var helpBox = document.getElementById("helpBox");
+  var helpSection = document.getElementById("helpSection");
   var helpToggle = document.getElementById("helpToggle");
-  var helpHead = document.getElementById("helpHead");
   var helpLog = document.getElementById("helpLog");
   var helpForm = document.getElementById("helpForm");
   var helpIn = document.getElementById("helpIn");
   var helpGo = document.getElementById("helpGo");
-  var helpField = document.getElementById("helpField");
-  var helpHint = document.getElementById("helpHint");
 
-  if (!helpToggle || !helpBox) return;
+  if (!helpToggle || !helpSection) return;
 
   function updateLabels() {
-    helpToggle.textContent = t("Ask us", "Pregúntenos");
-    helpHead.textContent = t("Got a question? Ask us.", "¿Tiene una pregunta? Pregúntenos.");
-    helpHint.textContent = t("Type it here.", "Escríbala aquí.");
-    helpIn.setAttribute("aria-label", t("Question", "Pregunta"));
-    helpGo.textContent = t("Send", "Enviar");
-  }
-
-  function syncHint() {
-    var on = !!(helpIn && helpIn.value);
-    helpField.classList.toggle("has-text", on);
-    if (on || helpLog.childNodes.length) {
-      helpHead.style.display = "none";
-    } else {
-      helpHead.style.display = "";
+    var toggleText = t("Ask us", "Pregúntenos");
+    if (helpToggle.textContent.indexOf("✕") === -1) {
+      helpToggle.textContent = toggleText;
     }
+    helpIn.setAttribute("placeholder", t("Type your question...", "Escribe tu pregunta..."));
+    helpGo.textContent = t("Send", "Enviar");
   }
 
   function add(who, text) {
@@ -60,16 +47,16 @@
   }
 
   helpToggle.addEventListener("click", function () {
-    var isHidden = helpBox.hidden;
-    helpBox.hidden = !isHidden;
+    var isHidden = helpSection.hidden;
+    helpSection.hidden = !isHidden;
     if (!isHidden) {
+      helpToggle.textContent = t("Ask us", "Pregúntenos");
       helpIn.blur();
     } else {
+      helpToggle.textContent = "✕";
       helpIn.focus();
     }
   });
-
-  helpIn.addEventListener("input", syncHint);
 
   helpForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -78,7 +65,6 @@
 
     add("me", q);
     helpIn.value = "";
-    syncHint();
 
     var session = getSession();
     var payload = { session: session, text: q, lang: lang() };
@@ -123,11 +109,9 @@
     langBtn.addEventListener("click", function () {
       setTimeout(function () {
         updateLabels();
-        syncHint();
       }, 0);
     });
   }
 
   updateLabels();
-  syncHint();
 })();
