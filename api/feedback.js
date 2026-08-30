@@ -58,14 +58,14 @@ module.exports = async function handler(req, res) {
     body = {};
   }
 
-  const type = String(body.type || "").trim();
+  const type = String(body.type || "general").trim() || "general";
   const message = String(body.message || "").trim();
   const shop = String(body.shop || "").trim();
   const phone = String(body.phone || "").trim();
   const lang = String(body.lang || "en").trim();
 
-  if (!type || !message) {
-    res.status(400).json({ ok: false, error: "Need type and message." });
+  if (!message) {
+    res.status(400).json({ ok: false, error: "Need message." });
     return;
   }
 

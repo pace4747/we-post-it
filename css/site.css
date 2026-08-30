@@ -643,97 +643,40 @@ ol.easy span {
   }
 }
 
-/* FEEDBACK BOX - opposite side from help */
+/* FEEDBACK BUTTON - opposite side from help, always visible */
 #feedbackBox {
   position: fixed;
   bottom: calc(var(--bottom-bar, 5.25rem) + 0.75rem);
   left: 1rem;
-  right: 1rem;
   max-width: 34rem;
-  margin-right: auto;
-  background: #fff;
-  color: #111;
+  background: #111;
+  color: #fff;
   border: 2px solid #111;
   border-radius: 14px;
-  padding: 1rem 1.1rem;
+  padding: 1rem 1.5rem;
   box-shadow: 0 12px 32px rgba(0,0,0,0.2);
   z-index: 110;
-  max-height: calc(var(--bottom-bar, 5.25rem) + 1.5rem + 4rem);
-  transition: max-height 0.2s ease;
-}
-
-#feedbackBox.open {
-  max-height: calc(100vh - var(--bottom-bar, 5.25rem) - 2rem);
-}
-
-body.cookies-off #feedbackBox {
-  bottom: 0.9rem;
-}
-
-.feedback-head {
-  margin: 0 0 0.6rem;
+  text-decoration: none;
+  display: block;
   font-weight: 800;
   font-size: 1.35rem;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  cursor: pointer;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.feedback-log {
-  max-height: 10rem;
-  overflow: auto;
-  margin: 0 0 0.6rem;
+#feedbackBox:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
 }
 
-.feedback-log:empty {
-  display: none;
+#feedbackBox:active {
+  transform: translateY(0);
 }
 
-.feedback-log p {
-  margin: 0 0 0.45rem;
-  font-size: 1rem;
-}
-
-.feedback-form {
-  display: grid;
-  gap: 0.4rem;
-}
-
-.feedback-field {
-  position: relative;
-}
-
-.feedback-form select,
-.feedback-form textarea {
-  width: 100%;
-  border: 1.5px solid #111;
-  border-radius: 10px;
-  padding: 0.45rem 0.7rem;
-  font: inherit;
-  font-size: 1.05rem;
-  background: #f7f7f4;
-  min-height: 48px;
-}
-
-.feedback-form textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-.feedback-form button {
-  min-height: 48px;
-  padding: 0 0.9rem;
-  background: #111;
-  color: #fff;
-  border: 0;
-  border-radius: 10px;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.feedback-form button:disabled {
-  opacity: 0.5;
+body.cookies-off #feedbackBox {
+  bottom: 0.9rem;
 }
 
 @media (max-width: 640px) {
@@ -742,5 +685,10 @@ body.cookies-off #feedbackBox {
     left: 0.5rem;
     right: 0.5rem;
     max-width: none;
+  }
+  
+  #feedbackBox {
+    font-size: 1.15rem;
+    padding: 0.85rem 1.2rem;
   }
 }

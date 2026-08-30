@@ -14,6 +14,42 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/css/site.css">
+<style>
+#feedbackForm .field {
+  margin-bottom: 1.5rem;
+}
+
+#feedbackForm .lbl {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+#feedbackForm select,
+#feedbackForm textarea,
+#feedbackForm input[type="text"],
+#feedbackForm input[type="tel"] {
+  font-size: 1.15rem;
+  padding: 0.75rem 0.9rem;
+  min-height: 54px;
+}
+
+#feedbackForm textarea {
+  min-height: 180px;
+  line-height: 1.5;
+}
+
+#feedbackForm button[type="submit"] {
+  font-size: 1.2rem;
+  padding: 0.85rem 1.5rem;
+  min-height: 58px;
+}
+
+.lead {
+  font-size: 1.15rem;
+}
+</style>
 </head>
 <body>
 
@@ -73,8 +109,8 @@
     <form id="feedbackForm" novalidate>
       <div class="field">
         <label class="lbl" for="type" data-en="What is this about?" data-es="¿De qué se trata?">What is this about?</label>
-        <select id="type" name="type" required>
-          <option value="" data-en="Pick one" data-es="Elija uno">Pick one</option>
+        <select id="type" name="type">
+          <option value="general" data-en="General" data-es="General">General</option>
           <option value="better" data-en="How we can do better" data-es="Cómo podemos hacerlo mejor">How we can do better</option>
           <option value="bug" data-en="Bugs" data-es="Errores">Bugs</option>
           <option value="feature" data-en="Future features you would like added" data-es="Funciones futuras que le gustaría agregar">Future features you would like added</option>
@@ -83,7 +119,7 @@
 
       <div class="field">
         <label class="lbl" for="message" data-en="Your words" data-es="Sus palabras">Your words</label>
-        <textarea id="message" name="message" rows="6" required data-ph-en="Tell us." data-ph-es="Díganos." placeholder="Tell us."></textarea>
+        <textarea id="message" name="message" rows="8" required data-ph-en="Tell us." data-ph-es="Díganos." placeholder="Tell us."></textarea>
       </div>
 
       <div class="field">
@@ -150,15 +186,8 @@
     e.preventDefault();
     err.hidden = true;
 
-    var type = document.getElementById("type").value.trim();
+    var type = document.getElementById("type").value.trim() || "general";
     var message = document.getElementById("message").value.trim();
-
-    if (!type) {
-      showErr((window.wpiLang && window.wpiLang() === "es")
-        ? "Elija un tema."
-        : "Pick a topic.");
-      return;
-    }
 
     if (!message) {
       showErr((window.wpiLang && window.wpiLang() === "es")
