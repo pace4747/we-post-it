@@ -315,6 +315,10 @@
         if (!res.http || !res.j || !res.j.ok) {
           throw new Error((res.j && res.j.error) || "no");
         }
+        if (res.j.url) {
+          window.location.href = res.j.url;
+          return;
+        }
         finish(res.j, skipCard || (res.j.payment && res.j.payment.skipCard));
       })
       .catch(function () {
