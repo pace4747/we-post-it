@@ -1,0 +1,279 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#f7f7f4"><title data-en="Feedback · We Post It" data-es="Opiniones · We Post It">Feedback · We Post It</title><link rel="canonical" href="https://we-post-it.vercel.app/feedback"><meta name="robots" content="index,follow"><meta property="og:title" content="Feedback · We Post It"><meta property="og:description" content="Tell us how to improve, report a bug, or share what you want automated."><meta property="og:url" content="https://we-post-it.vercel.app/feedback"><meta property="og:type" content="website"><meta name="description" content="Tell us how to improve, report a bug, or share what you want automated."><link rel="icon" href="/favicon.svg" type="image/svg+xml"><style>
+  :root {
+    --bg: #f7f7f4;
+    --ink: #111111;
+    --muted: #333330;
+    --line: #cfcfc8;
+    --paper: #ffffff;
+    --ask: #111111;
+    --askbg: #ecece6;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 36rem;
+    margin: 0 auto;
+    padding: 0.75rem 1.25rem 3.5rem;
+  }
+
+  .sale {
+    position: sticky; top: 0; z-index: 50;
+    margin: 0;
+    padding: .75rem 1rem;
+    padding-top: max(.75rem, env(safe-area-inset-top));
+    background: #111; color: #fff;
+    text-align: center;
+    font-weight: 800;
+    font-size: clamp(1.5rem, 5.2vw, 2.25rem);
+    line-height: 1.2;
+  }
+  header.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 0 1.6rem;
+  }
+  .brand {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .15rem .9rem;
+    padding: .65rem 0 .75rem;
+    border-top: 1px solid var(--line);
+  }
+  .nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 650;
+    font-size: 0.95rem;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .nav a[aria-current="page"] {
+    color: var(--ink);
+    font-weight: 750;
+  }
+  #langBtn {
+    min-height: 44px;
+    min-width: 48px;
+    padding: 0 0.7rem;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  h1 {
+    font-size: 2.35rem;
+    line-height: 1.15;
+    font-weight: 750;
+    letter-spacing: -0.025em;
+    margin: 0 0 0.85rem;
+  }
+  h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.45rem;
+  }
+  p { margin: 0 0 0.85rem; }
+  .lead { margin-bottom: 1.75rem; }
+  section {
+    margin: 0 0 2.15rem;
+  }
+  label.lbl {
+    display: block;
+    font-weight: 650;
+    font-size: 1rem;
+    margin: 0 0 0.35rem;
+  }
+  .field { margin: 0 0 1.05rem; }
+  input[type="text"], input[type="tel"], textarea {
+    width: 100%;
+    min-height: 58px;
+    font: inherit;
+    font-size: 1.15rem;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1.5px solid #bdbdb6;
+    border-radius: 10px;
+    padding: 0.55rem 0.8rem;
+  }
+  input:focus, textarea:focus, #langBtn:focus, .btn:focus, .choice:focus-within {
+    outline: 3px solid #111;
+    outline-offset: 2px;
+  }
+  textarea { min-height: 8rem; resize: vertical; }
+  ::placeholder { color: #3a3a38; opacity: 1; }
+  .choices { display: grid; gap: 0.5rem; margin: 0 0 1.15rem; }
+  .choice {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.65rem;
+    align-items: center;
+    padding: 0.75rem 0.85rem;
+    min-height: 52px;
+    background: var(--paper);
+    border: 1.5px solid #bdbdb6;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .choice:has(input:checked) {
+    border-color: #111;
+    border-width: 2px;
+    padding: calc(0.75rem - 0.5px) calc(0.85rem - 0.5px);
+  }
+  .choice input { width: 1.15rem; height: 1.15rem; accent-color: #111; }
+  .choice b { font-weight: 750; font-size: 1.22rem; }
+  .btn {
+    display: block;
+    width: 100%;
+    min-height: 52px;
+    margin: 0 0 0.65rem;
+    padding: 0.7rem 1rem;
+    background: #111;
+    color: #fff;
+    border: 0;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn:disabled { opacity: 0.55; cursor: wait; }
+  .err {
+    color: #111;
+    background: var(--askbg);
+    font-weight: 700;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    margin: 0 0 0.85rem;
+  }
+  .err[hidden] { display: none; }
+  .success {
+    color: #111;
+    background: #d4f4dd;
+    font-weight: 700;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    margin: 0 0 0.85rem;
+  }
+  .success[hidden] { display: none; }
+  #feedbackForm[hidden], #successMsg[hidden] { display: none; }
+  footer {
+    margin-top: 2.5rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+</style></head><body><p class="sale" data-en="Online Presence for only $9.99 a month" data-es="Presencia en línea por solo $9.99 al mes">Online Presence for only $9.99 a month</p><div class="wrap"><header class="top"><a class="brand" href="/">We Post It</a><button type="button" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button></header><nav class="nav" aria-label="Site"><a href="/" data-en="Home" data-es="Inicio">Home</a><a href="/how" data-en="How" data-es="Cómo">How</a><a href="/prices" data-en="Prices" data-es="Precios">Prices</a><a href="/faq" data-en="FAQ" data-es="FAQ">FAQ</a><a href="/looks" data-en="Looks" data-es="Estilos">Looks</a><a href="/feedback" aria-current="page" data-en="Feedback" data-es="Opiniones">Feedback</a><a href="/start" data-en="Start" data-es="Empezar">Start</a></nav><h1 data-en="We want to hear from you." data-es="Queremos escucharlo.">We want to hear from you.</h1><p class="lead" data-en="Tell us how to improve, report a bug, or share what you want automated." data-es="Díganos cómo mejorar, reporte un error o comparta qué quiere automatizar.">Tell us how to improve, report a bug, or share what you want automated.</p><div id="successMsg" hidden><p class="success" data-en="We got it. Thanks." data-es="Lo recibimos. Gracias.">We got it. Thanks.</p><a class="btn" href="/" data-en="Back to Home" data-es="Regresar al inicio">Back to Home</a></div><div id="feedbackForm"><section><div class="choices"><label class="choice"><input type="radio" name="kind" value="improve" required><b data-en="Improve it." data-es="Mejórelo.">Improve it.</b></label><label class="choice"><input type="radio" name="kind" value="bug" required><b data-en="A bug." data-es="Un error.">A bug.</b></label><label class="choice"><input type="radio" name="kind" value="automate" required><b data-en="Automate this for me." data-es="Automátelo por mí.">Automate this for me.</b></label></div><div class="field"><label class="lbl" for="message" data-en="Your feedback" data-es="Su opinión">Your feedback</label><textarea id="message" name="message" required data-ph-en="Tell us what's on your mind." data-ph-es="Díganos qué piensa." placeholder="Tell us what's on your mind."></textarea></div><div class="field"><label class="lbl" for="shop" data-en="Shop name (optional)" data-es="Nombre del negocio (opcional)">Shop name (optional)</label><input id="shop" name="shop" type="text" autocomplete="organization"></div><div class="field"><label class="lbl" for="phone" data-en="Phone (optional)" data-es="Teléfono (opcional)">Phone (optional)</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"></div><p class="err" id="err" hidden></p><button class="btn" type="submit" id="sendBtn" data-en="Send" data-es="Enviar">Send</button></section></div><footer><p style="margin: 0 0 0.5rem;">We Post It · <a href="/faq">FAQ</a> · <a href="/about" data-en="About" data-es="Acerca">About</a> · <a href="/contact" data-en="Contact" data-es="Contacto">Contact</a> · <a href="/feedback" data-en="Feedback" data-es="Opiniones">Feedback</a> · <a href="/notice" data-en="Legal Notice" data-es="Aviso legal">Legal Notice</a> · <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a> · <a href="/terms" data-en="Terms" data-es="Términos">Terms</a> · <a href="/cookies">Cookies</a> · <a href="/legal">Legal</a></p><p style="margin: 0; color: var(--muted); font-size: 0.9rem;" data-en="© 2026 Sunset Gaming LLC dba We Post It · Texas." data-es="© 2026 Sunset Gaming LLC dba We Post It · Texas.">© 2026 Sunset Gaming LLC dba We Post It · Texas.</p></footer></div><script>
+(function () {
+  var KEY = "wpi-lang";
+
+  function lang() {
+    return localStorage.getItem(KEY) === "es" ? "es" : "en";
+  }
+  function apply(l) {
+    document.documentElement.lang = l;
+    document.querySelectorAll("[data-en]").forEach(function (el) {
+      var v = el.getAttribute("data-" + l) || el.getAttribute("data-en");
+      if (v !== null) el.textContent = v;
+    });
+    document.querySelectorAll("[data-ph-en]").forEach(function (el) {
+      el.setAttribute("placeholder", el.getAttribute("data-ph-" + l) || el.getAttribute("data-ph-en"));
+    });
+    var btn = document.getElementById("langBtn");
+    if (btn) {
+      btn.textContent = l === "en" ? "ES" : "EN";
+      btn.setAttribute("aria-label", l === "en" ? "Español" : "English");
+    }
+    localStorage.setItem(KEY, l);
+  }
+
+  document.getElementById("langBtn").addEventListener("click", function () {
+    apply(lang() === "en" ? "es" : "en");
+  });
+
+  function showErr(msg) {
+    var err = document.getElementById("err");
+    err.textContent = msg;
+    err.hidden = false;
+  }
+
+  document.getElementById("sendBtn").addEventListener("click", function (e) {
+    e.preventDefault();
+    
+    var kindEl = document.querySelector('input[name="kind"]:checked');
+    var message = document.getElementById("message").value.trim();
+    var shop = document.getElementById("shop").value.trim();
+    var phone = document.getElementById("phone").value.trim();
+    var err = document.getElementById("err");
+    
+    err.hidden = true;
+
+    if (!kindEl) {
+      showErr(lang() === "es" ? "Elija un tipo." : "Pick a kind.");
+      return;
+    }
+
+    if (!message) {
+      showErr(lang() === "es" ? "Escriba su opinión." : "Write your feedback.");
+      return;
+    }
+
+    if (message.length > 2000) {
+      showErr(lang() === "es" ? "Muy largo. Máximo 2000 caracteres." : "Too long. Max 2000 characters.");
+      return;
+    }
+
+    var payload = {
+      kind: kindEl.value,
+      message: message,
+      shop: shop,
+      phone: phone,
+      lang: lang()
+    };
+
+    var btn = document.getElementById("sendBtn");
+    btn.disabled = true;
+
+    fetch("/api/feedback", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.ok) {
+          document.getElementById("feedbackForm").hidden = true;
+          document.getElementById("successMsg").hidden = false;
+          window.scrollTo(0, 0);
+        } else {
+          throw new Error(data.error || "error");
+        }
+      })
+      .catch(function () {
+        showErr(lang() === "es" ? "No se envió. Intente de nuevo." : "Did not send. Try again.");
+        btn.disabled = false;
+      });
+  });
+
+  apply(lang());
+})();
+</script></body></html>
