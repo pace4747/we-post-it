@@ -16,6 +16,26 @@
     {
       "source": "/api/help",
       "destination": "/api/help"
+    },
+    {
+      "source": "/faq",
+      "destination": "/faq.html"
+    },
+    {
+      "source": "/notice",
+      "destination": "/notice.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/cookies",
+      "destination": "/cookies.html"
     }
   ],
   "headers": [
