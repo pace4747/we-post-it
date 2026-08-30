@@ -564,12 +564,82 @@ ol.easy span {
 
 /* Responsive */
 @media (max-width: 640px) {
+  /* Shrink header to a thin strip */
+  .header {
+    padding: 0.4rem 0.75rem;
+    padding-top: max(0.4rem, env(safe-area-inset-top));
+  }
+  
+  .header-inner {
+    gap: 0.5rem 0.65rem;
+  }
+  
   .header-sale {
-    font-size: 1.15rem;
+    font-size: 0.95rem;
+    line-height: 1.2;
   }
   
   .header-nav {
-    font-size: 0.88rem;
+    font-size: 0.8rem;
+    gap: 0.4rem 0.7rem;
+  }
+  
+  .header-nav a {
+    min-height: 32px;
+  }
+  
+  .header-start {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.85rem;
+    min-height: 36px;
+  }
+  
+  #langBtn {
+    min-height: 36px;
+    min-width: 40px;
+    padding: 0 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Move help box to TOP on mobile, under header */
+  #helpBox {
+    top: calc(3.5rem + env(safe-area-inset-top, 0rem));
+    bottom: auto;
+    left: 0.5rem;
+    right: 0.5rem;
+    max-width: none;
+    z-index: 105;
+  }
+  
+  body.cookies-off #helpBox {
+    top: calc(3.5rem + env(safe-area-inset-top, 0rem));
+    bottom: auto;
+  }
+  
+  /* Keep feedback at bottom on mobile with small inset */
+  #feedbackBox {
+    bottom: max(0.5rem, env(safe-area-inset-bottom));
+    left: 0.5rem;
+    right: 0.5rem;
+    max-width: none;
+    font-size: 1.3rem;
+    padding: 1.1rem 1.5rem;
+    min-height: 64px;
+  }
+  
+  body.cookies-off #feedbackBox {
+    bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+  
+  /* Adjust body padding for mobile - only bottom for feedback button */
+  body {
+    padding-bottom: 6rem;
+  }
+  
+  /* Adjust wrap padding to clear the fixed help box at top */
+  .wrap {
+    padding-top: 8rem;
+    padding-bottom: 2rem;
   }
 }
 
@@ -614,20 +684,5 @@ body.cookies-off #feedbackBox {
 @media (min-width: 1000px) {
   #feedbackBox {
     left: max(1rem, calc(((100vw - 36rem) / 2 - 22rem) / 2));
-  }
-}
-
-@media (max-width: 640px) {
-  #feedbackBox,
-  #helpBox {
-    left: 0.5rem;
-    right: 0.5rem;
-    max-width: none;
-  }
-  
-  #feedbackBox {
-    font-size: 1.3rem;
-    padding: 1.1rem 1.5rem;
-    min-height: 64px;
   }
 }
