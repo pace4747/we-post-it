@@ -22,12 +22,9 @@ body {
 
 .hero-visual {
   width: 100%;
-  height: 60vh;
-  min-height: 400px;
-  max-height: 700px;
+  height: 360px;
   border: 0;
   display: block;
-  border-bottom: 2px solid #e5e5e0;
 }
 
 .hero {
@@ -170,30 +167,6 @@ body {
   margin-top: 1rem;
 }
 
-.map-section {
-  padding: 4rem 1.5rem;
-  background: #fff;
-  border-bottom: 1px solid #e5e5e0;
-}
-.map-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-.map-inner h2 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 2rem;
-  color: #111;
-  text-align: center;
-  letter-spacing: -0.02em;
-}
-.map-embed {
-  width: 100%;
-  height: 450px;
-  border: 2px solid #e5e5e0;
-  border-radius: 12px;
-}
-
 .contact-section {
   padding: 4rem 1.5rem;
   background: #fafaf8;
@@ -256,13 +229,12 @@ body {
   .section p { font-size: 1.1rem; }
   .service-card h3 { font-size: 1.3rem; }
   .contact-phone { font-size: 1.5rem; }
-  .hero-visual { height: 50vh; min-height: 300px; }
 }
 </style>
 </head>
 <body>
 
-<iframe class="hero-visual" src="https://maps.google.com/maps?q=3621+FM1600,+Cameron,+TX+76520&layer=c&output=svembed" title="Street view of R & R Electric & Constrctn Co" loading="eager"></iframe>
+<iframe class="hero-visual" src="https://maps.google.com/maps?q=3621+FM1600,+Cameron,+TX+76520&z=16&output=embed" title="Map of R & R Electric & Constrctn Co" loading="eager"></iframe>
 
 <div class="hero">
   <h1>R &amp; R Electric &amp; Constrctn Co</h1>
@@ -330,13 +302,6 @@ body {
       <div class="town-chip">Taylor</div>
     </div>
     <p class="area-note">Nearby towns. Call if you are farther.</p>
-  </div>
-</div>
-
-<div class="map-section">
-  <div class="map-inner">
-    <h2>Location</h2>
-    <iframe class="map-embed" src="https://maps.google.com/maps?q=3621+FM1600,+Cameron,+TX+76520&z=16&output=embed" title="Map location" loading="lazy"></iframe>
   </div>
 </div>
 
