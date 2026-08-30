@@ -60,6 +60,10 @@
       "destination": "/faq.html"
     },
     {
+      "source": "/looks",
+      "destination": "/looks.html"
+    },
+    {
       "source": "/notice",
       "destination": "/notice.html"
     },

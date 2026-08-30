@@ -119,10 +119,6 @@ async function createCheckoutSession(fields) {
   var sku = String(fields.product || "both").trim();
   var lang = String(fields.lang || "en");
 
-  if (!process.env.STRIPE_SECRET_KEY) {
-    return { status: 500, body: { ok: false, error: "Stripe configuration missing." } };
-  }
-
   var stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
   try {
@@ -268,7 +264,23 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    // Fail-loud validation before Stripe
     var shop = String(fields.shop || fields.name || "").trim();
+    var zip = String(fields.zip || fields.town || fields.place || "").trim();
+    var phone = String(fields.phone || "").trim();
+    
+    if (!shop || !zip || !phone) {
+      res.status(400).json({ ok: false, error: "Need shop name, ZIP, and a phone." });
+      return;
+    }
+
+    // Check Stripe configuration
+    var stripeKey = process.env.STRIPE_SECRET_KEY || "";
+    if (!stripeKey || !stripeKey.startsWith("sk_")) {
+      res.status(500).json({ ok: false, error: "Stripe configuration missing." });
+      return;
+    }
+
     var shouldSkipPayment = /batten/i.test(shop);
 
     if (shouldSkipPayment) {

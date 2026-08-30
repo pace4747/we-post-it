@@ -22,4 +22,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://we-post-it.vercel.app/sitemap.xml
+Sitemap: https://we-post-it-full.vercel.app/sitemap.xml
