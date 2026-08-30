@@ -6,7 +6,7 @@
   if (!document.getElementById("wpiHelpCss")) {
     var css = document.createElement("style");
     css.id = "wpiHelpCss";
-    css.textContent = "#wpiHelp{position:fixed;right:.75rem;bottom:.75rem;left:.75rem;z-index:80;max-width:26rem;margin-left:auto;font-family:inherit}body{padding-bottom:8.5rem}.wpi-help-box{background:#fff;color:#111;border:1.5px solid #111;border-radius:14px;padding:.85rem;box-shadow:0 10px 28px rgba(0,0,0,.16)}.wpi-help-head{margin:0 0 .55rem;font-weight:700;font-size:1.12rem}.wpi-help-log{max-height:10rem;overflow:auto;margin:0 0 .5rem}.wpi-help-log:empty{display:none}.wpi-help-log p{margin:0 0 .45rem;font-size:1rem}.wpi-help-log .me{font-weight:650}.wpi-help-log .wait{color:#666;font-style:italic}.wpi-help-form{display:grid;grid-template-columns:1fr auto;gap:.4rem}.wpi-help-field{position:relative}.wpi-help-form input{width:100%;min-height:48px;border:1.5px solid #111;border-radius:10px;padding:.45rem .7rem;font:inherit;font-size:1.05rem;background:#f7f7f4}.wpi-help-hint{position:absolute;left:.7rem;right:.7rem;top:50%;transform:translateY(-50%);pointer-events:none;color:#222;font-weight:700;font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wpi-help-field.has-text .wpi-help-hint{display:none}.wpi-help-form button{min-height:48px;padding:0 .9rem;background:#111;color:#fff;border:0;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}.wpi-help-form button:disabled{opacity:.45}";
+    css.textContent = "#wpiHelp{position:fixed;right:.75rem;bottom:.9rem;left:.75rem;z-index:80;max-width:34rem;margin-left:auto;font-family:inherit}body{padding-bottom:11rem}.wpi-help-box{background:#fff;color:#111;border:2px solid #111;border-radius:18px;padding:1.15rem 1.2rem;box-shadow:0 16px 40px rgba(0,0,0,.22)}.wpi-help-head{margin:0 0 .75rem;font-weight:800;font-size:1.55rem;letter-spacing:-.02em;line-height:1.2}.wpi-help-log{max-height:10rem;overflow:auto;margin:0 0 .6rem}.wpi-help-log:empty{display:none}.wpi-help-log p{margin:0 0 .45rem;font-size:1.05rem}.wpi-help-log .me{font-weight:650}.wpi-help-log .wait{color:#666;font-style:italic}.wpi-help-form{display:grid;grid-template-columns:1fr auto;gap:.5rem}.wpi-help-field{position:relative}.wpi-help-form input{width:100%;min-height:58px;border:2px solid #111;border-radius:12px;padding:.55rem .95rem;font:inherit;font-size:1.22rem;background:#f7f7f4}.wpi-help-hint{position:absolute;left:.95rem;right:.95rem;top:50%;transform:translateY(-50%);pointer-events:none;color:#111;font-weight:750;font-size:1.22rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wpi-help-field.has-text .wpi-help-hint{display:none}.wpi-help-form button{min-height:58px;padding:0 1.2rem;background:#111;color:#fff;border:0;border-radius:12px;font:inherit;font-weight:800;font-size:1.15rem;cursor:pointer}.wpi-help-form button:disabled{opacity:.45}";
     document.head.appendChild(css);
   }
 
@@ -41,10 +41,10 @@
   document.body.appendChild(wrap);
 
   function labels() {
-    document.getElementById("wpiHelpHead").textContent = t("Have a question?", "¿Tiene una pregunta?");
-    var hint = t("Have a question?", "¿Tiene una pregunta?");
+    document.getElementById("wpiHelpHead").textContent = t("Got a question? Ask us.", "¿Tiene una pregunta? Pregúntenos.");
+    var hint = t("Type it here.", "Escríbala aquí.");
     document.getElementById("wpiHelpHint").textContent = hint;
-    document.getElementById("wpiHelpIn").setAttribute("aria-label", hint);
+    document.getElementById("wpiHelpIn").setAttribute("aria-label", t("Got a question? Ask us.", "¿Tiene una pregunta? Pregúntenos."));
     document.getElementById("wpiHelpGo").textContent = t("Send", "Enviar");
   }
 
@@ -73,6 +73,10 @@
     if (!polling) return;
     if (Date.now() > pollStop) {
       polling = false;
+      document.getElementById("wpiHelpIn").disabled = false;
+      document.getElementById("wpiHelpGo").disabled = false;
+      var waits = document.querySelectorAll("#wpiHelpLog .wait");
+      for (var i = 0; i < waits.length; i++) { waits[i].remove(); }
       return;
     }
     var session = getSession();
