@@ -129,7 +129,7 @@ async function createCheckoutSession(fields) {
     var sessionParams = {
       mode: "subscription",
       line_items: [{
-        price: "price_1UABhxRODxSLQAjIxjMNtx38",
+        price: "price_1UABs108z3zLzTvzj60seVsl",
         quantity: 1
       }],
       success_url: "https://we-post-it-full.vercel.app/?paid=1",
