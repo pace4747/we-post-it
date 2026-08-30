@@ -66,46 +66,6 @@
     document.getElementById("wpiHelpHead").style.display = on || document.getElementById("wpiHelpLog").childNodes.length ? "none" : "";
   }
 
-  var polling = false;
-  var pollStop = 0;
-
-  function poll() {
-    if (!polling) return;
-    if (Date.now() > pollStop) {
-      polling = false;
-      document.getElementById("wpiHelpIn").disabled = false;
-      document.getElementById("wpiHelpGo").disabled = false;
-      var waits = document.querySelectorAll("#wpiHelpLog .wait");
-      for (var i = 0; i < waits.length; i++) { waits[i].remove(); }
-      return;
-    }
-    var session = getSession();
-    fetch("/api/help?session=" + encodeURIComponent(session))
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (!polling) return;
-        if (data.ok && data.messages && data.messages.length) {
-          var log = document.getElementById("wpiHelpLog");
-          var waits = log.querySelectorAll(".wait");
-          for (var i = 0; i < waits.length; i++) { waits[i].remove(); }
-          for (var j = 0; j < data.messages.length; j++) {
-            var msg = data.messages[j];
-            if (msg.who === "bot") {
-              add("bot", msg.text);
-              polling = false;
-              document.getElementById("wpiHelpIn").disabled = false;
-              document.getElementById("wpiHelpGo").disabled = false;
-              return;
-            }
-          }
-        }
-        if (polling) setTimeout(poll, 2000);
-      })
-      .catch(function () {
-        if (polling) setTimeout(poll, 2000);
-      });
-  }
-
   labels();
   var inp = document.getElementById("wpiHelpIn");
   inp.addEventListener("input", syncHint);
@@ -113,6 +73,10 @@
     e.preventDefault();
     var q = inp.value.trim();
     if (!q) return;
+
+    var log = document.getElementById("wpiHelpLog");
+    var turnCount = log.querySelectorAll(".me").length;
+
     add("me", q);
     inp.value = "";
     syncHint();
@@ -130,11 +94,16 @@
     })
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (data.ok) {
-          add("wait", t("Checking with the team…", "Consultando con el equipo…"));
-          polling = true;
-          pollStop = Date.now() + 120000;
-          setTimeout(poll, 2000);
+        if (data.ok && data.reply) {
+          add("bot", data.reply);
+          if (data.closed) {
+            document.getElementById("wpiHelpIn").disabled = true;
+            document.getElementById("wpiHelpGo").disabled = true;
+          } else {
+            document.getElementById("wpiHelpIn").disabled = false;
+            document.getElementById("wpiHelpGo").disabled = false;
+            inp.focus();
+          }
         } else {
           add("bot", t("We got it. After you start, text us.", "Lo recibimos. Cuando empiece, mándenos un mensaje."));
           document.getElementById("wpiHelpIn").disabled = false;
