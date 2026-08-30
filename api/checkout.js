@@ -111,7 +111,7 @@ function collectBody(req) {
   });
 }
 
-async function createCheckoutSession(fields) {
+async function createCheckoutSession(fields, req) {
   var shop = String(fields.shop || fields.name || "").trim();
   var zip = String(fields.zip || fields.town || fields.place || "").trim();
   var phone = String(fields.phone || "").trim();
@@ -121,6 +121,23 @@ async function createCheckoutSession(fields) {
 
   var stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+  var allowedHosts = [
+    "wepostit.site",
+    "www.wepostit.site",
+    "we-post-it-full.vercel.app",
+    "yoursite.site",
+    "www.yoursite.site"
+  ];
+  var fallbackOrigin = "https://we-post-it-full.vercel.app";
+
+  var host = req.headers["x-forwarded-host"] || req.headers["host"] || "";
+  var proto = req.headers["x-forwarded-proto"] || "https";
+  var origin = fallbackOrigin;
+
+  if (host && allowedHosts.indexOf(host) !== -1) {
+    origin = proto + "://" + host;
+  }
+
   try {
     var sessionParams = {
       mode: "subscription",
@@ -128,8 +145,8 @@ async function createCheckoutSession(fields) {
         price: "price_1UABs108z3zLzTvzj60seVsl",
         quantity: 1
       }],
-      success_url: "https://we-post-it-full.vercel.app/?paid=1",
-      cancel_url: "https://we-post-it-full.vercel.app/#checkout",
+      success_url: origin + "/?paid=1",
+      cancel_url: origin + "/#checkout",
       client_reference_id: shop + "|" + Date.now(),
       metadata: {
         shop: shop,
@@ -290,7 +307,7 @@ module.exports = async function handler(req, res) {
       return;
     }
 
-    var checkoutResult = await createCheckoutSession(fields);
+    var checkoutResult = await createCheckoutSession(fields, req);
     res.status(checkoutResult.status).json(checkoutResult.body);
   } catch (e) {
     console.error("checkout", e);
