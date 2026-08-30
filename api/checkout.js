@@ -119,6 +119,7 @@ function saveOrder(fields, photos) {
   }
   var sku = String(fields.product || "both").trim();
   if (!PRODUCTS[sku]) sku = "both";
+  var email = String(fields.email || "").trim();
   var skipCard = fields.skipCard === "1" || fields.skipCard === true || fields.skipCard === "true";
   var proof = fields.proof === "1" || fields.proof === true || /batten/i.test(shop);
   if (proof && skipCard) skipCard = true;
@@ -227,3 +228,4 @@ module.exports = async function handler(req, res) {
     res.status(500).json({ ok: false, error: "Did not save." });
   }
 };
+
