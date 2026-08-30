@@ -219,61 +219,7 @@ body {
   }
 }
 
-/* BOTTOM BAR - Cookies + Help combined in ONE strip */
-#bottomBar {
-  --bottom-bar: 5.25rem;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #111;
-  color: #fff;
-  padding: 0.75rem 1rem;
-  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
-  font-size: 0.95rem;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-#bottomBar[hidden] {
-  display: none;
-}
-
-.bottom-left {
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.bottom-left a {
-  color: #fff;
-  font-weight: 700;
-}
-
-.bottom-right {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-#cookieOk {
-  padding: 0.3rem 0.7rem;
-  background: #fff;
-  color: #111;
-  border: 0;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-/* Help in bottom bar */
+/* Help box */
 #helpToggle {
   padding: 0.4rem 0.8rem;
   background: transparent;
@@ -289,7 +235,7 @@ body {
 
 #helpBox {
   position: fixed;
-  bottom: calc(var(--bottom-bar, 5.25rem) + 0.75rem);
+  bottom: 0.9rem;
   right: 1rem;
   left: 1rem;
   max-width: 34rem;
@@ -301,18 +247,6 @@ body {
   padding: 1rem 1.1rem;
   box-shadow: 0 12px 32px rgba(0,0,0,0.2);
   z-index: 110;
-}
-
-body.cookies-off #helpBox {
-  bottom: 0.9rem;
-}
-
-body.cookies-off #bottomBar {
-  display: none;
-}
-
-#cookieRow[hidden] {
-  display: none;
 }
 
 .help-head {
