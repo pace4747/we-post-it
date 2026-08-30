@@ -30,10 +30,11 @@
   var helpField = document.getElementById("helpField");
   var helpHint = document.getElementById("helpHint");
 
-  if (!helpToggle || !helpBox) return;
+  if (!helpBox) return;
+  helpBox.hidden = false;
 
   function updateLabels() {
-    helpToggle.textContent = t("Ask us", "Pregúntenos");
+    if (helpToggle) helpToggle.textContent = t("Ask us", "Pregúntenos");
     helpHead.textContent = t("Got a question? Ask us.", "¿Tiene una pregunta? Pregúntenos.");
     helpHint.textContent = t("Type it here.", "Escríbala aquí.");
     helpIn.setAttribute("aria-label", t("Question", "Pregunta"));
@@ -59,15 +60,9 @@
     return p;
   }
 
-  helpToggle.addEventListener("click", function () {
-    var isHidden = helpBox.hidden;
-    helpBox.hidden = !isHidden;
-    if (!isHidden) {
-      helpIn.blur();
-    } else {
-      helpIn.focus();
-    }
-  });
+  if (helpToggle) {
+    helpToggle.style.display = "none";
+  }
 
   helpIn.addEventListener("input", syncHint);
 
