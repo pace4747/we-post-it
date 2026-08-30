@@ -3,6 +3,7 @@ const { generateShopPageHTML, makeSlug } = require("./shop-page-generator");
 
 module.exports = async function handler(req, res) {
   var slug = req.query.slug;
+  var look = req.query.look;
   
   if (!slug || typeof slug !== "string") {
     res.status(400).send("Missing shop slug");
@@ -14,6 +15,15 @@ module.exports = async function handler(req, res) {
   if (!slug) {
     res.status(400).send("Invalid shop slug");
     return;
+  }
+
+  if (look && typeof look === "string") {
+    look = look.toLowerCase();
+    if (look !== "call" && look !== "photos") {
+      look = "call";
+    }
+  } else {
+    look = "call";
   }
 
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -40,8 +50,22 @@ module.exports = async function handler(req, res) {
           shop: meta.shop,
           zip: meta.zip || "",
           phone: meta.phone,
-          slug: meta.slug
+          slug: meta.slug,
+          look: look,
+          category: meta.category || "",
+          address: meta.address || "",
+          hours: meta.hours || "",
+          photos: []
         };
+        
+        if (meta.photos) {
+          try {
+            shopData.photos = JSON.parse(meta.photos);
+          } catch (e) {
+            shopData.photos = [];
+          }
+        }
+        
         break;
       }
     }
