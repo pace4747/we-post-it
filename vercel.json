@@ -111,8 +111,5 @@
       ]
     }
   ],
-  "trailingSlash": false,
-  "error": {
-    "404": "/404.html"
-  }
+  "trailingSlash": false
 }
