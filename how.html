@@ -128,14 +128,16 @@
 <script src="/js/help.js"></script>
 <script>
 (function() {
-  if (!localStorage.getItem("wpi-cookie-ok")) {
-    document.getElementById("bottomBar").hidden = false;
-  } else {
-    document.getElementById("bottomBar").hidden = true;
+  function hideCookies() {
+    document.body.classList.add("cookies-off");
+    var bar = document.getElementById("bottomBar");
+    if (bar) bar.hidden = true;
   }
-  document.getElementById("cookieOk").addEventListener("click", function () {
+  if (localStorage.getItem("wpi-cookie-ok")) hideCookies();
+  var btn = document.getElementById("cookieOk");
+  if (btn) btn.addEventListener("click", function () {
     localStorage.setItem("wpi-cookie-ok", "1");
-    document.getElementById("bottomBar").hidden = true;
+    hideCookies();
   });
 })();
 </script>
