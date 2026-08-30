@@ -12,6 +12,10 @@
     {
       "source": "/api/order",
       "destination": "/api/checkout"
+    },
+    {
+      "source": "/api/help",
+      "destination": "/api/help"
     }
   ],
   "headers": [
