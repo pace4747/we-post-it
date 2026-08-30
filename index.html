@@ -165,25 +165,10 @@
   </div>
 </div>
 
-<!-- Feedback box - opens above bottom bar -->
-<div id="feedbackBox">
-  <p class="feedback-head" id="feedbackHead" data-en="Feedback" data-es="Feedback">Feedback</p>
-  <div class="feedback-log" id="feedbackLog"></div>
-  <form class="feedback-form" id="feedbackFormMain" novalidate>
-    <div class="feedback-field">
-      <select id="feedbackType" name="type" required data-en-default="Pick one" data-es-default="Elija uno">
-        <option value="" data-en="Pick one" data-es="Elija uno">Pick one</option>
-        <option value="better" data-en="How we can do better" data-es="Cómo podemos hacerlo mejor">How we can do better</option>
-        <option value="bug" data-en="Bugs" data-es="Errores">Bugs</option>
-        <option value="feature" data-en="Future features you would like added" data-es="Funciones futuras que le gustaría agregar">Future features you would like added</option>
-      </select>
-    </div>
-    <div class="feedback-field" id="feedbackField">
-      <textarea id="feedbackMsg" rows="3" data-ph-en="Tell us." data-ph-es="Díganos." placeholder="Tell us."></textarea>
-    </div>
-    <button type="submit" id="feedbackGo" data-en="Send" data-es="Enviar">Send</button>
-  </form>
-</div>
+<!-- Feedback button - always visible opposite Help chat -->
+<a href="/feedback" id="feedbackBox" class="feedback-btn">
+  <span data-en="Feedback" data-es="Feedback">Feedback</span>
+</a>
 
 <!-- Help box - opens above bottom bar -->
 <div id="helpBox">
@@ -373,61 +358,6 @@
     });
   }
 
-  // Feedback box
-  var feedbackBox = document.getElementById("feedbackBox");
-  var feedbackLog = document.getElementById("feedbackLog");
-  var feedbackFormMain = document.getElementById("feedbackFormMain");
-  var feedbackHead = document.getElementById("feedbackHead");
-
-  if (feedbackHead) {
-    feedbackHead.addEventListener("click", function () {
-      feedbackBox.classList.toggle("open");
-    });
-  }
-
-  if (feedbackFormMain) {
-    feedbackFormMain.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var type = document.getElementById("feedbackType").value.trim();
-      var message = document.getElementById("feedbackMsg").value.trim();
-
-      if (!type || !message) {
-        var msg = lang() === "es" ? "Elija un tema y escriba su mensaje." : "Pick a topic and write your message.";
-        feedbackLog.innerHTML = '<p style="color:#b91c1c;margin:0.5rem 0">' + msg + '</p>';
-        return;
-      }
-
-      document.getElementById("feedbackGo").disabled = true;
-
-      fetch("/api/feedback", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          type: type,
-          message: message,
-          lang: lang()
-        })
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(res) {
-        if (res && res.ok) {
-          var thanks = lang() === "es" ? "Gracias por el feedback." : "Thank you for the feedback.";
-          feedbackLog.innerHTML = '<p style="color:#15803d;margin:0.5rem 0">' + thanks + '</p>';
-          document.getElementById("feedbackType").value = "";
-          document.getElementById("feedbackMsg").value = "";
-        } else {
-          throw new Error("no");
-        }
-      })
-      .catch(function() {
-        var err = lang() === "es" ? "No se envió. Intente de nuevo." : "Did not send. Try again.";
-        feedbackLog.innerHTML = '<p style="color:#b91c1c;margin:0.5rem 0">' + err + '</p>';
-      })
-      .finally(function() {
-        document.getElementById("feedbackGo").disabled = false;
-      });
-    });
-  }
 })();
 </script>
 <script src="/js/help.js"></script>
