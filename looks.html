@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f7f7f4">
 <title>Looks — We Post It</title>
-<meta name="description" content="Two simple layouts for your shop page: Call and Photos.">
+<meta name="description" content="Three palettes for your shop page: Yard, Night, Granite. Simple, clean looks.">
 <link rel="canonical" href="https://we-post-it-full.vercel.app/looks">
 <meta name="robots" content="index,follow">
 <meta property="og:title" content="Looks — We Post It">
-<meta property="og:description" content="Two simple layouts for your shop page: Call and Photos.">
+<meta property="og:description" content="Three palettes for your shop page: Yard, Night, Granite.">
 <meta property="og:url" content="https://we-post-it-full.vercel.app/looks">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -92,17 +92,17 @@
 <main class="wrap">
   <h1 data-en="Looks" data-es="Estilos">Looks</h1>
   
-  <p class="lead" data-en="Two simple layouts for your shop page." data-es="Dos diseños simples para su página de negocio.">Two simple layouts for your shop page.</p>
+  <p class="lead" data-en="Two page layouts for your shop. Full local website with services, area, and map." data-es="Dos diseños de página para su negocio. Sitio web local completo con servicios, área y mapa.">Two page layouts for your shop. Full local website with services, area, and map.</p>
 
   <div class="palette-grid">
     <div class="palette-card">
       <h2 data-en="Call" data-es="Llamar">Call</h2>
-      <p data-en="Phone-first. Big shop name, category, location, hours, and a huge Call button." data-es="Teléfono primero. Nombre grande del negocio, categoría, ubicación, horario y un botón grande de Llamar.">Phone-first. Big shop name, category, location, hours, and a huge Call button.</p>
+      <p data-en="Contact-focused layout with call-to-action first, then services and location." data-es="Diseño enfocado en contacto con llamada a la acción primero, luego servicios y ubicación.">Contact-focused layout with call-to-action first, then services and location.</p>
     </div>
 
     <div class="palette-card">
       <h2 data-en="Photos" data-es="Fotos">Photos</h2>
-      <p data-en="Photos first. Your Google listing photos in a grid, then shop info and Call button below." data-es="Fotos primero. Sus fotos de Google en una cuadrícula, luego información del negocio y botón de Llamar abajo.">Photos first. Your Google listing photos in a grid, then shop info and Call button below.</p>
+      <p data-en="Visual-first layout with street view or map at top, then full shop details." data-es="Diseño visual primero con vista de calle o mapa arriba, luego detalles completos del negocio.">Visual-first layout with street view or map at top, then full shop details.</p>
     </div>
   </div>
 
@@ -114,6 +114,17 @@
   </div>
 </main>
 
+<!-- ONE BOTTOM BAR -->
+<div id="bottomBar">
+  <div class="bottom-left" id="cookieRow">
+    <span data-en="We only remember if you picked English or Spanish." data-es="Solo recordamos si eligió inglés o español.">We only remember if you picked English or Spanish.</span>
+    <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a>
+    <a href="/cookies" data-en="Cookies" data-es="Cookies">Cookies</a>
+  </div>
+  <div class="bottom-right">
+    <button id="cookieOk" data-en="OK" data-es="OK">OK</button>
+  </div>
+</div>
 
 <div id="helpBox">
   <p class="help-head" id="helpHead">Got a question? Ask us.</p>
@@ -130,5 +141,20 @@
 <script src="/js/site.js"></script>
 <script src="/js/visit.js"></script>
 <script src="/js/help.js"></script>
+<script>
+(function() {
+  function hideCookies() {
+    document.body.classList.add("cookies-off");
+    var bar = document.getElementById("bottomBar");
+    if (bar) bar.hidden = true;
+  }
+  if (localStorage.getItem("wpi-cookie-ok")) hideCookies();
+  var btn = document.getElementById("cookieOk");
+  if (btn) btn.addEventListener("click", function () {
+    localStorage.setItem("wpi-cookie-ok", "1");
+    hideCookies();
+  });
+})();
+</script>
 </body>
 </html>

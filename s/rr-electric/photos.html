@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f7f7f4">
-<title>R &amp; R Electric &amp; Constrctn Co</title>
-<meta name="description" content="R &amp; R Electric &amp; Constrctn Co in Cameron, TX. Electrician and utility contractor. Call 254-697-3711.">
-<meta property="og:title" content="R &amp; R Electric &amp; Constrctn Co">
-<meta property="og:description" content="R &amp; R Electric &amp; Constrctn Co in Cameron, TX. Electrician and utility contractor.">
+<title>R &amp; R Electric &amp; Constrctn Co — Electrician in Cameron, TX</title>
+<meta name="description" content="R &amp; R Electric &amp; Constrctn Co. Local electrician and utility contractor in Cameron, TX. Electrical service, wiring, panel upgrades, and construction. Call 254-697-3711.">
+<meta property="og:title" content="R &amp; R Electric &amp; Constrctn Co — Electrician in Cameron, TX">
+<meta property="og:description" content="Local electrician and utility contractor in Cameron, TX. Call 254-697-3711.">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
@@ -18,105 +18,348 @@ body {
   background: #f7f7f4;
   color: #222;
   padding: 0;
-  min-height: 100vh;
 }
-.container {
-  max-width: 600px;
+
+.hero-visual {
   width: 100%;
-  margin: 0 auto;
-  padding: 1.5rem 1rem;
+  height: 60vh;
+  min-height: 400px;
+  max-height: 700px;
+  border: 0;
+  display: block;
+  border-bottom: 2px solid #e5e5e0;
 }
-.header {
+
+.hero {
+  background: #fff;
+  padding: 4rem 1.5rem;
   text-align: center;
-  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e5e5e0;
 }
-h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-  color: #111;
-}
-.category {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 0.25rem;
-  text-transform: capitalize;
-}
-.address {
-  font-size: 0.95rem;
-  color: #666;
-  margin-bottom: 0.125rem;
-}
-.location {
-  font-size: 0.95rem;
-  color: #666;
-  margin-bottom: 0.25rem;
-}
-.hours {
-  font-size: 0.9rem;
-  color: #666;
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
   margin-bottom: 1rem;
+  color: #111;
+  letter-spacing: -0.02em;
 }
-.call-section {
-  position: sticky;
-  bottom: 0;
-  background: #f7f7f4;
-  padding: 1rem 0;
-  text-align: center;
-  border-top: 1px solid #ddd;
-}
-.phone {
-  font-size: 1.25rem;
-  margin-bottom: 0.75rem;
+.hero .tagline {
+  font-size: 1.75rem;
+  color: #0066cc;
   font-weight: 600;
+  margin-bottom: 2.5rem;
 }
-.call-btn {
+.hero .cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
   display: inline-block;
+  padding: 1.25rem 3rem;
+  border-radius: 8px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+.btn-primary {
   background: #0066cc;
   color: #fff;
-  text-decoration: none;
-  padding: 1rem 3rem;
-  border-radius: 12px;
-  font-size: 1.25rem;
-  font-weight: 700;
-  transition: background 0.2s;
 }
-.call-btn:hover {
+.btn-primary:hover {
   background: #0052a3;
 }
-.footer {
-  margin-top: 1.5rem;
-  font-size: 0.85rem;
-  color: #999;
+.btn-secondary {
+  background: #fff;
+  color: #0066cc;
+  border-color: #0066cc;
+}
+.btn-secondary:hover {
+  background: #f0f7ff;
+}
+
+.section {
+  padding: 4rem 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid #e5e5e0;
+}
+.section:nth-child(even) {
+  background: #fafaf8;
+}
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: #111;
+  letter-spacing: -0.02em;
+}
+.section p {
+  font-size: 1.2rem;
+  color: #444;
+  line-height: 1.8;
+  max-width: 800px;
+}
+
+.about p {
+  margin-bottom: 1rem;
+}
+.about p:last-of-type {
+  margin-bottom: 0;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+.service-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid #e5e5e0;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.section:nth-child(even) .service-card {
+  background: #fafaf8;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: #0066cc;
+}
+.service-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #0066cc;
+}
+.service-card p {
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.area-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.town-chip {
+  background: #fff;
+  border: 2px solid #0066cc;
+  color: #0066cc;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.section:nth-child(even) .town-chip {
+  background: #fafaf8;
+}
+.area-note {
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+.map-section {
+  padding: 4rem 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid #e5e5e0;
+}
+.map-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.map-inner h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: #111;
   text-align: center;
-  padding-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.map-embed {
+  width: 100%;
+  height: 450px;
+  border: 2px solid #e5e5e0;
+  border-radius: 12px;
+}
+
+.contact-section {
+  padding: 4rem 1.5rem;
+  background: #fafaf8;
+  text-align: center;
+}
+.contact-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.contact-inner h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: #111;
+  letter-spacing: -0.02em;
+}
+.contact-address {
+  font-size: 1.3rem;
+  color: #444;
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+.contact-phone {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0066cc;
+  margin: 1.5rem 0;
+}
+.contact-phone a {
+  color: inherit;
+  text-decoration: none;
+}
+.contact-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.footer {
+  background: #fff;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid #e5e5e0;
+  font-size: 1rem;
+  color: #999;
 }
 .footer a {
   color: #0066cc;
   text-decoration: none;
+  font-weight: 600;
 }
-@media (max-width: 640px) {
-  h1 { font-size: 1.75rem; }
-  .phone { font-size: 1.1rem; }
-  .call-btn { font-size: 1.1rem; padding: 0.9rem 2.5rem; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.25rem; }
+  .hero .tagline { font-size: 1.35rem; }
+  .btn { font-size: 1.15rem; padding: 1rem 2rem; }
+  .section h2 { font-size: 2rem; }
+  .section p { font-size: 1.1rem; }
+  .service-card h3 { font-size: 1.3rem; }
+  .contact-phone { font-size: 1.5rem; }
+  .hero-visual { height: 50vh; min-height: 300px; }
 }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <h1>R &amp; R Electric &amp; Constrctn Co</h1>
-    <div class="category">Electrician • Utility Contractor</div>
-    <div class="address">3621 FM1600</div>
-    <div class="location">Cameron, TX</div>
-  </div>
-  <div class="call-section">
-    <div class="phone">254-697-3711</div>
-    <a href="tel:2546973711" class="call-btn">Call</a>
-  </div>
-  <div class="footer">
-    <p>Powered by <a href="/">We Post It</a></p>
+
+<iframe class="hero-visual" src="https://maps.google.com/maps?q=3621+FM1600,+Cameron,+TX+76520&layer=c&output=svembed" title="Street view of R & R Electric & Constrctn Co" loading="eager"></iframe>
+
+<div class="hero">
+  <h1>R &amp; R Electric &amp; Constrctn Co</h1>
+  <div class="tagline">Electrician in Cameron, TX</div>
+  <div class="cta">
+    <a href="tel:2546973711" class="btn btn-primary">Call 254-697-3711</a>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=3621+FM1600,+Cameron,+TX+76520" class="btn btn-secondary" target="_blank" rel="noopener">Get Directions</a>
   </div>
 </div>
+
+<div class="section">
+  <div class="section-inner about">
+    <h2>About</h2>
+    <p>R &amp; R Electric &amp; Constrctn Co is a local electrician and utility contractor based in Cameron, TX. We provide electrical services, construction, and utility work for residential and commercial clients.</p>
+    <p>Our shop is located at 3621 FM1600, Cameron, TX 76520. Call us for reliable electrical work and construction services.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-inner">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Electrical Wiring</h3>
+        <p>Complete wiring installation and repair for homes and businesses.</p>
+      </div>
+      <div class="service-card">
+        <h3>Panel Upgrades</h3>
+        <p>Upgrade your electrical panel to meet current safety standards and power needs.</p>
+      </div>
+      <div class="service-card">
+        <h3>Outlets &amp; Switches</h3>
+        <p>Install and repair outlets, switches, and electrical fixtures.</p>
+      </div>
+      <div class="service-card">
+        <h3>Lighting</h3>
+        <p>Professional lighting installation and repair for any space.</p>
+      </div>
+      <div class="service-card">
+        <h3>Electrical Repair</h3>
+        <p>Fast troubleshooting and repair of all types of electrical issues.</p>
+      </div>
+      <div class="service-card">
+        <h3>New Construction Electrical</h3>
+        <p>Full electrical systems for new builds and major renovations.</p>
+      </div>
+      <div class="service-card">
+        <h3>Utility Work</h3>
+        <p>Professional utility contractor services for residential and commercial projects.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-inner">
+    <h2>Where We Work</h2>
+    <div class="area-grid">
+      <div class="town-chip">Cameron</div>
+      <div class="town-chip">Rockdale</div>
+      <div class="town-chip">Temple</div>
+      <div class="town-chip">Bryan</div>
+      <div class="town-chip">Caldwell</div>
+      <div class="town-chip">Hearne</div>
+      <div class="town-chip">Taylor</div>
+    </div>
+    <p class="area-note">Nearby towns. Call if you are farther.</p>
+  </div>
+</div>
+
+<div class="map-section">
+  <div class="map-inner">
+    <h2>Location</h2>
+    <iframe class="map-embed" src="https://maps.google.com/maps?q=3621+FM1600,+Cameron,+TX+76520&z=16&output=embed" title="Map location" loading="lazy"></iframe>
+  </div>
+</div>
+
+<div class="contact-section">
+  <div class="contact-inner">
+    <h2>Contact</h2>
+    <div class="contact-address">
+      3621 FM1600<br>
+      Cameron, TX 76520
+    </div>
+    <div class="contact-phone">
+      <a href="tel:2546973711">254-697-3711</a>
+    </div>
+    <div class="contact-cta">
+      <a href="tel:2546973711" class="btn btn-primary">Call Now</a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=3621+FM1600,+Cameron,+TX+76520" class="btn btn-secondary" target="_blank" rel="noopener">Get Directions</a>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Powered by <a href="https://we-post-it-full.vercel.app">We Post It</a></p>
+</div>
+
 </body>
 </html>
