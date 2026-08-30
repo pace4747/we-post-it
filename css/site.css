@@ -642,3 +642,105 @@ ol.easy span {
     font-size: 0.85rem;
   }
 }
+
+/* FEEDBACK BOX - opposite side from help */
+#feedbackBox {
+  position: fixed;
+  bottom: calc(var(--bottom-bar, 5.25rem) + 0.75rem);
+  left: 1rem;
+  right: 1rem;
+  max-width: 34rem;
+  margin-right: auto;
+  background: #fff;
+  color: #111;
+  border: 2px solid #111;
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+  z-index: 110;
+  max-height: calc(var(--bottom-bar, 5.25rem) + 1.5rem + 4rem);
+  transition: max-height 0.2s ease;
+}
+
+#feedbackBox.open {
+  max-height: calc(100vh - var(--bottom-bar, 5.25rem) - 2rem);
+}
+
+body.cookies-off #feedbackBox {
+  bottom: 0.9rem;
+}
+
+.feedback-head {
+  margin: 0 0 0.6rem;
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.feedback-log {
+  max-height: 10rem;
+  overflow: auto;
+  margin: 0 0 0.6rem;
+}
+
+.feedback-log:empty {
+  display: none;
+}
+
+.feedback-log p {
+  margin: 0 0 0.45rem;
+  font-size: 1rem;
+}
+
+.feedback-form {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.feedback-field {
+  position: relative;
+}
+
+.feedback-form select,
+.feedback-form textarea {
+  width: 100%;
+  border: 1.5px solid #111;
+  border-radius: 10px;
+  padding: 0.45rem 0.7rem;
+  font: inherit;
+  font-size: 1.05rem;
+  background: #f7f7f4;
+  min-height: 48px;
+}
+
+.feedback-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.feedback-form button {
+  min-height: 48px;
+  padding: 0 0.9rem;
+  background: #111;
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.feedback-form button:disabled {
+  opacity: 0.5;
+}
+
+@media (max-width: 640px) {
+  #feedbackBox,
+  #helpBox {
+    left: 0.5rem;
+    right: 0.5rem;
+    max-width: none;
+  }
+}

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f7f4">
+<title>Feedback — We Post It</title>
+<meta name="description" content="Tell us how we can do better. We Post It feedback.">
+<link rel="canonical" href="https://we-post-it.vercel.app/feedback">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="Feedback — We Post It">
+<meta property="og:description" content="Tell us how we can do better. We Post It feedback.">
+<meta property="og:url" content="https://we-post-it.vercel.app/feedback">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+
+<!-- Competitor ads -->
+<div class="comp-ads" aria-hidden="true">
+  <div class="comp-ad comp-ad-left-1">
+    <strong>Wix</strong>
+    <div class="old-price" data-en="$17/mo" data-es="$17 al mes">$17/mo</div>
+    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
+  </div>
+  <div class="comp-ad comp-ad-left-2">
+    <strong>Squarespace</strong>
+    <div class="old-price" data-en="$16/mo" data-es="$16 al mes">$16/mo</div>
+    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
+  </div>
+  <div class="comp-ad comp-ad-left-3">
+    <strong>Durable</strong>
+    <div class="old-price" data-en="$22/mo" data-es="$22 al mes">$22/mo</div>
+    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
+  </div>
+  <div class="comp-ad comp-ad-right-1">
+    <strong>Hootsuite</strong>
+    <div class="old-price" data-en="$99/mo" data-es="$99 al mes">$99/mo</div>
+    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
+  </div>
+  <div class="comp-ad comp-ad-right-2">
+    <strong>Thryv</strong>
+    <div class="old-price" data-en="$99/mo" data-es="$99 al mes">$99/mo</div>
+    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
+  </div>
+</div>
+
+<!-- ONE HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <nav class="header-nav" aria-label="Site">
+      <a href="/" data-en="We Post It" data-es="We Post It">We Post It</a>
+      <a href="/how" data-en="How" data-es="Cómo">How</a>
+      <a href="/prices" data-en="Prices" data-es="Precios">Prices</a>
+      <a href="/faq" data-en="FAQ" data-es="FAQ">FAQ</a>
+      <a href="/feedback" aria-current="page" data-en="Feedback" data-es="Feedback">Feedback</a>
+    </nav>
+    <div class="header-sale" data-en="Online Presence for only $9.99 a month" data-es="Presencia en línea por solo $9.99 al mes">Online Presence for only $9.99 a month</div>
+    <div class="header-actions">
+      <a class="header-start" href="/#checkout" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
+      <button type="button" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button>
+    </div>
+  </div>
+</header>
+
+<!-- Main content -->
+<main class="wrap">
+  <div id="formbox">
+    <h1 data-en="Feedback" data-es="Feedback">Feedback</h1>
+    <p class="lead" data-en="We want to know how we can do better, bugs, and future features you would like added." data-es="Queremos saber cómo podemos hacerlo mejor, errores y funciones futuras que le gustaría agregar.">We want to know how we can do better, bugs, and future features you would like added.</p>
+
+    <form id="feedbackForm" novalidate>
+      <div class="field">
+        <label class="lbl" for="type" data-en="What is this about?" data-es="¿De qué se trata?">What is this about?</label>
+        <select id="type" name="type" required>
+          <option value="" data-en="Pick one" data-es="Elija uno">Pick one</option>
+          <option value="better" data-en="How we can do better" data-es="Cómo podemos hacerlo mejor">How we can do better</option>
+          <option value="bug" data-en="Bugs" data-es="Errores">Bugs</option>
+          <option value="feature" data-en="Future features you would like added" data-es="Funciones futuras que le gustaría agregar">Future features you would like added</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="lbl" for="message" data-en="Your words" data-es="Sus palabras">Your words</label>
+        <textarea id="message" name="message" rows="6" required data-ph-en="Tell us." data-ph-es="Díganos." placeholder="Tell us."></textarea>
+      </div>
+
+      <div class="field">
+        <label class="lbl" for="shop" data-en="Shop name (optional)" data-es="Nombre del negocio (opcional)">Shop name (optional)</label>
+        <input id="shop" name="shop" type="text" autocomplete="organization">
+      </div>
+
+      <div class="field">
+        <label class="lbl" for="phone" data-en="Phone (optional)" data-es="Teléfono (opcional)">Phone (optional)</label>
+        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel">
+      </div>
+
+      <p class="err" id="err" hidden></p>
+
+      <button class="btn" type="submit" id="send" data-en="Send" data-es="Enviar">Send</button>
+    </form>
+  </div>
+
+  <div id="thanks" hidden>
+    <h1 data-en="We got it." data-es="Lo recibimos.">We got it.</h1>
+    <p class="lead" data-en="Thank you for the feedback." data-es="Gracias por el feedback.">Thank you for the feedback.</p>
+    <a class="btn" href="/" data-en="Home" data-es="Inicio">Home</a>
+  </div>
+</main>
+
+<!-- ONE BOTTOM BAR -->
+<div id="bottomBar">
+  <div class="bottom-left" id="cookieRow">
+    <span data-en="We only remember if you picked English or Spanish." data-es="Solo recordamos si eligió inglés o español.">We only remember if you picked English or Spanish.</span>
+    <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a>
+    <a href="/cookies" data-en="Cookies" data-es="Cookies">Cookies</a>
+  </div>
+  <div class="bottom-right">
+    <button id="cookieOk" data-en="OK" data-es="OK">OK</button>
+  </div>
+</div>
+
+<div id="helpBox">
+  <p class="help-head" id="helpHead">Got a question? Ask us.</p>
+  <div class="help-log" id="helpLog"></div>
+  <form class="help-form" id="helpForm">
+    <div class="help-field" id="helpField">
+      <input type="text" id="helpIn" autocomplete="off">
+      <span class="help-hint" id="helpHint">Type it here.</span>
+    </div>
+    <button type="submit" id="helpGo">Send</button>
+  </form>
+</div>
+
+<script src="/js/site.js"></script>
+<script src="/js/help.js"></script>
+<script>
+(function() {
+  var form = document.getElementById("feedbackForm");
+  var err = document.getElementById("err");
+  var send = document.getElementById("send");
+
+  function showErr(msg) {
+    err.textContent = msg;
+    err.hidden = false;
+  }
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    err.hidden = true;
+
+    var type = document.getElementById("type").value.trim();
+    var message = document.getElementById("message").value.trim();
+
+    if (!type) {
+      showErr((window.wpiLang && window.wpiLang() === "es")
+        ? "Elija un tema."
+        : "Pick a topic.");
+      return;
+    }
+
+    if (!message) {
+      showErr((window.wpiLang && window.wpiLang() === "es")
+        ? "Escriba su mensaje."
+        : "Write your message.");
+      return;
+    }
+
+    send.disabled = true;
+
+    fetch("/api/feedback", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        type: type,
+        message: message,
+        shop: document.getElementById("shop").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        lang: (window.wpiLang && window.wpiLang()) || "en"
+      })
+    })
+    .then(function(r) { return r.json().then(function(j) { return { ok: r.ok && j && j.ok, j: j }; }); })
+    .then(function(res) {
+      if (!res.ok) throw new Error("no");
+      document.getElementById("formbox").hidden = true;
+      document.getElementById("thanks").hidden = false;
+      if (window.wpiApplyLang) window.wpiApplyLang(window.wpiLang());
+    })
+    .catch(function() {
+      showErr((window.wpiLang && window.wpiLang() === "es")
+        ? "No se envió. Intente de nuevo."
+        : "Did not send. Try again.");
+      send.disabled = false;
+    });
+  });
+
+  function hideCookies() {
+    document.body.classList.add("cookies-off");
+    var bar = document.getElementById("bottomBar");
+    if (bar) bar.hidden = true;
+  }
+  if (localStorage.getItem("wpi-cookie-ok")) hideCookies();
+  var btn = document.getElementById("cookieOk");
+  if (btn) btn.addEventListener("click", function () {
+    localStorage.setItem("wpi-cookie-ok", "1");
+    hideCookies();
+  });
+})();
+</script>
+</body>
+</html>

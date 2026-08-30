@@ -113,7 +113,7 @@ function collectBody(req) {
 
 async function createCheckoutSession(fields) {
   var shop = String(fields.shop || fields.name || "").trim();
-  var town = String(fields.town || fields.place || "").trim();
+  var zip = String(fields.zip || fields.town || fields.place || "").trim();
   var phone = String(fields.phone || "").trim();
   var email = String(fields.email || "").trim();
   var sku = String(fields.product || "both").trim();
@@ -137,7 +137,7 @@ async function createCheckoutSession(fields) {
       client_reference_id: shop + "|" + Date.now(),
       metadata: {
         shop: shop,
-        town: town,
+        zip: zip,
         phone: phone,
         email: email,
         lang: lang
@@ -158,10 +158,10 @@ async function createCheckoutSession(fields) {
 
 function saveOrder(fields, photos) {
   var shop = String(fields.shop || fields.name || "").trim();
-  var town = String(fields.town || fields.place || "").trim();
+  var zip = String(fields.zip || fields.town || fields.place || "").trim();
   var phone = String(fields.phone || "").trim();
-  if (!shop || !town || !phone) {
-    return { status: 400, body: { ok: false, error: "Need shop name, town, and a phone." } };
+  if (!shop || !zip || !phone) {
+    return { status: 400, body: { ok: false, error: "Need shop name, ZIP, and a phone." } };
   }
   var sku = String(fields.product || "both").trim();
   if (!PRODUCTS[sku]) sku = "both";
@@ -191,7 +191,7 @@ function saveOrder(fields, photos) {
     id: id,
     at: now.toISOString(),
     shop: shop,
-    town: town,
+    zip: zip,
     phone: phone,
     email: email,
     product: sku,
