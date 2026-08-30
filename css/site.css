@@ -643,27 +643,28 @@ ol.easy span {
   }
 }
 
-/* FEEDBACK BUTTON - opposite side from help, always visible */
+/* FEEDBACK BUTTON - opposite side from help, always visible, BIG and centered */
 #feedbackBox {
   position: fixed;
   bottom: calc(var(--bottom-bar, 5.25rem) + 0.75rem);
   left: 1rem;
-  max-width: 34rem;
+  max-width: 22rem;
   background: #111;
   color: #fff;
   border: 2px solid #111;
-  border-radius: 14px;
-  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  padding: 1.35rem 2rem;
   box-shadow: 0 12px 32px rgba(0,0,0,0.2);
   z-index: 110;
   text-decoration: none;
   display: block;
   font-weight: 800;
-  font-size: 1.35rem;
+  font-size: 1.65rem;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.25;
   text-align: center;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  min-height: 72px;
 }
 
 #feedbackBox:hover {
@@ -679,6 +680,13 @@ body.cookies-off #feedbackBox {
   bottom: 0.9rem;
 }
 
+/* Center feedback button in available left space on wider screens */
+@media (min-width: 1000px) {
+  #feedbackBox {
+    left: max(1rem, calc(((100vw - 36rem) / 2 - 22rem) / 2));
+  }
+}
+
 @media (max-width: 640px) {
   #feedbackBox,
   #helpBox {
@@ -688,7 +696,8 @@ body.cookies-off #feedbackBox {
   }
   
   #feedbackBox {
-    font-size: 1.15rem;
-    padding: 0.85rem 1.2rem;
+    font-size: 1.3rem;
+    padding: 1.1rem 1.5rem;
+    min-height: 64px;
   }
 }
