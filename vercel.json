@@ -8,6 +8,14 @@
   },
   "rewrites": [
     {
+      "source": "/api/geo",
+      "destination": "/api/geo"
+    },
+    {
+      "source": "/api/visit",
+      "destination": "/api/visit"
+    },
+    {
       "source": "/api/start",
       "destination": "/api/start"
     },
