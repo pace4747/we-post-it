@@ -221,6 +221,7 @@ body {
 
 /* BOTTOM BAR - Cookies + Help combined in ONE strip */
 #bottomBar {
+  --bottom-bar: 5.25rem;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -288,7 +289,7 @@ body {
 
 #helpBox {
   position: fixed;
-  bottom: 4.5rem;
+  bottom: calc(var(--bottom-bar, 5.25rem) + 0.75rem);
   right: 1rem;
   left: 1rem;
   max-width: 34rem;
@@ -304,6 +305,10 @@ body {
 
 body.cookies-off #helpBox {
   bottom: 0.9rem;
+}
+
+body.cookies-off #bottomBar {
+  display: none;
 }
 
 #cookieRow[hidden] {
