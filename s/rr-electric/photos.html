@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f7f7f4">
+<meta name="theme-color" content="#0A2A6B">
 <title>R &amp; R Electric &amp; Constrctn Co — Electrician in Cameron, TX</title>
 <meta name="description" content="R &amp; R Electric &amp; Constrctn Co. Local electrician and utility contractor in Cameron, TX. Electrical service, wiring, panel upgrades, and construction. Call 254-697-3711.">
 <meta property="og:title" content="R &amp; R Electric &amp; Constrctn Co — Electrician in Cameron, TX">
@@ -12,101 +12,137 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  line-height: 1.6;
-  background: #f7f7f4;
-  color: #222;
-  padding: 0;
+
+:root {
+  --primary: #0A2A6B;
+  --accent: #C8102E;
+  --primary-hover: #08213E;
+  --accent-hover: #A00D25;
+}
+body.scheme-blue-gold {
+  --primary: #123E73;
+  --accent: #C9A227;
+  --primary-hover: #0D2E55;
+  --accent-hover: #A68620;
 }
 
-.hero-visual {
-  width: 100%;
-  height: 360px;
-  border: 0;
-  display: block;
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  background: #fff;
+  color: #222;
+  padding: 0;
+  margin: 0;
 }
 
 .hero {
-  background: #fff;
-  padding: 4rem 1.5rem;
+  background: var(--primary);
+  background-image: linear-gradient(rgba(10, 42, 107, 0.75), rgba(10, 42, 107, 0.75)), url('/towns/cameron-tx.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 5rem 1.5rem;
   text-align: center;
-  border-bottom: 2px solid #e5e5e0;
+  position: relative;
+}
+body.scheme-blue-gold .hero {
+  background-image: linear-gradient(rgba(18, 62, 115, 0.75), rgba(18, 62, 115, 0.75)), url('/towns/cameron-tx.jpg');
 }
 .hero h1 {
-  font-size: 3rem;
-  font-weight: 800;
+  font-size: 3.5rem;
+  font-weight: 900;
   margin-bottom: 1rem;
-  color: #111;
-  letter-spacing: -0.02em;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 .hero .tagline {
-  font-size: 1.75rem;
-  color: #0066cc;
+  font-size: 2rem;
+  color: #fff;
   font-weight: 600;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
+  opacity: 0.95;
 }
 .hero .cta {
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .btn {
   display: inline-block;
-  padding: 1.25rem 3rem;
-  border-radius: 8px;
-  font-size: 1.35rem;
+  padding: 1.25rem 3.5rem;
+  border-radius: 12px;
+  font-size: 1.4rem;
   font-weight: 700;
   text-decoration: none;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   border: 2px solid transparent;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 .btn-primary {
-  background: #0066cc;
+  background: var(--accent);
   color: #fff;
+  border-color: var(--accent);
 }
 .btn-primary:hover {
-  background: #0052a3;
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 .btn-secondary {
-  background: #fff;
-  color: #0066cc;
-  border-color: #0066cc;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 .btn-secondary:hover {
-  background: #f0f7ff;
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .section {
-  padding: 4rem 1.5rem;
+  padding: 5rem 1.5rem;
   background: #fff;
-  border-bottom: 1px solid #e5e5e0;
 }
 .section:nth-child(even) {
-  background: #fafaf8;
+  background: #F8F9FB;
 }
 .section-inner {
   max-width: 1200px;
   margin: 0 auto;
 }
 .section h2 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  color: #111;
-  letter-spacing: -0.02em;
+  font-size: 2.75rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  letter-spacing: -0.03em;
+  position: relative;
+  display: inline-block;
+}
+.section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
 }
 .section p {
-  font-size: 1.2rem;
-  color: #444;
+  font-size: 1.25rem;
+  color: #4A5568;
   line-height: 1.8;
   max-width: 800px;
+  margin-top: 2rem;
 }
 
 .about p {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 .about p:last-of-type {
   margin-bottom: 0;
@@ -114,62 +150,112 @@ body {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
 }
 .service-card {
   background: #fff;
-  padding: 2rem;
+  padding: 2.5rem;
+  padding-left: 2.25rem;
   border-radius: 12px;
-  border: 2px solid #e5e5e0;
-  transition: transform 0.2s, border-color 0.2s;
-}
-.section:nth-child(even) .service-card {
-  background: #fafaf8;
+  border-left: 5px solid var(--accent);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
 }
 .service-card:hover {
-  transform: translateY(-4px);
-  border-color: #0066cc;
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  border-left-color: var(--primary);
 }
 .service-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.65rem;
   font-weight: 700;
-  margin-bottom: 0.75rem;
-  color: #0066cc;
+  margin-bottom: 1rem;
+  color: var(--primary);
+  letter-spacing: -0.01em;
 }
 .service-card p {
   color: #555;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin: 0;
 }
 
 .area-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin: 2rem 0;
+  gap: 1.25rem;
+  margin: 3rem 0 1.5rem;
 }
 .town-chip {
-  background: #fff;
-  border: 2px solid #0066cc;
-  color: #0066cc;
-  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: #fff;
+  padding: 1rem 2rem;
   border-radius: 50px;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
 }
-.section:nth-child(even) .town-chip {
-  background: #fafaf8;
+.town-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 .area-note {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: #666;
   margin-top: 1rem;
 }
 
+.map-section {
+  padding: 5rem 1.5rem;
+  background: #F8F9FB;
+}
+.map-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.map-inner h2 {
+  font-size: 2.75rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  text-align: center;
+  letter-spacing: -0.03em;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.map-inner h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.map-frame {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  margin-top: 3rem;
+}
+.map-embed {
+  width: 100%;
+  height: 400px;
+  border: 0;
+  border-radius: 12px;
+  display: block;
+}
+
 .contact-section {
-  padding: 4rem 1.5rem;
-  background: #fafaf8;
+  padding: 5rem 1.5rem;
+  background: var(--primary);
   text-align: center;
 }
 .contact-inner {
@@ -177,23 +263,36 @@ body {
   margin: 0 auto;
 }
 .contact-inner h2 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 2rem;
-  color: #111;
-  letter-spacing: -0.02em;
+  font-size: 2.75rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  letter-spacing: -0.03em;
+  position: relative;
+  display: inline-block;
+}
+.contact-inner h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
 }
 .contact-address {
-  font-size: 1.3rem;
-  color: #444;
-  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.95);
+  margin: 2.5rem 0 1rem;
   line-height: 1.8;
 }
 .contact-phone {
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: 700;
-  color: #0066cc;
-  margin: 1.5rem 0;
+  color: #fff;
+  margin: 2rem 0;
 }
 .contact-phone a {
   color: inherit;
@@ -201,40 +300,56 @@ body {
 }
 .contact-cta {
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .footer {
-  background: #fff;
-  padding: 2rem 1.5rem;
+  background: var(--primary-hover);
+  padding: 2.5rem 1.5rem;
   text-align: center;
-  border-top: 1px solid #e5e5e0;
-  font-size: 1rem;
-  color: #999;
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.75);
 }
 .footer a {
-  color: #0066cc;
+  color: #fff;
   text-decoration: none;
   font-weight: 600;
+  transition: opacity 0.2s;
+}
+.footer a:hover {
+  opacity: 0.8;
 }
 
 @media (max-width: 768px) {
-  .hero h1 { font-size: 2.25rem; }
-  .hero .tagline { font-size: 1.35rem; }
-  .btn { font-size: 1.15rem; padding: 1rem 2rem; }
-  .section h2 { font-size: 2rem; }
-  .section p { font-size: 1.1rem; }
-  .service-card h3 { font-size: 1.3rem; }
-  .contact-phone { font-size: 1.5rem; }
+  .hero { padding: 4rem 1.5rem; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero .tagline { font-size: 1.5rem; }
+  .btn { font-size: 1.2rem; padding: 1.1rem 2.5rem; }
+  .section { padding: 4rem 1.5rem; }
+  .section h2 { font-size: 2.25rem; }
+  .section p { font-size: 1.15rem; }
+  .services-grid { gap: 2rem; }
+  .service-card h3 { font-size: 1.4rem; }
+  .service-card p { font-size: 1.05rem; }
+  .contact-phone { font-size: 1.85rem; }
+  .map-section { padding: 4rem 1.5rem; }
+  .map-embed { height: 320px; }
 }
 </style>
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var scheme = params.get('color') || params.get('scheme');
+  if (scheme === 'blue-gold') {
+    document.body.classList.add('scheme-blue-gold');
+  }
+})();
+</script>
 </head>
-<body>
-
-<iframe class="hero-visual" src="https://maps.google.com/maps?q=3621+FM1600,+Cameron,+TX+76520&z=16&output=embed" title="Map of R & R Electric & Constrctn Co" loading="eager"></iframe>
+<body class="scheme-navy-red">
 
 <div class="hero">
   <h1>R &amp; R Electric &amp; Constrctn Co</h1>
@@ -305,6 +420,15 @@ body {
   </div>
 </div>
 
+<div class="map-section">
+  <div class="map-inner">
+    <h2>Visit Us</h2>
+    <div class="map-frame">
+      <iframe class="map-embed" src="https://maps.google.com/maps?q=3621+FM1600,+Cameron,+TX+76520&z=16&output=embed" title="Map location" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+
 <div class="contact-section">
   <div class="contact-inner">
     <h2>Contact</h2>
@@ -323,7 +447,7 @@ body {
 </div>
 
 <div class="footer">
-  <p>Powered by <a href="https://we-post-it-full.vercel.app">We Post It</a></p>
+  <p>Powered by <a href="https://we-post-it-full.vercel.app">We Post It</a> · Photo of Cameron, TX (Wikimedia Commons)</p>
 </div>
 
 </body>
