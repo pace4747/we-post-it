@@ -142,7 +142,7 @@ async function createCheckoutSession(fields, req) {
     var sessionParams = {
       mode: "subscription",
       line_items: [{
-        price: "price_1UABs108z3zLzTvzj60seVsl",
+        price: "price_1UABhxRODxSLQAjIxjMNtx38",
         quantity: 1
       }],
       success_url: origin + "/?paid=1",
