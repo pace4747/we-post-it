@@ -212,7 +212,7 @@ function saveOrder(fields, photos) {
       reason: reason
     },
     source: "checkout",
-    posting: { maxPerDay: 1, onlyIfPhotoSent: true }
+    posting: { maxPerDay: 1, maxPerWeek: 3, onlyIfPhotoSent: true }
   };
   fs.writeFileSync(path.join(dir, "order.json"), JSON.stringify(order, null, 2));
   try { fs.appendFileSync("/tmp/wepostit-orders.jsonl", JSON.stringify(order) + "\n"); } catch (e) {}
