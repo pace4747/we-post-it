@@ -132,7 +132,6 @@
         <p class="err" id="err" hidden></p>
 
         <button class="btn" type="submit" id="pay" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</button>
-        <button class="btn btn-ghost" type="button" id="skip" data-en="It's free for Ryan" data-es="Es gratis para Ryan">It's free for Ryan</button>
 
         <p class="fine" data-en="$9.99 a month. Stop whenever. Pay once and the website stays up for a year, even if you cancel." data-es="$9.99 al mes. Pare cuando quiera. Pague una vez y la página web sigue un año, aunque cancele.">$9.99 a month. Stop whenever. Pay once and the website stays up for a year, even if you cancel.</p>
       </form>
@@ -236,8 +235,6 @@
   }
 
   function syncProof() {
-    var skip = document.getElementById("skip");
-    if (skip) skip.hidden = false;
   }
 
   function showErr(msg) {
@@ -246,29 +243,23 @@
     err.hidden = false;
   }
 
-  function finish(res, skipCard) {
+  function finish(res) {
     var es = lang() === "es";
     var photosEl = document.getElementById("donePhotos");
     var payEl = document.getElementById("donePay");
     photosEl.textContent = es
       ? "Luego nos manda las fotos. Las publicamos por usted."
       : "Then you text the photos to us. We post them for you.";
-    if (skipCard) {
-      payEl.textContent = es
-        ? "Es gratis para Ryan. Mande fotos cuando las tenga. Un cambio. Mándelo."
-        : "It's free for Ryan. Send photos when you have them. Need a change. Text it.";
-    } else {
-      payEl.textContent = es
-        ? "Las tarjetas aún no están activas. El pedido queda en espera. Igual le escribimos."
-        : "Cards are not live yet. Your order is held. We will still text you.";
-    }
+    payEl.textContent = es
+      ? "Las tarjetas aún no están activas. El pedido queda en espera. Igual le escribimos."
+      : "Cards are not live yet. Your order is held. We will still text you.";
     document.getElementById("form").hidden = true;
     document.getElementById("done").hidden = false;
     window.scrollTo(0, 0);
     apply(lang());
   }
 
-  function send(skipCard) {
+  function send() {
     var shop = document.getElementById("shop").value.trim();
     var town = document.getElementById("town").value.trim();
     var phone = document.getElementById("phone").value.trim();
@@ -290,9 +281,7 @@
     }
 
     var payBtn = document.getElementById("pay");
-    var skipBtn = document.getElementById("skip");
     payBtn.disabled = true;
-    skipBtn.disabled = true;
 
     var fd = new FormData();
     fd.append("shop", shop);
@@ -301,7 +290,6 @@
     var em = document.getElementById("email");
     fd.append("email", em ? em.value.trim() : "");
     fd.append("product", product());
-    fd.append("skipCard", skipCard ? "1" : "0");
     fd.append("proof", isProof() ? "1" : "0");
     fd.append("lang", lang());
 
@@ -319,26 +307,19 @@
           window.location.href = res.j.url;
           return;
         }
-        finish(res.j, skipCard || (res.j.payment && res.j.payment.skipCard));
+        finish(res.j);
       })
       .catch(function () {
         showErr(lang() === "es" ? "No se envió. Intente de nuevo." : "Did not send. Try again.");
         payBtn.disabled = false;
-        skipBtn.disabled = false;
       });
   }
 
   document.getElementById("checkout").addEventListener("submit", function (e) {
     e.preventDefault();
-    send(false);
+    send();
   });
 
-  document.getElementById("skip").addEventListener("click", function () {
-    document.getElementById("shop").value = "Batten Monuments";
-    document.getElementById("town").value = "Cameron, TX";
-    document.getElementById("phone").value = "(254) 482-1818";
-    send(true);
-  });
 
   document.getElementById("langBtn").addEventListener("click", function () {
     apply(lang() === "en" ? "es" : "en");
