@@ -48,7 +48,7 @@ function getLogPath() {
 }
 
 async function sendToWebhook(visitData) {
-  const webhookUrl = process.env.VISITOR_WEBHOOK;
+  const webhookUrl = process.env.VISITOR_WEBHOOK || process.env.VISIT_WEBHOOK;
   if (!webhookUrl) {
     return { sent: false, reason: "no_webhook" };
   }
@@ -84,7 +84,7 @@ module.exports = async function handler(req, res) {
   }
 
   if (req.method === "GET") {
-    const adminKey = req.headers["x-admin-key"] || req.query.key;
+    const adminKey = req.headers["x-admin-key"];
     const expectedKey = process.env.VISITOR_ADMIN_KEY;
 
     if (!expectedKey || adminKey !== expectedKey) {
@@ -117,13 +117,10 @@ module.exports = async function handler(req, res) {
       body = {};
     }
 
-    const ip = String(req.headers["x-forwarded-for"] || req.headers["x-real-ip"] || "").split(",")[0].trim();
     const city = String(req.headers["x-vercel-ip-city"] || "").trim();
     const region = String(req.headers["x-vercel-ip-country-region"] || "").trim();
     const country = String(req.headers["x-vercel-ip-country"] || "").trim();
     const postalCode = String(req.headers["x-vercel-ip-postal-code"] || "").trim();
-    const latitude = String(req.headers["x-vercel-ip-latitude"] || "").trim();
-    const longitude = String(req.headers["x-vercel-ip-longitude"] || "").trim();
     const timezone = String(req.headers["x-vercel-ip-timezone"] || "").trim();
     const userAgent = String(req.headers["user-agent"] || "").trim();
     const acceptLanguage = String(req.headers["accept-language"] || "").trim();
@@ -139,13 +136,10 @@ module.exports = async function handler(req, res) {
       utm_campaign: String(body.utm_campaign || "").trim(),
       utm_content: String(body.utm_content || "").trim(),
       utm_term: String(body.utm_term || "").trim(),
-      ip: ip,
       city: city,
       region: region,
       country: country,
       postalCode: postalCode,
-      latitude: latitude,
-      longitude: longitude,
       ipTimezone: timezone,
       userAgent: userAgent,
       acceptLanguage: acceptLanguage,
@@ -160,7 +154,7 @@ module.exports = async function handler(req, res) {
       buttonClicked: String(body.buttonClicked || "").trim()
     };
 
-    const fingerprint = `${ip}-${userAgent.slice(0, 50)}-${body.path}`;
+    const fingerprint = `${city}-${region}-${country}-${userAgent.slice(0, 50)}-${body.path}`;
     
     if (shouldRateLimit(fingerprint)) {
       res.status(200).json({ ok: true, logged: false, reason: "rate_limited" });

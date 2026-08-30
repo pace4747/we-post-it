@@ -1,23 +1,13 @@
 (function () {
-  var SESSION_KEY = "wpi-session-id";
-  var SESSION_START_KEY = "wpi-session-start";
-  var SESSION_DURATION = 365 * 24 * 60 * 60 * 1000;
-
   function getOrCreateSessionId() {
     try {
-      var sessionId = localStorage.getItem(SESSION_KEY);
-      var sessionStart = localStorage.getItem(SESSION_START_KEY);
-      var now = Date.now();
-
-      if (sessionId && sessionStart && (now - parseInt(sessionStart)) < SESSION_DURATION) {
+      var sessionId = sessionStorage.getItem("wpi-session-id");
+      if (sessionId) {
         return sessionId;
       }
 
-      sessionId = "s_" + now + "_" + Math.random().toString(36).substring(2, 15);
-      localStorage.setItem(SESSION_KEY, sessionId);
-      localStorage.setItem(SESSION_START_KEY, String(now));
-
-      document.cookie = "wpi_sid=" + sessionId + "; path=/; max-age=" + Math.floor(SESSION_DURATION / 1000) + "; samesite=lax";
+      sessionId = "s_" + Date.now() + "_" + Math.random().toString(36).substring(2, 15);
+      sessionStorage.setItem("wpi-session-id", sessionId);
 
       return sessionId;
     } catch (e) {

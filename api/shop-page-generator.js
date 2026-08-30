@@ -320,6 +320,7 @@ ${mapEmbed && streetViewEmbed ? `<div class="map-section">
   <p>Powered by <a href="https://we-post-it-full.vercel.app">We Post It</a></p>
 </div>
 
+<script src="/js/visit.js"></script>
 </body>
 </html>`;
 
