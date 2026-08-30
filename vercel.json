@@ -16,6 +16,26 @@
     {
       "source": "/api/help",
       "destination": "/api/help"
+    },
+    {
+      "source": "/vs/wix",
+      "destination": "/vs/wix.html"
+    },
+    {
+      "source": "/vs/squarespace",
+      "destination": "/vs/squarespace.html"
+    },
+    {
+      "source": "/vs/durable",
+      "destination": "/vs/durable.html"
+    },
+    {
+      "source": "/vs/hootsuite",
+      "destination": "/vs/hootsuite.html"
+    },
+    {
+      "source": "/vs/thryv",
+      "destination": "/vs/thryv.html"
     }
   ],
   "headers": [
