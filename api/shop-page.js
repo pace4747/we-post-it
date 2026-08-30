@@ -26,8 +26,8 @@ module.exports = async function handler(req, res) {
     look = "call";
   }
 
-  if (!process.env.STRIPE_SECRET_KEY) {
-    res.status(500).send("Configuration error");
+  if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_SECRET_KEY.startsWith("sk_")) {
+    res.status(404).send("Shop not found");
     return;
   }
 
@@ -82,6 +82,10 @@ module.exports = async function handler(req, res) {
     res.status(200).send(html);
   } catch (e) {
     console.error("Error serving shop page:", e);
-    res.status(500).send("Error loading shop page");
+    if (e.type === "StripeAuthenticationError") {
+      res.status(404).send("Shop not found");
+    } else {
+      res.status(500).send("Error loading shop page");
+    }
   }
 };
