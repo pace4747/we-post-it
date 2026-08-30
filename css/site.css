@@ -697,20 +697,15 @@ ol.easy span {
     bottom: max(0.5rem, env(safe-area-inset-bottom));
   }
   
-  /* Add top padding for body content to clear fixed header + help */
+  /* Adjust body padding for mobile - only bottom for feedback button */
   body {
-    padding-top: calc(3.5rem + env(safe-area-inset-top, 0rem));
     padding-bottom: 6rem;
   }
   
-  /* Adjust wrap padding for mobile */
+  /* Adjust wrap padding to clear the fixed help box at top */
   .wrap {
-    padding-top: 11rem;
+    padding-top: 8rem;
     padding-bottom: 2rem;
-  }
-  
-  #bottomBar {
-    font-size: 0.85rem;
   }
 }
 
