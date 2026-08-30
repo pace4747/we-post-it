@@ -1,1 +1,108 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#14110f"><title>Prices — We Post It</title><meta name="description" content="$9.99 a month. We start your Google, Facebook page, and website. You text photos. We post them."><link rel="canonical" href="https://we-post-it.vercel.app/prices"><meta name="robots" content="index,follow"><meta property="og:title" content="Prices — We Post It"><meta property="og:description" content="$9.99 a month. We start your Google, Facebook page, and website. You text photos. We post them."><meta property="og:url" content="https://we-post-it.vercel.app/prices"><meta property="og:type" content="website"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/site.css"></head><body><p class="sale" data-en="Bigger online presence for $9.99 a month" data-es="Presencia en línea más grande por $9.99 al mes">Bigger online presence for $9.99 a month</p><header class="top"><a class="brand" href="/">We Post It</a><div class="top-actions"><button type="button" class="lang" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button></div></header><nav class="nav" aria-label="Site"><a href="/" data-en="Home" data-es="Inicio">Home</a><a href="/how" data-en="How" data-es="Cómo">How</a><a href="/prices" aria-current="page" data-en="Prices" data-es="Precios">Prices</a><a href="/looks" data-en="Looks" data-es="Estilos">Looks</a><a href="/start" data-en="Start" data-es="Empezar">Start</a></nav><main class="wrap" style="padding-top:1.6rem"><p class="kicker" data-en="What it costs" data-es="Lo que cuesta">What it costs</p><h1 data-en="$9.99 a month." data-es="$9.99 al mes.">$9.99 a month.</h1><p class="line" data-en="We get your Google, Facebook page, and website started. We maintain them and post on Facebook for you. You text the photos to us. We post them for you. If you drop a lot of photos, we space them out for you." data-es="Empezamos su Google, su Facebook y su página web. Las mantenemos y publicamos en Facebook por usted. Nos manda las fotos. Las publicamos por usted. Si manda muchas, las espaciamos por usted.">We get your Google, Facebook page, and website started. We maintain them and post on Facebook for you. You text the photos to us. We post them for you. If you drop a lot of photos, we space them out for you.</p><article class="price-card"><strong data-en="We Post It" data-es="We Post It">We Post It</strong><div class="amt">$9.99<span style="font-size:.7em" data-en="/mo" data-es="/mes">/mo</span></div><em data-en="Stop whenever." data-es="Pare cuando quiera.">Stop whenever.</em></article><p class="note" data-en="People can find you. Google, Facebook, Apple Maps, Bing, and your page. You come in just to finish. Then you text the photos to us. We post them for you." data-es="La gente puede encontrarlo. Google, Facebook, Apple Maps, Bing y su página. Usted solo viene a terminar. Luego nos manda las fotos. Las publicamos por usted.">People can find you. Google, Facebook, Apple Maps, Bing, and your page. You come in just to finish. Then you text the photos to us. We post them for you.</p><div class="row" style="margin:1.2rem 0 2.2rem"><a class="btn" href="/start" data-en="Start" data-es="Empezar">Start</a><a class="btn ghost" href="/how" data-en="How it works" data-es="Cómo funciona">How it works</a></div></main><footer class="foot"><div class="wrap"><span>We Post It</span><a href="/legal" data-en="Legal" data-es="Legal">Legal</a></div></footer><script src="/js/site.js"></script><script src="/js/help.js"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#14110f"><title>Prices — We Post It</title><meta name="description" content="$9.99 a month. We start your Google, Facebook page, and website. You text photos. We post them."><link rel="canonical" href="https://we-post-it.vercel.app/prices"><meta name="robots" content="index,follow"><meta property="og:title" content="Prices — We Post It"><meta property="og:description" content="$9.99 a month. We start your Google, Facebook page, and website. You text photos. We post them."><meta property="og:url" content="https://we-post-it.vercel.app/prices"><meta property="og:type" content="website"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/site.css"><style>
+.trust-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin: 0 0 1.6rem;
+}
+.trust-chip {
+  background: var(--cream);
+  border: 1px solid var(--paper-2);
+  padding: .55rem .75rem;
+  font-size: .88rem;
+  font-weight: 650;
+  color: #5c4e3a;
+}
+.price-lists {
+  margin: 1.2rem 0 1.6rem;
+}
+.price-lists h3 {
+  font-family: var(--display);
+  font-size: 1rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin: 0 0 .5rem;
+  color: var(--oxide);
+}
+.price-lists ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.2rem;
+}
+.price-lists li {
+  padding: .4rem 0 .4rem 1.5rem;
+  position: relative;
+  font-size: .98rem;
+}
+.price-lists li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: var(--oxide);
+}
+.price-lists .not-list li::before {
+  content: "×";
+}
+.price-faq {
+  margin: 2rem 0 1.6rem;
+}
+.price-faq h2 {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin: 0 0 .9rem;
+}
+.price-faq details {
+  margin: 0 0 .65rem;
+  background: var(--cream);
+  border: 1px solid var(--paper-2);
+  padding: .75rem .85rem;
+}
+.price-faq summary {
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  list-style: none;
+}
+.price-faq summary::-webkit-details-marker {
+  display: none;
+}
+.price-faq p {
+  margin: .55rem 0 0;
+  font-size: .98rem;
+  color: #5c4e3a;
+}
+.extra-note {
+  background: var(--cream);
+  border: 1px solid var(--paper-2);
+  padding: 1rem;
+  margin: 1.2rem 0;
+  font-size: .98rem;
+  font-weight: 650;
+  color: #5c4e3a;
+}
+.comp-ads {
+  display: grid;
+  gap: .5rem;
+  margin: 1.4rem 0;
+}
+.comp-ad {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e8d4b0;
+  border: 1px solid #d4c09a;
+  padding: .65rem .8rem;
+  font-size: .92rem;
+}
+.comp-ad strong {
+  font-weight: 700;
+}
+.comp-ad em {
+  font-style: normal;
+  font-weight: 650;
+  color: #5c4e3a;
+}
+</style></head><body><p class="sale" data-en="Bigger online presence for $9.99 a month" data-es="Presencia en línea más grande por $9.99 al mes">Bigger online presence for $9.99 a month</p><header class="top"><a class="brand" href="/">We Post It</a><div class="top-actions"><a class="btn" href="/start" style="min-width:auto;padding:.5rem .85rem;font-size:.82rem;letter-spacing:.1em" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a><button type="button" class="lang" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button></div></header><nav class="nav" aria-label="Site"><a href="/" data-en="Home" data-es="Inicio">Home</a><a href="/how" data-en="How" data-es="Cómo">How</a><a href="/prices" aria-current="page" data-en="Prices" data-es="Precios">Prices</a><a href="/about" data-en="About" data-es="Acerca">About</a><a href="/contact" data-en="Contact" data-es="Contacto">Contact</a><a href="/faq">FAQ</a></nav><main class="wrap" style="padding-top:1.6rem"><p class="kicker" data-en="What it costs" data-es="Lo que cuesta">What it costs</p><h1 data-en="$9.99 a month." data-es="$9.99 al mes.">$9.99 a month.</h1><div class="trust-chips"><span class="trust-chip" data-en="Same name, town, phone" data-es="Mismo nombre, pueblo, teléfono">Same name, town, phone</span><span class="trust-chip" data-en="You stay owner" data-es="Usted sigue de dueño">You stay owner</span><span class="trust-chip" data-en="We never take a password" data-es="Nunca pedimos su clave">We never take a password</span></div><article class="price-card"><strong data-en="We Post It" data-es="We Post It">We Post It</strong><div class="amt">$9.99<span style="font-size:.7em" data-en="/mo" data-es="/mes">/mo</span></div><em data-en="Stop whenever. You keep the logins. You text the photos." data-es="Pare cuando quiera. Se queda con las cuentas. Usted manda las fotos.">Stop whenever. You keep the logins. You text the photos.</em></article><div class="price-lists"><h3 data-en="What's in" data-es="Qué incluye">What's in</h3><ul><li data-en="One-page site" data-es="Página de una sola hoja">One-page site</li><li data-en="We start Facebook and post photos they text" data-es="Empezamos Facebook y publicamos las fotos que mandan">We start Facebook and post photos they text</li><li data-en="Google sit-down on their phone" data-es="Sesión de Google en su teléfono">Google sit-down on their phone</li><li data-en="Same name, town, phone everywhere" data-es="Mismo nombre, pueblo, teléfono en todos lados">Same name, town, phone everywhere</li><li data-en="We space a pile of photos over time" data-es="Espaciamos un montón de fotos">We space a pile of photos over time</li></ul><h3 data-en="What's not" data-es="Qué no incluye">What's not</h3><ul class="not-list"><li data-en="Store, extra pages, or blog" data-es="Tienda, páginas extra, o blog">Store, extra pages, or blog</li><li data-en="Portal or Sign in" data-es="Portal o inicio de sesión">Portal or Sign in</li><li data-en="Fake posts" data-es="Publicaciones falsas">Fake posts</li><li data-en="Rank promises" data-es="Promesas de ranking">Rank promises</li><li data-en="Google as a sold product" data-es="Google como producto vendido">Google as a sold product</li></ul></div><p class="note" data-en="Pay once and the hosted site stays a year. Google and Facebook stay theirs." data-es="Pague una vez y el sitio alojado dura un año. Google y Facebook siguen siendo suyos.">Pay once and the hosted site stays a year. Google and Facebook stay theirs.</p><div class="extra-note"><p data-en="Would one extra customer a year pay for this service? Yes. $9.99 a month is about $120 a year." data-es="¿Un cliente extra al año pagaría este servicio? Sí. $9.99 al mes son como $120 al año.">Would one extra customer a year pay for this service? Yes. $9.99 a month is about $120 a year.</p></div><div class="comp-ads"><div class="comp-ad"><strong>Wix</strong><em>$17/mo</em></div><div class="comp-ad"><strong>Squarespace</strong><em>$16/mo</em></div><div class="comp-ad"><strong>Durable</strong><em>$22/mo</em></div><div class="comp-ad"><strong>Hootsuite</strong><em>$99/mo</em></div><div class="comp-ad"><strong>Thryv</strong><em>$99/mo</em></div></div><div class="price-faq"><h2 data-en="Pricing questions" data-es="Preguntas de precios">Pricing questions</h2><details><summary data-en="Can they stop whenever?" data-es="¿Pueden parar cuando quieran?">Can they stop whenever?</summary><p data-en="Yes. $9.99 a month. Stop whenever. Pay once and the website stays up for a year, even if they cancel." data-es="Sí. $9.99 al mes. Paren cuando quieran. Paguen una vez y la página web sigue un año, aunque cancelen.">Yes. $9.99 a month. Stop whenever. Pay once and the website stays up for a year, even if they cancel.</p></details><details><summary data-en="Do they keep the logins?" data-es="¿Se quedan con las cuentas?">Do they keep the logins?</summary><p data-en="Yes. They stay owner of Google and Facebook. We never take a password. They add us as Manager, not Owner." data-es="Sí. Siguen de dueños de Google y Facebook. Nunca pedimos su clave. Nos agregan como Manager, no Owner.">Yes. They stay owner of Google and Facebook. We never take a password. They add us as Manager, not Owner.</p></details><details><summary data-en="Who texts the photos?" data-es="¿Quién manda las fotos?">Who texts the photos?</summary><p data-en="They do. They text the photos to us. We post them. Old ones are fine. A big pile is good. We space them out." data-es="Ellos. Nos mandan las fotos. Las publicamos. Las viejas sirven. Un montón es bueno. Las espaciamos.">They do. They text the photos to us. We post them. Old ones are fine. A big pile is good. We space them out.</p></details><details><summary data-en="Is the website one page?" data-es="¿La página web es de una sola hoja?">Is the website one page?</summary><p data-en="Yes. One page. Name, town, phone, hours, a photo. Not a store. Not extra pages. Not a blog." data-es="Sí. Una página. Nombre, pueblo, teléfono, horario, una foto. No tienda. No páginas extra. No blog.">Yes. One page. Name, town, phone, hours, a photo. Not a store. Not extra pages. Not a blog.</p></details><details><summary data-en="Do they get Google?" data-es="¿Obtienen Google?">Do they get Google?</summary><p data-en="Google is setup help only. We sit with them on their phone. We type. They tap. They keep the password. They stay owner. Setup help, not a sold product." data-es="Google es solo ayuda de configuración. Nos sentamos con ellos en su teléfono. Escribimos. Tocan. Se quedan con la clave. Siguen de dueños. Ayuda de configuración, no un producto vendido.">Google is setup help only. We sit with them on their phone. We type. They tap. They keep the password. They stay owner. Setup help, not a sold product.</p></details><details><summary data-en="Do we make fake posts?" data-es="¿Hacemos publicaciones falsas?">Do we make fake posts?</summary><p data-en="No. We use their photos and their words. We do not invent jobs, stones, prices, or captions. No fake posts. No rank promises." data-es="No. Usamos sus fotos y sus palabras. No inventamos trabajos, piedras, precios o textos. No publicaciones falsas. No promesas de ranking.">No. We use their photos and their words. We do not invent jobs, stones, prices, or captions. No fake posts. No rank promises.</p></details></div><div class="row" style="margin:1.8rem 0 2.2rem"><a class="btn" href="/start" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a><a class="btn ghost" href="/faq" data-en="See all FAQ" data-es="Ver todas las preguntas">See all FAQ</a></div></main><footer class="foot"><div class="wrap"><span>We Post It</span><a href="/legal" data-en="Legal" data-es="Legal">Legal</a></div></footer><script src="/js/site.js"></script><script src="/js/help.js"></script></body></html>
