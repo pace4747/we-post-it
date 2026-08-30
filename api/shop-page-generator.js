@@ -19,13 +19,11 @@ function generateShopPageHTML(shopData) {
   var services = deriveServicesFromCategory(category);
   var aboutText = generateAboutText(shop, category, city, state);
   var mapEmbed = "";
-  var streetViewEmbed = "";
   var directionsLink = "";
   
   if (fullAddress && cityState) {
     var mapQuery = encodeURIComponent(fullAddress + ", " + cityState);
     mapEmbed = `<iframe class="map-embed" src="https://maps.google.com/maps?q=${mapQuery}&z=16&output=embed" title="Map location" loading="lazy"></iframe>`;
-    streetViewEmbed = `<iframe class="map-embed" src="https://maps.google.com/maps?q=${mapQuery}&layer=c&output=svembed" title="Street view" loading="lazy"></iframe>`;
     directionsLink = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
   }
 
@@ -167,7 +165,7 @@ body {
   border-bottom: 1px solid #e5e5e0;
 }
 .map-inner {
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .map-inner h2 {
@@ -178,16 +176,12 @@ body {
   text-align: center;
   letter-spacing: -0.02em;
 }
-.maps-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
 .map-embed {
   width: 100%;
-  height: 450px;
-  border: 2px solid #e5e5e0;
+  height: 360px;
+  border: 0;
   border-radius: 12px;
+  display: block;
 }
 .contact-section {
   padding: 4rem 1.5rem;
@@ -250,11 +244,6 @@ body {
   .service-card h3 { font-size: 1.3rem; }
   .contact-phone { font-size: 1.5rem; }
 }
-@media (min-width: 900px) {
-  .maps-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
 </style>
 </head>
 <body>
@@ -289,13 +278,10 @@ ${services.length > 0 ? `<div class="section">
   </div>
 </div>` : ""}
 
-${mapEmbed && streetViewEmbed ? `<div class="map-section">
+${mapEmbed ? `<div class="map-section">
   <div class="map-inner">
     <h2>Visit Us</h2>
-    <div class="maps-grid">
-      ${mapEmbed}
-      ${streetViewEmbed}
-    </div>
+    ${mapEmbed}
   </div>
 </div>` : ""}
 
