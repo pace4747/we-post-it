@@ -1,0 +1,29 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/api/start",
+      "destination": "/api/start"
+    },
+    {
+      "source": "/api/checkout",
+      "destination": "/api/checkout"
+    },
+    {
+      "source": "/api/order",
+      "destination": "/api/checkout"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
+    }
+  ],
+  "trailingSlash": false
+}
