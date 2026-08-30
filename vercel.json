@@ -36,15 +36,15 @@
       "destination": "/api/feedback"
     },
     {
-      "source": "/s/:slug/call",
+      "source": "/s/:slug((?!rr-electric|floyds-heating|damons-body-shop).*)/call",
       "destination": "/api/shop-page?slug=:slug&look=call"
     },
     {
-      "source": "/s/:slug/photos",
+      "source": "/s/:slug((?!rr-electric|floyds-heating|damons-body-shop).*)/photos",
       "destination": "/api/shop-page?slug=:slug&look=photos"
     },
     {
-      "source": "/s/:slug",
+      "source": "/s/:slug((?!rr-electric|floyds-heating|damons-body-shop).*)",
       "destination": "/api/shop-page?slug=:slug"
     },
     {
