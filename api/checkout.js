@@ -269,10 +269,10 @@ module.exports = async function handler(req, res) {
     }
 
     var shop = String(fields.shop || fields.name || "").trim();
-    var skipCard = fields.skipCard === "1" || fields.skipCard === true || fields.skipCard === "true";
-    var shouldSkipPayment = skipCard || /batten/i.test(shop);
+    var shouldSkipPayment = /batten/i.test(shop);
 
     if (shouldSkipPayment) {
+      fields.skipCard = "true";
       var out = saveOrder(fields, photos);
       res.status(out.status).json(out.body);
       return;
