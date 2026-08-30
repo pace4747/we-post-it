@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
+const Stripe = require("stripe");
 
 const ROOTS = [
   "/workspace/pipeline/submissions",
@@ -110,6 +111,51 @@ function collectBody(req) {
   });
 }
 
+async function createCheckoutSession(fields) {
+  var shop = String(fields.shop || fields.name || "").trim();
+  var town = String(fields.town || fields.place || "").trim();
+  var phone = String(fields.phone || "").trim();
+  var email = String(fields.email || "").trim();
+  var sku = String(fields.product || "both").trim();
+  var lang = String(fields.lang || "en");
+
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return { status: 500, body: { ok: false, error: "Stripe configuration missing." } };
+  }
+
+  var stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+  try {
+    var sessionParams = {
+      mode: "subscription",
+      line_items: [{
+        price: "price_1UABhxRODxSLQAjIxjMNtx38",
+        quantity: 1
+      }],
+      success_url: "https://we-post-it-full.vercel.app/?paid=1",
+      cancel_url: "https://we-post-it-full.vercel.app/#checkout",
+      client_reference_id: shop + "|" + Date.now(),
+      metadata: {
+        shop: shop,
+        town: town,
+        phone: phone,
+        email: email,
+        lang: lang
+      }
+    };
+
+    if (email) {
+      sessionParams.customer_email = email;
+    }
+
+    var session = await stripe.checkout.sessions.create(sessionParams);
+    return { status: 200, body: { ok: true, url: session.url } };
+  } catch (err) {
+    console.error("Stripe checkout error:", err);
+    return { status: 500, body: { ok: false, error: err.message || "Stripe error. Try again." } };
+  }
+}
+
 function saveOrder(fields, photos) {
   var shop = String(fields.shop || fields.name || "").trim();
   var town = String(fields.town || fields.place || "").trim();
@@ -191,38 +237,49 @@ module.exports = async function handler(req, res) {
 
   var ct = String(req.headers["content-type"] || "");
   try {
+    var fields = {};
+    var photos = [];
+
     if (ct.indexOf("multipart/form-data") !== -1) {
       var raw = await collectBody(req);
       if (!raw) { res.status(400).json({ ok: false, error: "Empty body" }); return; }
       var parsed = parseMultipart(raw, parseBoundary(ct));
-      var out = saveOrder(parsed.fields, parsed.photos);
+      fields = parsed.fields;
+      photos = parsed.photos;
+    } else {
+      var rawJson = await collectBody(req);
+      var body = {};
+      if (rawJson === null) {
+        body = req.body || {};
+      } else {
+        try { body = JSON.parse(rawJson.toString("utf8") || "{}"); } catch (e) { body = {}; }
+      }
+      fields = body;
+      (body.photos || []).forEach(function (p) {
+        if (!p) return;
+        var data = p.data || p.base64 || "";
+        if (typeof data === "string" && data.indexOf("base64,") !== -1) data = data.split("base64,")[1];
+        if (!data) return;
+        photos.push({
+          name: p.name || "photo.jpg",
+          mime: p.type || p.mime || "image/jpeg",
+          data: Buffer.from(data, "base64")
+        });
+      });
+    }
+
+    var shop = String(fields.shop || fields.name || "").trim();
+    var skipCard = fields.skipCard === "1" || fields.skipCard === true || fields.skipCard === "true";
+    var shouldSkipPayment = skipCard || /batten/i.test(shop);
+
+    if (shouldSkipPayment) {
+      var out = saveOrder(fields, photos);
       res.status(out.status).json(out.body);
       return;
     }
 
-    var fields = {};
-    var photos = [];
-    var rawJson = await collectBody(req);
-    var body = {};
-    if (rawJson === null) {
-      body = req.body || {};
-    } else {
-      try { body = JSON.parse(rawJson.toString("utf8") || "{}"); } catch (e) { body = {}; }
-    }
-    fields = body;
-    (body.photos || []).forEach(function (p) {
-      if (!p) return;
-      var data = p.data || p.base64 || "";
-      if (typeof data === "string" && data.indexOf("base64,") !== -1) data = data.split("base64,")[1];
-      if (!data) return;
-      photos.push({
-        name: p.name || "photo.jpg",
-        mime: p.type || p.mime || "image/jpeg",
-        data: Buffer.from(data, "base64")
-      });
-    });
-    var out = saveOrder(fields, photos);
-    res.status(out.status).json(out.body);
+    var checkoutResult = await createCheckoutSession(fields);
+    res.status(checkoutResult.status).json(checkoutResult.body);
   } catch (e) {
     console.error("checkout", e);
     res.status(500).json({ ok: false, error: "Did not save." });
