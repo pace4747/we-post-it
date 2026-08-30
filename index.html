@@ -57,6 +57,7 @@
       <a href="/how" data-en="How" data-es="Cómo">How</a>
       <a href="/prices" data-en="Prices" data-es="Precios">Prices</a>
       <a href="/faq" data-en="FAQ" data-es="FAQ">FAQ</a>
+      <a href="/feedback" data-en="Feedback" data-es="Feedback">Feedback</a>
     </nav>
     <div class="header-sale" data-en="Online Presence for only $9.99 a month" data-es="Presencia en línea por solo $9.99 al mes">Online Presence for only $9.99 a month</div>
     <div class="header-actions">
@@ -71,7 +72,7 @@
   <div id="form">
     <h1 data-en="We get your Google, Facebook page, and website started and updated." data-es="Empezamos y actualizamos su Google, su Facebook y su página web.">We get your Google, Facebook page, and website started and updated.</h1>
     
-    <p class="lead" data-en="We maintain them and post on Facebook for you. People can find you. Same name, town, phone on Google, Facebook, Apple Maps, Bing, and your page." data-es="Las mantenemos y publicamos en Facebook por usted. La gente puede encontrarlo. Mismo nombre, pueblo, teléfono en Google, Facebook, Apple Maps, Bing y su página.">We maintain them and post on Facebook for you. People can find you. Same name, town, phone on Google, Facebook, Apple Maps, Bing, and your page.</p>
+    <p class="lead" data-en="We maintain them and post on Facebook for you. We put your shop name, ZIP, and phone on Google, Facebook, Apple Maps, Bing, and your page so they match." data-es="Las mantenemos y publicamos en Facebook por usted. Ponemos el nombre de su negocio, código postal y teléfono en Google, Facebook, Apple Maps, Bing y su página para que coincidan.">We maintain them and post on Facebook for you. We put your shop name, ZIP, and phone on Google, Facebook, Apple Maps, Bing, and your page so they match.</p>
 
     <div class="hero-buttons" style="margin: 0 0 1.35rem;">
       <a class="btn" href="#checkout" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
@@ -80,17 +81,16 @@
     </div>
 
     <section class="trust-strip">
-      <p style="margin: 0 0 0.55rem; font-weight: 700; font-size: 1.05rem;" data-en="Same name, town, phone everywhere." data-es="Mismo nombre, pueblo, teléfono en todos lados.">Same name, town, phone everywhere.</p>
       <p style="margin: 0 0 0.55rem; font-weight: 650; font-size: 1rem;" data-en="You stay owner." data-es="Usted sigue de dueño.">You stay owner.</p>
       <p style="margin: 0 0 0.55rem; font-weight: 650; font-size: 1rem;" data-en="We never take a password." data-es="Nunca tomamos una clave.">We never take a password.</p>
       <p style="margin: 0; font-size: 0.95rem; color: var(--muted);" data-en="Sunset Gaming LLC, Texas." data-es="Sunset Gaming LLC, Texas.">Sunset Gaming LLC, Texas.</p>
     </section>
 
     <ol class="easy">
-      <li><b>1</b><span data-en="We put you where people look. Google, Facebook, Apple Maps, Bing, and your website. Same name, town, phone. You come in just to finish." data-es="Lo ponemos donde la gente busca. Google, Facebook, Apple Maps, Bing y su página web. Mismo nombre, pueblo, teléfono. Usted solo viene a terminar.">We put you where people look. Google, Facebook, Apple Maps, Bing, and your website. Same name, town, phone. You come in just to finish.</span></li>
+      <li><b>1</b><span data-en="We put your shop name, ZIP, and phone on Google, Facebook, Apple Maps, Bing, and your page so they match. You come in just to finish." data-es="Ponemos el nombre de su negocio, código postal y teléfono en Google, Facebook, Apple Maps, Bing y su página para que coincidan. Usted solo viene a terminar.">We put your shop name, ZIP, and phone on Google, Facebook, Apple Maps, Bing, and your page so they match. You come in just to finish.</span></li>
       <li><b>2</b><span data-en="If you already have Google, we take hours, address, and category from there." data-es="Si ya tiene Google, tomamos horario, dirección y rubro de ahí.">If you already have Google, we take hours, address, and category from there.</span></li>
       <li><b>3</b><span data-en="The first photo you text is your profile picture. On Google, Facebook, and your page." data-es="La primera foto que mande es su foto de perfil. En Google, Facebook y su página.">The first photo you text is your profile picture. On Google, Facebook, and your page.</span></li>
-      <li><b>4</b><span data-en="Start with a photo dump. Old ones are fine. We organize them and space them out. Send at least 50 a year." data-es="Empiece con un montón de fotos. Las viejas sirven. Las organizamos y las espaciamos. Mande por lo menos 50 al año.">Start with a photo dump. Old ones are fine. We organize them and space them out. Send at least 50 a year.</span></li>
+      <li><b>4</b><span data-en="Start with a photo dump. Old ones are fine. We organize them and space them out. We encourage you to send us at least 52 photos a year, that's one a week." data-es="Empiece con un montón de fotos. Las viejas sirven. Las organizamos y las espaciamos. Le animamos a enviarnos al menos 52 fotos al año, eso es una por semana.">Start with a photo dump. Old ones are fine. We organize them and space them out. We encourage you to send us at least 52 photos a year, that's one a week.</span></li>
       <li><b>5</b><span data-en="Text more anytime. Need a change on the site. Text it." data-es="Mande más cuando quiera. ¿Cambio en la página? Mándelo.">Text more anytime. Need a change on the site. Text it.</span></li>
     </ol>
 
@@ -103,8 +103,8 @@
         </div>
 
         <div class="field">
-          <label class="lbl" for="town" data-en="Town" data-es="Pueblo">Town</label>
-          <input id="town" name="town" type="text" autocomplete="address-level2" required data-ph-en="Town, ST" data-ph-es="Pueblo, ST" placeholder="Town, ST">
+          <label class="lbl" for="zip" data-en="ZIP" data-es="Código postal">ZIP</label>
+          <input id="zip" name="zip" type="text" autocomplete="postal-code" required data-ph-en="75201" data-ph-es="75201" placeholder="75201" inputmode="numeric" pattern="[0-9]{5}(-[0-9]{4})?" maxlength="10">
         </div>
 
         <div class="field">
@@ -119,7 +119,7 @@
 
         <input type="hidden" name="product" id="productHidden" value="both">
 
-        <p class="ask" id="afterPayAsk" data-en="Start. Then send a photo dump. We organize them and space them out. Aim for at least 50 a year." data-es="Empiece. Luego mande un montón de fotos. Las organizamos y las espaciamos. El objetivo es por lo menos 50 al año.">Start. Then send a photo dump. We organize them and space them out. Aim for at least 50 a year.</p>
+        <p class="ask" id="afterPayAsk" data-en="Start. Then send a photo dump. We organize them and space them out. We encourage you to send us at least 52 photos a year, that's one a week." data-es="Empiece. Luego mande un montón de fotos. Las organizamos y las espaciamos. Le animamos a enviarnos al menos 52 fotos al año, eso es una por semana.">Start. Then send a photo dump. We organize them and space them out. We encourage you to send us at least 52 photos a year, that's one a week.</p>
 
         <label class="agree" for="agree">
           <input id="agree" name="agree" type="checkbox" required>
@@ -144,10 +144,10 @@
     <p id="donePay"></p>
     <h2 data-en="What happens next" data-es="Qué sigue">What happens next</h2>
     <ol>
-      <li data-en="We put you where people look. Google, Facebook, Apple Maps, Bing, and your website. Same name, town, phone. You come in just to finish." data-es="Lo ponemos donde la gente busca. Google, Facebook, Apple Maps, Bing y su página web. Mismo nombre, pueblo, teléfono. Usted solo viene a terminar.">We put you where people look. Google, Facebook, Apple Maps, Bing, and your website. Same name, town, phone. You come in just to finish.</li>
+      <li data-en="We put your shop name, ZIP, and phone on Google, Facebook, Apple Maps, Bing, and your page so they match. You come in just to finish." data-es="Ponemos el nombre de su negocio, código postal y teléfono en Google, Facebook, Apple Maps, Bing y su página para que coincidan. Usted solo viene a terminar.">We put your shop name, ZIP, and phone on Google, Facebook, Apple Maps, Bing, and your page so they match. You come in just to finish.</li>
       <li data-en="If you already have Google, we take hours, address, and category from there." data-es="Si ya tiene Google, tomamos horario, dirección y rubro de ahí.">If you already have Google, we take hours, address, and category from there.</li>
       <li data-en="The first photo you text is your profile picture. On Google, Facebook, and your page." data-es="La primera foto que mande es su foto de perfil. En Google, Facebook y su página.">The first photo you text is your profile picture. On Google, Facebook, and your page.</li>
-      <li data-en="Start with a photo dump. We organize them and space them out. Aim for at least 50 a year." data-es="Empiece con un montón de fotos. Las organizamos y las espaciamos. El objetivo es por lo menos 50 al año.">Start with a photo dump. We organize them and space them out. Aim for at least 50 a year.</li>
+      <li data-en="Start with a photo dump. We organize them and space them out. We encourage you to send us at least 52 photos a year, that's one a week." data-es="Empiece con un montón de fotos. Las organizamos y las espaciamos. Le animamos a enviarnos al menos 52 fotos al año, eso es una por semana.">Start with a photo dump. We organize them and space them out. We encourage you to send us at least 52 photos a year, that's one a week.</li>
       <li data-en="Text more anytime. Need a change on the site. Text it." data-es="Mande más cuando quiera. ¿Cambio en la página? Mándelo.">Text more anytime. Need a change on the site. Text it.</li>
     </ol>
   </div>
@@ -163,6 +163,26 @@
   <div class="bottom-right">
     <button id="cookieOk" data-en="OK" data-es="OK">OK</button>
   </div>
+</div>
+
+<!-- Feedback box - opens above bottom bar -->
+<div id="feedbackBox">
+  <p class="feedback-head" id="feedbackHead" data-en="Feedback" data-es="Feedback">Feedback</p>
+  <div class="feedback-log" id="feedbackLog"></div>
+  <form class="feedback-form" id="feedbackFormMain" novalidate>
+    <div class="feedback-field">
+      <select id="feedbackType" name="type" required data-en-default="Pick one" data-es-default="Elija uno">
+        <option value="" data-en="Pick one" data-es="Elija uno">Pick one</option>
+        <option value="better" data-en="How we can do better" data-es="Cómo podemos hacerlo mejor">How we can do better</option>
+        <option value="bug" data-en="Bugs" data-es="Errores">Bugs</option>
+        <option value="feature" data-en="Future features you would like added" data-es="Funciones futuras que le gustaría agregar">Future features you would like added</option>
+      </select>
+    </div>
+    <div class="feedback-field" id="feedbackField">
+      <textarea id="feedbackMsg" rows="3" data-ph-en="Tell us." data-ph-es="Díganos." placeholder="Tell us."></textarea>
+    </div>
+    <button type="submit" id="feedbackGo" data-en="Send" data-es="Enviar">Send</button>
+  </form>
 </div>
 
 <!-- Help box - opens above bottom bar -->
@@ -261,15 +281,15 @@
 
   function send() {
     var shop = document.getElementById("shop").value.trim();
-    var town = document.getElementById("town").value.trim();
+    var zip = document.getElementById("zip").value.trim();
     var phone = document.getElementById("phone").value.trim();
     var err = document.getElementById("err");
     err.hidden = true;
 
-    if (!shop || !town || !phone) {
+    if (!shop || !zip || !phone) {
       showErr(lang() === "es"
-        ? "Falta el nombre, el pueblo, o el teléfono."
-        : "Need shop name, town, and a phone.");
+        ? "Falta el nombre, el código postal, o el teléfono."
+        : "Need shop name, ZIP, and a phone.");
       return;
     }
 
@@ -285,7 +305,7 @@
 
     var fd = new FormData();
     fd.append("shop", shop);
-    fd.append("town", town);
+    fd.append("zip", zip);
     fd.append("phone", phone);
     var em = document.getElementById("email");
     fd.append("email", em ? em.value.trim() : "");
@@ -320,7 +340,6 @@
     send();
   });
 
-
   document.getElementById("langBtn").addEventListener("click", function () {
     apply(lang() === "en" ? "es" : "en");
   });
@@ -351,6 +370,62 @@
     cookieOk.addEventListener("click", function () {
       localStorage.setItem("wpi-cookie-ok", "1");
       hideCookieRow();
+    });
+  }
+
+  // Feedback box
+  var feedbackBox = document.getElementById("feedbackBox");
+  var feedbackLog = document.getElementById("feedbackLog");
+  var feedbackFormMain = document.getElementById("feedbackFormMain");
+  var feedbackHead = document.getElementById("feedbackHead");
+
+  if (feedbackHead) {
+    feedbackHead.addEventListener("click", function () {
+      feedbackBox.classList.toggle("open");
+    });
+  }
+
+  if (feedbackFormMain) {
+    feedbackFormMain.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var type = document.getElementById("feedbackType").value.trim();
+      var message = document.getElementById("feedbackMsg").value.trim();
+
+      if (!type || !message) {
+        var msg = lang() === "es" ? "Elija un tema y escriba su mensaje." : "Pick a topic and write your message.";
+        feedbackLog.innerHTML = '<p style="color:#b91c1c;margin:0.5rem 0">' + msg + '</p>';
+        return;
+      }
+
+      document.getElementById("feedbackGo").disabled = true;
+
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          type: type,
+          message: message,
+          lang: lang()
+        })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        if (res && res.ok) {
+          var thanks = lang() === "es" ? "Gracias por el feedback." : "Thank you for the feedback.";
+          feedbackLog.innerHTML = '<p style="color:#15803d;margin:0.5rem 0">' + thanks + '</p>';
+          document.getElementById("feedbackType").value = "";
+          document.getElementById("feedbackMsg").value = "";
+        } else {
+          throw new Error("no");
+        }
+      })
+      .catch(function() {
+        var err = lang() === "es" ? "No se envió. Intente de nuevo." : "Did not send. Try again.";
+        feedbackLog.innerHTML = '<p style="color:#b91c1c;margin:0.5rem 0">' + err + '</p>';
+      })
+      .finally(function() {
+        document.getElementById("feedbackGo").disabled = false;
+      });
     });
   }
 })();

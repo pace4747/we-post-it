@@ -24,6 +24,14 @@
       "destination": "/api/help"
     },
     {
+      "source": "/api/feedback",
+      "destination": "/api/feedback"
+    },
+    {
+      "source": "/feedback",
+      "destination": "/feedback.html"
+    },
+    {
       "source": "/about",
       "destination": "/about.html"
     },

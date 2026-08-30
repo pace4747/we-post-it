@@ -16,10 +16,10 @@ module.exports = async function handler(req, res) {
   }
 
   var name = String(body.name || body.shop || "").trim();
-  var place = String(body.place || body.cityState || "").trim();
+  var place = String(body.place || body.zip || body.cityState || "").trim();
   var phone = String(body.phone || "").trim();
   if (!name || !place || !phone) {
-    res.status(400).json({ ok: false, error: "Need shop name, city and state, and a phone." });
+    res.status(400).json({ ok: false, error: "Need shop name, location, and a phone." });
     return;
   }
 
