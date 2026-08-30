@@ -172,17 +172,6 @@
   </div>
 </div>
 
-<!-- ONE BOTTOM BAR - Cookies + Help combined -->
-<div id="bottomBar">
-  <div class="bottom-left" id="cookieRow">
-    <span data-en="We remember language and ZIP you entered. We may use your connection city/ZIP and referrer to run the shop. We do not sell lists. Questions?" data-es="Recordamos idioma y ZIP que ingresó. Podemos usar ciudad/ZIP de conexión y referidor para operar. No vendemos listas. ¿Preguntas?">We remember language and ZIP you entered. We may use your connection city/ZIP and referrer to run the shop. We do not sell lists. Questions?</span>
-    <a href="/legal" data-en="Legal" data-es="Legal">Legal</a>
-    <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a>
-  </div>
-  <div class="bottom-right">
-    <button id="cookieOk" data-en="OK" data-es="OK">OK</button>
-  </div>
-</div>
 
 <!-- Feedback button - always visible opposite Help chat -->
 <a href="/feedback" id="feedbackBox" class="feedback-btn">
@@ -375,21 +364,6 @@
   setPayLabel();
   syncProof();
 
-  function hideCookieRow() {
-    var row = document.getElementById("cookieRow");
-    if (row) row.hidden = true;
-    document.body.classList.add("cookies-off");
-  }
-  if (localStorage.getItem("wpi-cookie-ok")) {
-    hideCookieRow();
-  }
-  var cookieOk = document.getElementById("cookieOk");
-  if (cookieOk) {
-    cookieOk.addEventListener("click", function () {
-      localStorage.setItem("wpi-cookie-ok", "1");
-      hideCookieRow();
-    });
-  }
 
   // ZIP prefill from IP geo (Vercel headers) + remember typed ZIP
   var ZIP_KEY = "wpi-last-zip";
