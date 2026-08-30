@@ -2,6 +2,7 @@ const Stripe = require("stripe");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
+const { makeSlug } = require("./shop-page-generator");
 
 const ROOTS = [
   "/workspace/pipeline/submissions",
@@ -32,10 +33,10 @@ function collectRawBody(req) {
   });
 }
 
-function markShopPaid(metadata, subscriptionId) {
+function markShopPaid(metadata, subscriptionId, stripe) {
   try {
     var shop = metadata.shop || "";
-    var town = metadata.town || "";
+    var zip = metadata.zip || "";
     var phone = metadata.phone || "";
     var email = metadata.email || "";
     var lang = metadata.lang || "en";
@@ -45,7 +46,7 @@ function markShopPaid(metadata, subscriptionId) {
 
     var entry = {
       shop: shop,
-      town: town,
+      zip: zip,
       phone: phone,
       email: email,
       lang: lang,
@@ -55,8 +56,43 @@ function markShopPaid(metadata, subscriptionId) {
 
     fs.appendFileSync(shopsFile, JSON.stringify(entry) + "\n");
     console.log("Marked shop paid:", shop, subscriptionId);
+
+    if (subscriptionId && shop && phone) {
+      createShopPage(stripe, subscriptionId, shop, zip, phone).catch(function (e) {
+        console.error("Failed to create shop page async:", e);
+      });
+    }
   } catch (e) {
     console.error("Failed to mark shop paid:", e);
+  }
+}
+
+async function createShopPage(stripe, subscriptionId, shop, zip, phone) {
+  try {
+    var slug = makeSlug(shop);
+    var url = "https://we-post-it-full.vercel.app/s/" + slug;
+    
+    var subscription = await stripe.subscriptions.retrieve(subscriptionId);
+    
+    if (subscription.metadata && subscription.metadata.slug) {
+      console.log("Shop page already exists for subscription:", subscriptionId);
+      return;
+    }
+    
+    await stripe.subscriptions.update(subscriptionId, {
+      metadata: {
+        shop: shop,
+        zip: zip,
+        phone: phone,
+        slug: slug,
+        url: url,
+        createdAt: new Date().toISOString()
+      }
+    });
+    
+    console.log("Created shop page:", shop, "at", url);
+  } catch (e) {
+    console.error("Failed to create shop page:", e);
   }
 }
 
@@ -111,7 +147,7 @@ module.exports = async function handler(req, res) {
       var metadata = session.metadata || {};
       var subscriptionId = session.subscription || "";
       
-      markShopPaid(metadata, subscriptionId);
+      markShopPaid(metadata, subscriptionId, stripe);
       
       res.status(200).json({ received: true });
       return;

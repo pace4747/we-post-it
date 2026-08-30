@@ -36,6 +36,10 @@
       "destination": "/api/feedback"
     },
     {
+      "source": "/s/:slug",
+      "destination": "/api/shop-page?slug=:slug"
+    },
+    {
       "source": "/feedback",
       "destination": "/feedback.html"
     },
