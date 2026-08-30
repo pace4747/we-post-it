@@ -49,13 +49,13 @@
 <!-- ONE HEADER -->
 <header class="header">
   <div class="header-inner">
-    <div class="header-sale" data-en="Online Presence for only $9.99 a month" data-es="Presencia en línea por solo $9.99 al mes">Online Presence for only $9.99 a month</div>
     <nav class="header-nav" aria-label="Site">
       <a href="/" data-en="We Post It" data-es="We Post It">We Post It</a>
       <a href="/how" data-en="How" data-es="Cómo">How</a>
       <a href="/prices" data-en="Prices" data-es="Precios">Prices</a>
       <a href="/faq" data-en="FAQ" data-es="FAQ">FAQ</a>
     </nav>
+    <div class="header-sale" data-en="Online Presence for only $9.99 a month" data-es="Presencia en línea por solo $9.99 al mes">Online Presence for only $9.99 a month</div>
     <div class="header-actions">
       <a class="header-start" href="/#checkout" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
       <button type="button" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button>
@@ -88,18 +88,17 @@
 
 <!-- ONE BOTTOM BAR -->
 <div id="bottomBar">
-  <div class="bottom-left">
+  <div class="bottom-left" id="cookieRow">
     <span data-en="We only remember if you picked English or Spanish." data-es="Solo recordamos si eligió inglés o español.">We only remember if you picked English or Spanish.</span>
     <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a>
     <a href="/cookies" data-en="Cookies" data-es="Cookies">Cookies</a>
   </div>
   <div class="bottom-right">
     <button id="cookieOk" data-en="OK" data-es="OK">OK</button>
-    <button id="helpToggle" type="button">Ask us</button>
   </div>
 </div>
 
-<div id="helpBox" hidden>
+<div id="helpBox">
   <p class="help-head" id="helpHead">Got a question? Ask us.</p>
   <div class="help-log" id="helpLog"></div>
   <form class="help-form" id="helpForm">
