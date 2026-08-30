@@ -36,42 +36,6 @@
       "destination": "/api/feedback"
     },
     {
-      "source": "/s/rr-electric/call",
-      "destination": "/s/rr-electric-call.html"
-    },
-    {
-      "source": "/s/rr-electric/photos",
-      "destination": "/s/rr-electric-photos.html"
-    },
-    {
-      "source": "/s/rr-electric",
-      "destination": "/s/rr-electric-call.html"
-    },
-    {
-      "source": "/s/floyds-heating/call",
-      "destination": "/s/floyds-heating-call.html"
-    },
-    {
-      "source": "/s/floyds-heating/photos",
-      "destination": "/s/floyds-heating-photos.html"
-    },
-    {
-      "source": "/s/floyds-heating",
-      "destination": "/s/floyds-heating-call.html"
-    },
-    {
-      "source": "/s/damons-body-shop/call",
-      "destination": "/s/damons-body-shop-call.html"
-    },
-    {
-      "source": "/s/damons-body-shop/photos",
-      "destination": "/s/damons-body-shop-photos.html"
-    },
-    {
-      "source": "/s/damons-body-shop",
-      "destination": "/s/damons-body-shop-call.html"
-    },
-    {
       "source": "/s/:slug/call",
       "destination": "/api/shop-page?slug=:slug&look=call"
     },
