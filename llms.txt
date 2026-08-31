@@ -1,20 +1,20 @@
-# We Post It
+# Your Site
 
-We get your Google, Facebook page, and website started. We maintain them and post on Facebook for you. You text the photos to us. We post them for you. If you drop a lot of photos, we space them out for you. You come in just to finish.
+One-page website for local shops. $9.99/mo. Website only. You text photos. We update it.
 
-$9.99 a month. Stop whenever. Pay once and the website stays up for a year, even if you cancel.
+At most 1 site update per week (America/Chicago Mon–Sun). Photos by text after pay.
 
-Texas business. Card statement: WE POST IT. We never take a password.
+Texas business. Sunset Gaming LLC. We never take a password.
 
-Site: https://we-post-it-full.vercel.app
-How: https://we-post-it-full.vercel.app/how
-Prices: https://we-post-it-full.vercel.app/prices
-FAQ: https://we-post-it-full.vercel.app/faq
-Compare: https://we-post-it-full.vercel.app/compare
-Compare vs Wix: https://we-post-it-full.vercel.app/vs/wix
-Compare vs Squarespace: https://we-post-it-full.vercel.app/vs/squarespace
-Compare vs Durable: https://we-post-it-full.vercel.app/vs/durable
-Compare vs Hootsuite: https://we-post-it-full.vercel.app/vs/hootsuite
-Compare vs Thryv: https://we-post-it-full.vercel.app/vs/thryv
-Start: https://we-post-it-full.vercel.app/start
-Legal: https://we-post-it-full.vercel.app/legal
+Site: https://www.yoursite.site
+How: https://www.yoursite.site/how
+Prices: https://www.yoursite.site/prices
+FAQ: https://www.yoursite.site/faq
+Compare: https://www.yoursite.site/compare
+Compare vs Wix: https://www.yoursite.site/vs/wix
+Compare vs Squarespace: https://www.yoursite.site/vs/squarespace
+Compare vs Durable: https://www.yoursite.site/vs/durable
+Compare vs Hootsuite: https://www.yoursite.site/vs/hootsuite
+Compare vs Thryv: https://www.yoursite.site/vs/thryv
+Start: https://www.yoursite.site/start
+Legal: https://www.yoursite.site/legal

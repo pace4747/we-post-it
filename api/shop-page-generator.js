@@ -317,7 +317,7 @@ ${mapEmbed && streetViewEmbed ? `<div class="map-section">
 </div>
 
 <div class="footer">
-  <p>Powered by <a href="https://we-post-it-full.vercel.app">We Post It</a></p>
+  <p>Powered by <a href="https://www.yoursite.site">Your Site</a></p>
 </div>
 
 </body>
