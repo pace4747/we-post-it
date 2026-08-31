@@ -118,6 +118,18 @@ async function createCheckoutSession(fields, req) {
   var email = String(fields.email || "").trim();
   var sku = String(fields.product || "both").trim();
   var lang = String(fields.lang || "en");
+  
+  var referralInput = String(fields.referralCode || fields.referral || fields.code || fields.ref || "").trim();
+  var referralPhone = "";
+  var referralCode = "";
+  
+  if (referralInput) {
+    var digits = referralInput.replace(/\D/g, "");
+    if (digits.length === 10) {
+      referralPhone = digits;
+    }
+    referralCode = referralInput.replace(/[^A-Z0-9]/gi, "").toUpperCase().slice(0, 20);
+  }
 
   var stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -139,6 +151,17 @@ async function createCheckoutSession(fields, req) {
   }
 
   try {
+    var sessionMetadata = {
+      shop: shop,
+      zip: zip,
+      phone: phone,
+      email: email,
+      lang: lang
+    };
+    
+    if (referralPhone) sessionMetadata.referralPhone = referralPhone;
+    if (referralCode) sessionMetadata.referralCode = referralCode;
+    
     var sessionParams = {
       mode: "subscription",
       line_items: [{
@@ -148,12 +171,9 @@ async function createCheckoutSession(fields, req) {
       success_url: origin + "/?paid=1",
       cancel_url: origin + "/#checkout",
       client_reference_id: shop + "|" + Date.now(),
-      metadata: {
-        shop: shop,
-        zip: zip,
-        phone: phone,
-        email: email,
-        lang: lang
+      metadata: sessionMetadata,
+      subscription_data: {
+        metadata: sessionMetadata
       }
     };
 
@@ -182,6 +202,18 @@ function saveOrder(fields, photos) {
   var skipCard = fields.skipCard === "1" || fields.skipCard === true || fields.skipCard === "true";
   var proof = fields.proof === "1" || fields.proof === true || /batten/i.test(shop);
   if (proof && skipCard) skipCard = true;
+  
+  var referralInput = String(fields.referralCode || fields.referral || fields.code || fields.ref || "").trim();
+  var referralPhone = "";
+  var referralCode = "";
+  
+  if (referralInput) {
+    var digits = referralInput.replace(/\D/g, "");
+    if (digits.length === 10) {
+      referralPhone = digits;
+    }
+    referralCode = referralInput.replace(/[^A-Z0-9]/gi, "").toUpperCase().slice(0, 20);
+  }
 
   var now = new Date();
   var stamp = now.toISOString().replace(/[-:]/g, "").replace(/\.\d+Z$/, "Z");
@@ -227,6 +259,10 @@ function saveOrder(fields, photos) {
     source: "checkout",
     posting: { maxPerDay: 1, maxPerWeek: 3, onlyIfPhotoSent: true }
   };
+  
+  if (referralPhone) order.referralPhone = referralPhone;
+  if (referralCode) order.referralCode = referralCode;
+  
   fs.writeFileSync(path.join(dir, "order.json"), JSON.stringify(order, null, 2));
   try { fs.appendFileSync("/tmp/wepostit-orders.jsonl", JSON.stringify(order) + "\n"); } catch (e) {}
   return {
