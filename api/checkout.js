@@ -122,13 +122,13 @@ async function createCheckoutSession(fields, req) {
   var stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
   var allowedHosts = [
-    "wepostit.site",
-    "www.wepostit.site",
-    "we-post-it-full.vercel.app",
     "yoursite.site",
-    "www.yoursite.site"
+    "www.yoursite.site",
+    "we-post-it-full.vercel.app",
+    "wepostit.site",
+    "www.wepostit.site"
   ];
-  var fallbackOrigin = "https://we-post-it-full.vercel.app";
+  var fallbackOrigin = "https://www.yoursite.site";
 
   var host = req.headers["x-forwarded-host"] || req.headers["host"] || "";
   var proto = req.headers["x-forwarded-proto"] || "https";
