@@ -91,6 +91,7 @@ body {
   gap: 0.8rem;
   justify-self: end;
   grid-column: 3;
+  position: relative;
 }
 
 .header-start {
@@ -219,48 +220,45 @@ body {
   }
 }
 
-/* Help box */
-#helpToggle {
-  padding: 0.4rem 0.8rem;
+/* Help toggle button in header */
+.header-help-toggle {
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  border: 1.5px solid #fff;
   background: transparent;
   color: #fff;
-  border: 1.5px solid #fff;
+  border-radius: 8px;
   font: inherit;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
-  border-radius: 6px;
-  font-size: 0.9rem;
   white-space: nowrap;
 }
 
-#helpBox {
-  position: fixed;
-  bottom: 0.9rem;
-  right: 1rem;
-  left: 1rem;
-  max-width: 34rem;
-  margin-left: auto;
+.header-help-toggle:focus {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Compact help box dropdown */
+.help-box-compact {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  right: 0;
+  width: min(18rem, calc(100vw - 2rem));
   background: #fff;
   color: #111;
   border: 2px solid #111;
-  border-radius: 14px;
-  padding: 1rem 1.1rem;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.2);
-  z-index: 110;
-}
-
-.help-head {
-  margin: 0 0 0.6rem;
-  font-weight: 800;
-  font-size: 1.35rem;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  border-radius: 12px;
+  padding: 0.85rem 0.95rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  z-index: 120;
 }
 
 .help-log {
-  max-height: 10rem;
+  max-height: 8rem;
   overflow: auto;
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.5rem;
 }
 
 .help-log:empty {
@@ -268,8 +266,9 @@ body {
 }
 
 .help-log p {
-  margin: 0 0 0.45rem;
-  font-size: 1rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+  line-height: 1.3;
 }
 
 .help-log .me {
@@ -279,7 +278,7 @@ body {
 .help-form {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .help-field {
@@ -288,25 +287,25 @@ body {
 
 .help-form input {
   width: 100%;
-  min-height: 48px;
+  min-height: 36px;
   border: 1.5px solid #111;
-  border-radius: 10px;
-  padding: 0.45rem 0.7rem;
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
   font: inherit;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   background: #f7f7f4;
 }
 
 .help-hint {
   position: absolute;
-  left: 0.7rem;
-  right: 0.7rem;
+  left: 0.6rem;
+  right: 0.6rem;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
   color: #222;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.9rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -317,14 +316,15 @@ body {
 }
 
 .help-form button {
-  min-height: 48px;
-  padding: 0 0.9rem;
+  min-height: 36px;
+  padding: 0 0.75rem;
   background: #111;
   color: #fff;
   border: 0;
-  border-radius: 10px;
+  border-radius: 8px;
   font: inherit;
   font-weight: 700;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
@@ -601,88 +601,24 @@ ol.easy span {
     font-size: 0.85rem;
   }
   
-  /* Move help box to TOP on mobile, under header */
-  #helpBox {
-    top: calc(3.5rem + env(safe-area-inset-top, 0rem));
-    bottom: auto;
-    left: 0.5rem;
-    right: 0.5rem;
-    max-width: none;
-    z-index: 105;
+  .header-help-toggle {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.8rem;
+    min-height: 36px;
   }
   
-  body.cookies-off #helpBox {
-    top: calc(3.5rem + env(safe-area-inset-top, 0rem));
-    bottom: auto;
+  /* Make compact help box narrower on mobile */
+  .help-box-compact {
+    width: min(16rem, calc(100vw - 1.5rem));
   }
   
-  /* Keep feedback at bottom on mobile with small inset */
-  #feedbackBox {
-    bottom: max(0.5rem, env(safe-area-inset-bottom));
-    left: 0.5rem;
-    right: 0.5rem;
-    max-width: none;
-    font-size: 1.3rem;
-    padding: 1.1rem 1.5rem;
-    min-height: 64px;
-  }
-  
-  body.cookies-off #feedbackBox {
-    bottom: max(0.5rem, env(safe-area-inset-bottom));
-  }
-  
-  /* Adjust body padding for mobile - only bottom for feedback button */
+  /* Adjust body padding for mobile */
   body {
-    padding-bottom: 6rem;
+    padding-bottom: 3rem;
   }
   
-  /* Adjust wrap padding to clear the fixed help box at top */
   .wrap {
-    padding-top: 8rem;
+    padding-top: 0.75rem;
     padding-bottom: 2rem;
-  }
-}
-
-/* FEEDBACK BUTTON - opposite side from help, always visible, BIG and centered */
-#feedbackBox {
-  position: fixed;
-  bottom: calc(var(--bottom-bar, 5.25rem) + 0.75rem);
-  left: 1rem;
-  max-width: 22rem;
-  background: #111;
-  color: #fff;
-  border: 2px solid #111;
-  border-radius: 16px;
-  padding: 1.35rem 2rem;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.2);
-  z-index: 110;
-  text-decoration: none;
-  display: block;
-  font-weight: 800;
-  font-size: 1.65rem;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  text-align: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  min-height: 72px;
-}
-
-#feedbackBox:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
-}
-
-#feedbackBox:active {
-  transform: translateY(0);
-}
-
-body.cookies-off #feedbackBox {
-  bottom: 0.9rem;
-}
-
-/* Center feedback button in available left space on wider screens */
-@media (min-width: 1000px) {
-  #feedbackBox {
-    left: max(1rem, calc(((100vw - 36rem) / 2 - 22rem) / 2));
   }
 }

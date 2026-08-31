@@ -84,6 +84,9 @@
     <div class="header-actions">
       <a class="header-start" href="/#checkout" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
       <button type="button" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button>
+      <button type="button" id="helpToggle" class="header-help-toggle">
+        <span data-en="Got a question?" data-es="¿Pregunta?">Got a question?</span>
+      </button>
     </div>
   </div>
 </header>
@@ -126,12 +129,11 @@
   </div>
 </div>
 
-<div id="helpBox">
-  <p class="help-head" id="helpHead">Got a question? Ask us.</p>
+<div id="helpBox" class="help-box-compact" hidden>
   <div class="help-log" id="helpLog"></div>
   <form class="help-form" id="helpForm">
     <div class="help-field" id="helpField">
-      <input type="text" id="helpIn" autocomplete="off">
+      <input type="text" id="helpIn" autocomplete="off" placeholder="">
       <span class="help-hint" id="helpHint">Type it here.</span>
     </div>
     <button type="submit" id="helpGo">Send</button>

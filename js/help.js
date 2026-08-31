@@ -21,7 +21,6 @@
 
   var helpBox = document.getElementById("helpBox");
   var helpToggle = document.getElementById("helpToggle");
-  var helpHead = document.getElementById("helpHead");
   var helpLog = document.getElementById("helpLog");
   var helpForm = document.getElementById("helpForm");
   var helpIn = document.getElementById("helpIn");
@@ -29,12 +28,13 @@
   var helpField = document.getElementById("helpField");
   var helpHint = document.getElementById("helpHint");
 
-  if (!helpBox) return;
-  helpBox.hidden = false;
+  if (!helpBox || !helpToggle) return;
 
   function updateLabels() {
-    if (helpToggle) helpToggle.textContent = t("Ask us", "Pregúntenos");
-    helpHead.textContent = t("Got a question? Ask us.", "¿Tiene una pregunta? Pregúntenos.");
+    if (helpToggle) {
+      var span = helpToggle.querySelector("span");
+      if (span) span.textContent = t("Got a question?", "¿Pregunta?");
+    }
     helpHint.textContent = t("Type it here.", "Escríbala aquí.");
     helpIn.setAttribute("aria-label", t("Question", "Pregunta"));
     helpGo.textContent = t("Send", "Enviar");
@@ -43,11 +43,6 @@
   function syncHint() {
     var on = !!(helpIn && helpIn.value);
     helpField.classList.toggle("has-text", on);
-    if (on || helpLog.childNodes.length) {
-      helpHead.style.display = "none";
-    } else {
-      helpHead.style.display = "";
-    }
   }
 
   function add(who, text) {
@@ -59,9 +54,24 @@
     return p;
   }
 
-  if (helpToggle) {
-    helpToggle.style.display = "none";
-  }
+  // Toggle help box visibility
+  helpToggle.addEventListener("click", function () {
+    var isHidden = helpBox.hidden;
+    helpBox.hidden = !isHidden;
+    if (!isHidden) {
+      // Closing
+    } else {
+      // Opening
+      helpIn.focus();
+    }
+  });
+
+  // Close help box when clicking outside
+  document.addEventListener("click", function (e) {
+    if (!helpBox.hidden && !helpBox.contains(e.target) && !helpToggle.contains(e.target)) {
+      helpBox.hidden = true;
+    }
+  });
 
   helpIn.addEventListener("input", syncHint);
 
