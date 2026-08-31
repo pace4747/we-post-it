@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/pace4747/we-post-it#readme",
   "dependencies": {
+    "@vercel/blob": "^2.8.0",
     "stripe": "^22.6.0"
   }
 }
