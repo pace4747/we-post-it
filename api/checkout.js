@@ -9,10 +9,10 @@ const ROOTS = [
 ];
 
 const PRODUCTS = {
-  posts: { label: "Posts — $9.99/mo", once: 0, month: 9.99 },
-  cleanup: { label: "Cleanup — $9.99/mo", once: 0, month: 9.99 },
-  page: { label: "New page — $9.99/mo", once: 0, month: 9.99 },
-  both: { label: "Page + posts — $9.99/mo", once: 0, month: 9.99 }
+  posts: { label: "Posts — $8.75/mo", once: 0, month: 8.75 },
+  cleanup: { label: "Cleanup — $8.75/mo", once: 0, month: 8.75 },
+  page: { label: "New page — $8.75/mo", once: 0, month: 8.75 },
+  both: { label: "Page + posts — $8.75/mo", once: 0, month: 8.75 }
 };
 
 function destDir() {
@@ -142,7 +142,7 @@ async function createCheckoutSession(fields, req) {
     var sessionParams = {
       mode: "subscription",
       line_items: [{
-        price: "price_1UABs108z3zLzTvzj60seVsl",
+        price: "price_1UAWFtRODxSLQAjIQcLCon4y",
         quantity: 1
       }],
       success_url: origin + "/?paid=1",
