@@ -82,7 +82,7 @@
 
     <section style="margin: 1.5rem 0; padding: 1rem; background: #ecece6; border-radius: 10px;">
       <p style="margin: 0 0 0.4rem; font-weight: 700; font-size: 1.05rem;" data-en="Send another shop, get a free month" data-es="Mande otro negocio, reciba un mes gratis">Send another shop, get a free month</p>
-      <p style="margin: 0; font-size: 0.98rem; line-height: 1.45;" data-en="If you already pay, text us another shop's name and phone. After they pay $9.99, you get one month free. That stacks. They do not get a free month. If they get a refund, that free month comes off. A shop that is not paying cannot earn this." data-es="Si ya paga, mándenos el nombre y teléfono de otro negocio. Cuando paguen $9.99, usted recibe un mes gratis. Eso se acumula. Ellos no reciben mes gratis. Si les devuelven el dinero, ese mes gratis se quita. Un negocio que no paga no puede ganar esto.">If you already pay, text us another shop's name and phone. After they pay $9.99, you get one month free. That stacks. They do not get a free month. If they get a refund, that free month comes off. A shop that is not paying cannot earn this.</p>
+      <p style="margin: 0; font-size: 0.98rem; line-height: 1.45;" data-en="If you already pay, give them your referral code (your phone number). They enter it when they start. After they pay $9.99, you get one month free. That stacks. They do not get a free month. If they get a refund, that free month comes off. A shop that is not paying cannot earn this." data-es="Si ya paga, deles su código de referido (su número de teléfono). Lo ingresan cuando empiezan. Cuando paguen $9.99, usted recibe un mes gratis. Eso se acumula. Ellos no reciben mes gratis. Si les devuelven el dinero, ese mes gratis se quita. Un negocio que no paga no puede ganar esto.">If you already pay, give them your referral code (your phone number). They enter it when they start. After they pay $9.99, you get one month free. That stacks. They do not get a free month. If they get a refund, that free month comes off. A shop that is not paying cannot earn this.</p>
     </section>
 
     <ol class="easy">
@@ -114,6 +114,11 @@
         <div class="field">
           <label class="lbl" for="email" data-en="Email, if you have one. That's where the receipt goes." data-es="Correo, si tiene. Ahí llega el recibo.">Email, if you have one. That's where the receipt goes.</label>
           <input id="email" name="email" type="email" autocomplete="email" inputmode="email">
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="referralCode" data-en="Referral code (optional)" data-es="Código de referido (opcional)">Referral code (optional)</label>
+          <input id="referralCode" name="referralCode" type="text" autocomplete="off" data-ph-en="The referring shop's phone works" data-ph-es="El teléfono del negocio que refiere sirve" placeholder="The referring shop's phone works">
         </div>
 
         <input type="hidden" name="product" id="productHidden" value="both">
@@ -316,6 +321,8 @@
     fd.append("phone", phone);
     var em = document.getElementById("email");
     fd.append("email", em ? em.value.trim() : "");
+    var refCode = document.getElementById("referralCode");
+    fd.append("referralCode", refCode ? refCode.value.trim() : "");
     fd.append("product", product());
     fd.append("skipCard", skipCard ? "1" : "0");
     fd.append("proof", isProof() ? "1" : "0");
