@@ -1,5 +1,4 @@
 {
-  "$comment": "Cache bust: 2026-08-30-23:59",
   "cleanUrls": true,
   "functions": {
     "api/stripe-webhook.js": {
