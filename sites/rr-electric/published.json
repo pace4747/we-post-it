@@ -1,0 +1,93 @@
+{
+  "slug": "rr-electric",
+  "templateId": "local-shop-v1",
+  "status": "published",
+  "theme": {
+    "palette": "navy-red"
+  },
+  "business": {
+    "name": "R & R Electric & Constrctn Co",
+    "phone": "254-697-3711",
+    "email": "",
+    "address": "3621 FM1600",
+    "city": "Cameron",
+    "state": "TX",
+    "zip": "76520",
+    "hours": "Call for hours",
+    "category": "Electrician"
+  },
+  "pages": {
+    "home": {
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "enabled": true,
+          "settings": {
+            "headline": "R & R Electric & Constrctn Co",
+            "tagline": "Electrician in Cameron, TX",
+            "ctaLabel": "Call 254-697-3711"
+          }
+        },
+        {
+          "id": "about",
+          "type": "about",
+          "enabled": true,
+          "settings": {
+            "body": "R & R Electric & Constrctn Co is a local electrician and utility contractor based in Cameron, TX. We provide electrical services, construction, and utility work for residential and commercial clients.\n\nOur shop is located at 3621 FM1600, Cameron, TX 76520. Call us for reliable electrical work and construction services."
+          }
+        },
+        {
+          "id": "photos",
+          "type": "photos",
+          "enabled": true,
+          "settings": {
+            "images": []
+          }
+        },
+        {
+          "id": "services",
+          "type": "services",
+          "enabled": true,
+          "blocks": [
+            { "id": "svc-1", "name": "Electrical Wiring", "description": "Complete wiring installation and repair for homes and businesses." },
+            { "id": "svc-2", "name": "Panel Upgrades", "description": "Upgrade your electrical panel to meet current safety standards and power needs." },
+            { "id": "svc-3", "name": "Outlets & Switches", "description": "Install and repair outlets, switches, and electrical fixtures." },
+            { "id": "svc-4", "name": "Lighting", "description": "Professional lighting installation and repair for any space." },
+            { "id": "svc-5", "name": "Electrical Repair", "description": "Fast troubleshooting and repair of all types of electrical issues." },
+            { "id": "svc-6", "name": "New Construction Electrical", "description": "Full electrical systems for new builds and major renovations." },
+            { "id": "svc-7", "name": "Utility Work", "description": "Professional utility contractor services for residential and commercial projects." }
+          ]
+        },
+        {
+          "id": "reviews",
+          "type": "reviews",
+          "enabled": false,
+          "blocks": []
+        },
+        {
+          "id": "area",
+          "type": "area",
+          "enabled": true,
+          "settings": {
+            "towns": "Cameron, Rockdale, Temple, Bryan, Caldwell, Hearne, Taylor",
+            "note": "Nearby towns. Call if you are farther."
+          }
+        },
+        {
+          "id": "map",
+          "type": "map",
+          "enabled": true,
+          "settings": {}
+        },
+        {
+          "id": "contact",
+          "type": "contact",
+          "enabled": true,
+          "settings": {}
+        }
+      ]
+    }
+  },
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+}

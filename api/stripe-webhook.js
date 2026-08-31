@@ -3,6 +3,9 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 const { makeSlug } = require("./shop-page-generator");
+const { generateEditToken } = require("../lib/edit-auth");
+const { shopDataToDocument } = require("../lib/site-document");
+const store = require("../lib/site-store");
 
 const ROOTS = [
   "/workspace/pipeline/submissions",
@@ -73,24 +76,52 @@ async function createShopPage(stripe, subscriptionId, shop, zip, phone) {
     var url = "https://we-post-it-full.vercel.app/s/" + slug;
     
     var subscription = await stripe.subscriptions.retrieve(subscriptionId);
-    
-    if (subscription.metadata && subscription.metadata.slug) {
+    var existing = (subscription.metadata || {});
+
+    if (existing.slug && existing.editToken) {
       console.log("Shop page already exists for subscription:", subscriptionId);
       return;
     }
-    
-    await stripe.subscriptions.update(subscriptionId, {
-      metadata: {
-        shop: shop,
-        zip: zip,
-        phone: phone,
-        slug: slug,
-        url: url,
-        createdAt: new Date().toISOString()
-      }
+
+    var editToken = existing.editToken || generateEditToken();
+    var nextMeta = Object.assign({}, existing, {
+      shop: shop || existing.shop || "",
+      zip: zip || existing.zip || "",
+      phone: phone || existing.phone || "",
+      slug: existing.slug || slug,
+      url: existing.url || url,
+      editToken: editToken,
+      createdAt: existing.createdAt || new Date().toISOString()
     });
+
+    await stripe.subscriptions.update(subscriptionId, {
+      metadata: nextMeta
+    });
+
+    slug = nextMeta.slug;
+    try {
+      await store.saveAuth(slug, editToken);
+      var published = await store.getPublished(slug);
+      if (!published || !published.business || !published.business.name) {
+        var doc = shopDataToDocument({
+          shop: nextMeta.shop,
+          zip: nextMeta.zip,
+          phone: nextMeta.phone,
+          slug: slug,
+          category: nextMeta.category || "",
+          address: nextMeta.address || "",
+          hours: nextMeta.hours || "",
+          city: nextMeta.city || "",
+          state: nextMeta.state || ""
+        });
+        await store.saveDraft(slug, doc);
+        await store.publish(slug);
+      }
+    } catch (storeErr) {
+      console.error("Failed to seed site document (page URL still works from Stripe metadata):", storeErr);
+    }
     
-    console.log("Created shop page:", shop, "at", url);
+    console.log("Created shop page:", shop, "at", url, "editor /edit/" + slug);
   } catch (e) {
     console.error("Failed to create shop page:", e);
   }

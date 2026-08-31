@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /edit
+Disallow: /edit/
 
 User-agent: GPTBot
 Allow: /

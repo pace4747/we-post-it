@@ -48,6 +48,26 @@
       "destination": "/api/shop-page?slug=:slug"
     },
     {
+      "source": "/edit/:slug",
+      "destination": "/edit.html"
+    },
+    {
+      "source": "/api/site-document",
+      "destination": "/api/site-document"
+    },
+    {
+      "source": "/api/site-publish",
+      "destination": "/api/site-publish"
+    },
+    {
+      "source": "/api/site-preview",
+      "destination": "/api/site-preview"
+    },
+    {
+      "source": "/api/site-upload",
+      "destination": "/api/site-upload"
+    },
+    {
       "source": "/feedback",
       "destination": "/feedback.html"
     },
@@ -109,6 +129,24 @@
     }
   ],
   "headers": [
+    {
+      "source": "/edit/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/edit.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
