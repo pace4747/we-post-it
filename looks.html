@@ -4,14 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f7f7f4">
-<title>Looks — We Post It</title>
-<meta name="description" content="Three palettes for your shop page: Yard, Night, Granite. Simple, clean looks.">
-<link rel="canonical" href="https://we-post-it-full.vercel.app/looks">
+<title>Looks — Your Site</title>
+<meta name="description" content="Three looks for your shop page: Bold, Classic, and Photo. Then pick a color. Website only, $9.99 a month.">
+<link rel="canonical" href="https://www.yoursite.site/looks">
 <meta name="robots" content="index,follow">
-<meta property="og:title" content="Looks — We Post It">
-<meta property="og:description" content="Three palettes for your shop page: Yard, Night, Granite.">
-<meta property="og:url" content="https://we-post-it-full.vercel.app/looks">
+<meta property="og:title" content="Looks — Your Site">
+<meta property="og:description" content="Three looks for your shop page: Bold, Classic, and Photo. Then pick a color.">
+<meta property="og:url" content="https://www.yoursite.site/looks">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://www.yoursite.site/img/og-card.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="Your Site. Your online presence for only $9.99 a month.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.yoursite.site/img/og-card.png">
+<meta name="twitter:title" content="Looks — Your Site">
+<meta name="twitter:description" content="Three looks for your shop page: Bold, Classic, and Photo. Then pick a color.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/css/site.css">
 <style>
@@ -32,57 +40,33 @@
   font-weight: 750;
   margin: 0 0 0.5rem;
 }
-.palette-card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 1rem;
+.palette-card img {
+  width: 100%;
+  height: 14rem;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0 0 0.75rem;
+  display: block;
 }
 </style>
 </head>
 <body>
 
-<!-- Competitor ads -->
-<div class="comp-ads" aria-hidden="true">
-  <div class="comp-ad comp-ad-left-1">
-    <strong>Wix</strong>
-    <div class="old-price" data-en="$17/mo" data-es="$17 al mes">$17/mo</div>
-    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
-  </div>
-  <div class="comp-ad comp-ad-left-2">
-    <strong>Squarespace</strong>
-    <div class="old-price" data-en="$16/mo" data-es="$16 al mes">$16/mo</div>
-    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
-  </div>
-  <div class="comp-ad comp-ad-left-3">
-    <strong>Durable</strong>
-    <div class="old-price" data-en="$22/mo" data-es="$22 al mes">$22/mo</div>
-    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
-  </div>
-  <div class="comp-ad comp-ad-right-1">
-    <strong>Hootsuite</strong>
-    <div class="old-price" data-en="$99/mo" data-es="$99 al mes">$99/mo</div>
-    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
-  </div>
-  <div class="comp-ad comp-ad-right-2">
-    <strong>Thryv</strong>
-    <div class="old-price" data-en="$99/mo" data-es="$99 al mes">$99/mo</div>
-    <div class="our-price" data-en="We Post It $9.99/mo" data-es="We Post It $9.99 al mes">We Post It $9.99/mo</div>
-  </div>
-</div>
-
 <!-- ONE HEADER -->
 <header class="header">
   <div class="header-inner">
     <nav class="header-nav" aria-label="Site">
-      <a href="/" data-en="We Post It" data-es="We Post It">We Post It</a>
+      <a href="/" data-en="Your Site" data-es="Your Site">Your Site</a>
       <a href="/how" data-en="How" data-es="Cómo">How</a>
       <a href="/prices" data-en="Prices" data-es="Precios">Prices</a>
+      <a href="/compare" data-en="Compare" data-es="Comparar">Compare</a>
       <a href="/faq" data-en="FAQ" data-es="FAQ">FAQ</a>
-      <a href="/feedback" data-en="Feedback" data-es="Feedback">Feedback</a>
+      <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a>
     </nav>
-    <div class="header-sale" data-en="Online Presence for only $9.99 a month" data-es="Presencia en línea por solo $9.99 al mes">Online Presence for only $9.99 a month</div>
+    <div class="header-sale" data-en="Online Presence for $9.99 a month" data-es="Presencia en línea por $9.99 al mes">Online Presence for $9.99 a month</div>
     <div class="header-actions">
-      <a class="header-start" href="/#checkout" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
+      <a class="header-login" href="/login" data-en="Login" data-es="Iniciar sesión">Login</a>
+      <a class="header-start" href="/start" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
       <button type="button" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button>
     </div>
   </div>
@@ -92,27 +76,88 @@
 <main class="wrap">
   <h1 data-en="Looks" data-es="Estilos">Looks</h1>
   
-  <p class="lead" data-en="One professional layout for your shop page. Choose your color scheme." data-es="Un diseño profesional para su página de negocio. Elija su esquema de color.">One professional layout for your shop page. Choose your color scheme.</p>
+  <p class="lead" data-en="Same page. Pick a style, then a color. $9.99 a month." data-es="La misma página. Elija un estilo, luego un color. $9.99 al mes.">Same page. Pick a style, then a color. $9.99 a month.</p>
 
+  <h2 data-en="Style" data-es="Estilo">Style</h2>
   <div class="palette-grid">
     <div class="palette-card">
-      <h2 data-en="Navy & Red" data-es="Azul Marino y Rojo">Navy & Red</h2>
-      <p data-en="Deep navy blue hero and footer with bold red call buttons. Professional trade-shop look." data-es="Héroe y pie de página azul marino profundo con botones de llamada rojos. Aspecto profesional de negocio local.">Deep navy blue hero and footer with bold red call buttons. Professional trade-shop look.</p>
+      <img src="/img/look-bold.jpg" alt="" width="800" height="500">
+      <h2 data-en="Bold" data-es="Fuerte">Bold</h2>
+      <p data-en="Big name. Strong type. The usual trade-shop page." data-es="Nombre grande. Tipo fuerte. La página de siempre para un oficio.">Big name. Strong type. The usual trade-shop page.</p>
     </div>
-
     <div class="palette-card">
-      <h2 data-en="Blue & Gold" data-es="Azul y Oro">Blue & Gold</h2>
-      <p data-en="Deep blue with gold/amber accent buttons. Same layout, premium color scheme." data-es="Azul profundo con botones de acento dorado/ámbar. Mismo diseño, esquema de color premium.">Deep blue with gold/amber accent buttons. Same layout, premium color scheme.</p>
+      <img src="/img/look-classic.jpg" alt="" width="800" height="500">
+      <h2 data-en="Classic" data-es="Clásico">Classic</h2>
+      <p data-en="Calmer type. Easier to read. Same sections." data-es="Tipo más calmo. Más fácil de leer. Las mismas secciones.">Calmer type. Easier to read. Same sections.</p>
+    </div>
+    <div class="palette-card">
+      <img src="/img/look-photo.jpg" alt="" width="800" height="500">
+      <h2 data-en="Photo" data-es="Foto">Photo</h2>
+      <p data-en="Picture first. The photo does more of the work." data-es="La foto primero. La foto hace más del trabajo.">Picture first. The photo does more of the work.</p>
     </div>
   </div>
 
-  <p class="muted" data-en="All shops get this layout. Text us to pick your colors." data-es="Todos los negocios obtienen este diseño. Escríbanos para elegir sus colores.">All shops get this layout. Text us to pick your colors.</p>
+  <h2 data-en="Color" data-es="Color">Color</h2>
+  <div class="palette-grid">
+    <div class="palette-card">
+      <h2 data-en="Navy and red" data-es="Azul marino y rojo">Navy and red</h2>
+      <p data-en="Navy hero and footer. Red Call button." data-es="Héroe y pie azul marino. Botón de llamar rojo.">Navy hero and footer. Red Call button.</p>
+    </div>
+    <div class="palette-card">
+      <h2 data-en="Blue and gold" data-es="Azul y oro">Blue and gold</h2>
+      <p data-en="Deep blue with gold Call buttons." data-es="Azul profundo con botones de llamar dorados.">Deep blue with gold Call buttons.</p>
+    </div>
+    <div class="palette-card">
+      <h2 data-en="Forest and gold" data-es="Bosque y oro">Forest and gold</h2>
+      <p data-en="Green hero. Gold Call button." data-es="Héroe verde. Botón de llamar dorado.">Green hero. Gold Call button.</p>
+    </div>
+    <div class="palette-card">
+      <h2 data-en="Charcoal and orange" data-es="Carbón y naranja">Charcoal and orange</h2>
+      <p data-en="Dark gray with orange Call buttons." data-es="Gris oscuro con botones de llamar naranja.">Dark gray with orange Call buttons.</p>
+    </div>
+    <div class="palette-card">
+      <h2 data-en="Brick and tan" data-es="Ladrillo y beige">Brick and tan</h2>
+      <p data-en="Brick red with tan Call buttons." data-es="Rojo ladrillo con botones beige.">Brick red with tan Call buttons.</p>
+    </div>
+    <div class="palette-card">
+      <h2 data-en="Slate and teal" data-es="Pizarra y verde azulado">Slate and teal</h2>
+      <p data-en="Slate blue with teal Call buttons." data-es="Azul pizarra con botones verde azulado.">Slate blue with teal Call buttons.</p>
+    </div>
+    <div class="palette-card">
+      <h2 data-en="Night and red" data-es="Noche y rojo">Night and red</h2>
+      <p data-en="Black page. Red Call button." data-es="Página negra. Botón de llamar rojo.">Black page. Red Call button.</p>
+    </div>
+    <div class="palette-card">
+      <h2 data-en="Olive and gold" data-es="Olivo y oro">Olive and gold</h2>
+      <p data-en="Olive green with gold Call buttons." data-es="Verde olivo con botones de llamar dorados.">Olive green with gold Call buttons.</p>
+    </div>
+  </div>
+
+  <p class="muted" data-en="Your own colors wait in the editor. Website only." data-es="Sus propios colores esperan en el editor. Solo sitio web.">Your own colors wait in the editor. Website only.</p>
 
   <div style="margin-top: 1.5rem;">
-    <a class="btn" href="/#checkout" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
+    <a class="btn" href="/start" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
     <a class="btn btn-ghost" href="/how" data-en="How it works" data-es="Cómo funciona">How it works</a>
   </div>
 </main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Your Site</span>
+    <a href="/faq" data-en="FAQ" data-es="FAQ">FAQ</a>
+    <a href="/compare" data-en="Compare" data-es="Comparar">Compare</a>
+    <a href="/online-presence" data-en="Online Presence" data-es="Presencia en línea">Online Presence</a>
+    <a href="/feedback" data-en="Feedback" data-es="Feedback">Feedback</a>
+    <a href="/about" data-en="About" data-es="Acerca">About</a>
+    <a href="/contact" data-en="Contact" data-es="Contacto">Contact</a>
+    <a href="/notice" data-en="Legal Notice" data-es="Aviso legal">Legal Notice</a>
+    <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a>
+    <a href="/terms" data-en="Terms" data-es="Términos">Terms</a>
+    <a href="/terms-of-service" data-en="Terms of Service" data-es="Términos del servicio">Terms of Service</a>
+    <a href="/cookies" data-en="Cookies" data-es="Cookies">Cookies</a>
+    <a href="/legal" data-en="Legal" data-es="Legal">Legal</a>
+  </div>
+</footer>
 
 <!-- ONE BOTTOM BAR -->
 <div id="bottomBar">
@@ -126,21 +171,8 @@
   </div>
 </div>
 
-<div id="helpBox">
-  <p class="help-head" id="helpHead">Got a question? Ask us.</p>
-  <div class="help-log" id="helpLog"></div>
-  <form class="help-form" id="helpForm">
-    <div class="help-field" id="helpField">
-      <input type="text" id="helpIn" autocomplete="off">
-      <span class="help-hint" id="helpHint">Type it here.</span>
-    </div>
-    <button type="submit" id="helpGo">Send</button>
-  </form>
-</div>
-
 <script src="/js/site.js"></script>
 <script src="/js/visit.js"></script>
-<script src="/js/help.js"></script>
 <script>
 (function() {
   function hideCookies() {

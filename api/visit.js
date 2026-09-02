@@ -1,130 +1,128 @@
-const fs = require("fs");
-const path = require("path");
+const usage = require("../lib/usage-store");
+const { shopSlugFromHost, headerHost } = require("../lib/host");
+const { makeSlug } = require("../lib/escape");
+const session = require("../lib/session");
+const accounts = require("../lib/account-store");
 
-// Rate limiting: simple in-memory cache (resets on cold start, good enough for hobby)
-const visitCache = new Map();
-const RATE_LIMIT_MS = 5000; // 5 seconds between visits from same fingerprint
-
-function shouldRateLimit(fingerprint) {
-  const now = Date.now();
-  const last = visitCache.get(fingerprint);
-  
-  if (last && (now - last) < RATE_LIMIT_MS) {
-    return true;
-  }
-  
-  visitCache.set(fingerprint, now);
-  
-  // Clean up old entries (keep last 1000)
-  if (visitCache.size > 1000) {
-    const entries = Array.from(visitCache.entries());
-    entries.sort((a, b) => a[1] - b[1]);
-    entries.slice(0, 500).forEach(([key]) => visitCache.delete(key));
-  }
-  
-  return false;
+function collectJson(req) {
+  return new Promise(function (resolve) {
+    if (req.body && typeof req.body === "object" && !Buffer.isBuffer(req.body)) {
+      resolve(req.body);
+      return;
+    }
+    if (typeof req.body === "string") {
+      try { resolve(JSON.parse(req.body || "{}")); } catch (e) { resolve({}); }
+      return;
+    }
+    var chunks = [];
+    req.on("data", function (c) { chunks.push(c); });
+    req.on("end", function () {
+      try { resolve(JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}")); }
+      catch (e) { resolve({}); }
+    });
+    req.on("error", function () { resolve({}); });
+  });
 }
 
-function getLogPath() {
-  // Try multiple locations, fallback gracefully
-  const locations = [
-    "/tmp/wepostit-visits.jsonl",
-    path.join(process.cwd(), "visits.jsonl")
-  ];
-  
-  for (const loc of locations) {
-    try {
-      const dir = path.dirname(loc);
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-      }
-      // Test write access
-      fs.appendFileSync(loc, "");
-      return loc;
-    } catch (e) {
-      // Try next location
-    }
+function queryFlag(raw, key) {
+  try {
+    var q = String(raw || "");
+    var i = q.indexOf("?");
+    if (i === -1) return "";
+    var params = new URLSearchParams(q.slice(i + 1));
+    return String(params.get(key) || "").trim();
+  } catch (e) {
+    return "";
   }
-  
-  return null; // No writable location found
 }
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "content-type");
-  
+  res.setHeader("Cache-Control", "no-store");
+
   if (req.method === "OPTIONS") {
     res.status(204).end();
     return;
   }
-  
   if (req.method !== "POST") {
     res.status(405).json({ ok: false });
     return;
   }
 
   try {
-    var body = {};
-    try {
-      body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : (req.body || {});
-    } catch (e) {
-      body = {};
-    }
-
-    // Extract Vercel geo headers (NO full IP stored)
-    var city = String(req.headers["x-vercel-ip-city"] || "").trim();
-    var region = String(req.headers["x-vercel-ip-country-region"] || "").trim();
-    var country = String(req.headers["x-vercel-ip-country"] || "").trim();
-    var postalCode = String(req.headers["x-vercel-ip-postal-code"] || "").trim();
-    
-    // Extract user agent
-    var userAgent = String(req.headers["user-agent"] || "").trim();
-    
-    // Client-provided data
-    var visitData = {
-      at: new Date().toISOString(),
-      path: String(body.path || "").trim(),
-      referrer: String(body.referrer || "").trim(),
-      utm_source: String(body.utm_source || "").trim(),
-      utm_medium: String(body.utm_medium || "").trim(),
-      utm_campaign: String(body.utm_campaign || "").trim(),
-      lang: String(body.lang || "").trim(),
-      timezone: String(body.timezone || "").trim(),
-      viewportWidth: parseInt(body.viewportWidth) || 0,
-      city: city,
-      region: region,
-      country: country,
-      postalCode: postalCode,
-      userAgent: userAgent
-    };
-
-    // Simple fingerprint for rate limiting (not for tracking, just anti-flood)
-    var fingerprint = `${country}-${region}-${city}-${userAgent.slice(0, 50)}-${body.path}`;
-    
-    if (shouldRateLimit(fingerprint)) {
-      // Still return success, just don't log
-      res.status(200).json({ ok: true, logged: false, reason: "rate_limited" });
+    var body = await collectJson(req);
+    var pathRaw = String(body.path || "");
+    var from = String(body.from || queryFlag(pathRaw, "from") || "").toLowerCase();
+    if (from !== "text" && from !== "hub") from = "";
+    var clickId = String(body.clickId || body.c || queryFlag(pathRaw, "c") || "").replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 40);
+    var host = headerHost(req);
+    var slug = makeSlug(body.slug) || shopSlugFromHost(req);
+    var kind = String(body.kind || "look").toLowerCase();
+    if (kind !== "look" && kind !== "click" && kind !== "engage") kind = "look";
+    var cta = String(body.cta || "").toLowerCase();
+    if (["call", "directions", "keep", "login", "mail"].indexOf(cta) === -1) cta = "";
+    if (kind === "click" && !cta) {
+      res.status(200).json({ ok: true, logged: false, reason: "no_cta" });
       return;
     }
 
-    // Try to log (gracefully fail if not possible on Vercel Hobby)
-    var logPath = getLogPath();
-    if (logPath) {
-      try {
-        fs.appendFileSync(logPath, JSON.stringify(visitData) + "\n");
-        res.status(200).json({ ok: true, logged: true });
-      } catch (e) {
-        // Logging failed, but that's OK - return geo data worked
-        res.status(200).json({ ok: true, logged: false, reason: "write_failed" });
+    var userId = "";
+    var email = "";
+    var signedIn = false;
+    try {
+      userId = session.sessionFromRequest(req) || "";
+      if (userId) {
+        var user = await accounts.getById(userId);
+        if (user && user.disabled !== true) {
+          signedIn = true;
+          email = user.email || "";
+        } else {
+          userId = "";
+        }
       }
-    } else {
-      // No writable location (expected on Vercel Hobby ephemeral filesystem)
-      // Still successful - geo endpoint works even if logging doesn't persist
-      res.status(200).json({ ok: true, logged: false, reason: "no_persistent_storage" });
+    } catch (e) {}
+
+    var surface = String(body.surface || "").toLowerCase();
+    if (["shop", "login", "keep", "start", "editor", "marketing"].indexOf(surface) === -1) {
+      if (slug) surface = "shop";
+      else if (/^\/login/.test(pathRaw)) surface = "login";
+      else if (/^\/keep/.test(pathRaw)) surface = "keep";
+      else if (/^\/start/.test(pathRaw)) surface = "start";
+      else if (/^\/edit/.test(pathRaw)) surface = "editor";
+      else surface = "marketing";
     }
+
+    var result = await usage.emitFromReq(req, {
+      kind: kind,
+      slug: slug,
+      path: pathRaw.slice(0, 300),
+      host: host,
+      from: from,
+      clickId: clickId,
+      referrer: String(body.referrer || "").slice(0, 400),
+      utm_source: String(body.utm_source || "").slice(0, 80),
+      utm_medium: String(body.utm_medium || "").slice(0, 80),
+      utm_campaign: String(body.utm_campaign || "").slice(0, 80),
+      lang: String(body.lang || "").slice(0, 12),
+      timezone: String(body.timezone || "").slice(0, 60),
+      viewportWidth: parseInt(body.viewportWidth, 10) || 0,
+      viewportHeight: parseInt(body.viewportHeight, 10) || 0,
+      visitorId: String(body.visitorId || "").replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 40),
+      sessionId: String(body.sessionId || "").replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 40),
+      seconds: parseInt(body.seconds, 10) || 0,
+      sections: Array.isArray(body.sections) ? body.sections : [],
+      cta: cta,
+      surface: surface,
+      live: body.live === true || body.live === "1",
+      userId: userId,
+      email: email,
+      signedIn: signedIn
+    });
+    res.status(200).json({ ok: true, logged: !!(result && result.logged) });
   } catch (e) {
     console.error("visit log error:", e);
-    res.status(500).json({ ok: false, error: "Failed to log visit" });
+    res.status(200).json({ ok: true, logged: false });
   }
 };

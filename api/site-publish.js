@@ -1,15 +1,19 @@
 const store = require("../lib/site-store");
 const { makeSlug } = require("../lib/escape");
 const { tokenFromRequest } = require("../lib/edit-auth");
+const usage = require("../lib/usage-store");
+const seo = require("../lib/shop-seo");
+const indexnow = require("../lib/indexnow");
 
 function collectJson(req) {
   return new Promise(function (resolve, reject) {
-    if (req.body && typeof req.body === "object" && !Buffer.isBuffer(req.body)) {
-      resolve(req.body);
+    var parsed = req.body;
+    if (parsed && typeof parsed === "object" && !Buffer.isBuffer(parsed) && Object.keys(parsed).length) {
+      resolve(parsed);
       return;
     }
-    if (typeof req.body === "string") {
-      try { resolve(JSON.parse(req.body || "{}")); } catch (e) { resolve({}); }
+    if (typeof parsed === "string" && parsed.trim()) {
+      try { resolve(JSON.parse(parsed || "{}")); } catch (e) { resolve({}); }
       return;
     }
     var chunks = [];
@@ -29,28 +33,26 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  var slug = makeSlug(req.query.slug);
-  var token = tokenFromRequest(req);
-  if (!slug) {
-    var body = await collectJson(req);
-    slug = makeSlug(body.slug);
-    if (!token) token = String(body.k || "").trim();
-  }
+  var body = await collectJson(req);
+  var slug = makeSlug((req.query && req.query.slug) || body.slug);
+  var token = tokenFromRequest(req) || String(body.k || "").trim();
 
   if (!slug) {
     res.status(400).json({ ok: false, error: "Missing shop slug" });
     return;
   }
 
-  var auth = await store.authorize(slug, token);
+  var auth = await store.authorize(slug, token, req);
   if (!auth.ok) {
     res.status(401).json({ ok: false, error: "Need a valid editor link." });
     return;
   }
 
   try {
-    var published = await store.publish(slug);
-    res.status(200).json({
+      var published = await store.publish(slug);
+      usage.emitFromReq(req, { kind: "publish", slug: slug, surface: "editor" });
+      if (seo.shouldIndexShop(published)) indexnow.pingShopLater(slug);
+      res.status(200).json({
       ok: true,
       storage: store.storageKind(),
       document: published,

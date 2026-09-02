@@ -3,10 +3,18 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 const { makeSlug } = require("./shop-page-generator");
+const { generateEditToken } = require("../lib/edit-auth");
+const store = require("../lib/site-store");
+const accounts = require("../lib/account-store");
+const { emptyDocument } = require("../lib/site-document");
+const { shopOrigin } = require("../lib/host");
+const usage = require("../lib/usage-store");
+const lifecycle = require("../lib/lifecycle-mail");
+const indexnow = require("../lib/indexnow");
 
 const ROOTS = [
   "/workspace/pipeline/submissions",
-  path.join(os.tmpdir(), "wepostit-submissions")
+  path.join(os.tmpdir(), "yoursite-submissions")
 ];
 
 function destDir() {
@@ -33,206 +41,232 @@ function collectRawBody(req) {
   });
 }
 
-function markShopPaid(metadata, subscriptionId, stripe) {
-  try {
-    var shop = metadata.shop || "";
-    var zip = metadata.zip || "";
-    var phone = metadata.phone || "";
-    var email = metadata.email || "";
-    var lang = metadata.lang || "en";
-    var referralPhone = metadata.referralPhone || "";
-    var referralCode = metadata.referralCode || "";
+async function markShopPaid(metadata, subscriptionId, stripe) {
+  var shop = metadata.shop || "";
+  var zip = metadata.zip || "";
+  var phone = metadata.phone || "";
+  var email = metadata.email || metadata.customer_email || "";
+  var lang = metadata.lang || "en";
 
+  try {
     var root = destDir();
     var shopsFile = path.join(root, "paid-shops.jsonl");
-
-    var entry = {
+    fs.appendFileSync(shopsFile, JSON.stringify({
       shop: shop,
       zip: zip,
       phone: phone,
       email: email,
       lang: lang,
       subscriptionId: subscriptionId,
-      referralCode: phone.replace(/\D/g, "").slice(-10),
       paidAt: new Date().toISOString()
-    };
+    }) + "\n");
+  } catch (e) {}
 
-    fs.appendFileSync(shopsFile, JSON.stringify(entry) + "\n");
-    console.log("Marked shop paid:", shop, subscriptionId);
-    
-    if (referralPhone || referralCode) {
-      processReferralCredit(shop, phone, subscriptionId, referralPhone, referralCode, root);
-    }
-
-    if (subscriptionId && shop && phone) {
-      createShopPage(stripe, subscriptionId, shop, zip, phone).catch(function (e) {
-        console.error("Failed to create shop page async:", e);
-      });
-    }
-  } catch (e) {
-    console.error("Failed to mark shop paid:", e);
+  if (!subscriptionId || !(shop || (metadata && metadata.slug))) {
+    throw new Error("Missing subscription or shop");
   }
+  await createShopPage(stripe, subscriptionId, shop, zip, phone, email, metadata.slug || "", metadata);
 }
 
-function processReferralCredit(newShop, newPhone, newSubscriptionId, referralPhone, referralCode, root) {
-  try {
-    var newPhoneDigits = String(newPhone || "").replace(/\D/g, "");
-    var referralPhoneDigits = String(referralPhone || "").replace(/\D/g, "");
-    
-    if (newPhoneDigits === referralPhoneDigits) {
-      console.log("Referral skipped: same phone", newPhoneDigits);
-      return;
-    }
-    
-    var shopsFile = path.join(root, "paid-shops.jsonl");
-    if (!fs.existsSync(shopsFile)) {
-      console.log("No paid-shops.jsonl file found");
-      return;
-    }
-    
-    var lines = fs.readFileSync(shopsFile, "utf8").split("\n").filter(function (l) { return l.trim(); });
-    var referrerShop = null;
-    
-    for (var i = 0; i < lines.length; i++) {
-      try {
-        var entry = JSON.parse(lines[i]);
-        var entryPhone = String(entry.phone || "").replace(/\D/g, "");
-        var entryCode = String(entry.referralCode || "");
-        
-        if ((referralPhoneDigits && entryPhone === referralPhoneDigits) ||
-            (referralCode && entryCode && entryCode.toUpperCase() === referralCode.toUpperCase())) {
-          
-          if (entry.shop && /batten/i.test(entry.shop)) {
-            console.log("Referrer is Batten, cannot earn");
-            return;
-          }
-          
-          var cancelledFile = path.join(root, "cancelled-subscriptions.jsonl");
-          if (fs.existsSync(cancelledFile)) {
-            var cancelled = fs.readFileSync(cancelledFile, "utf8").split("\n");
-            for (var c = 0; c < cancelled.length; c++) {
-              try {
-                var cEntry = JSON.parse(cancelled[c]);
-                if (cEntry.subscriptionId === entry.subscriptionId) {
-                  console.log("Referrer subscription cancelled, cannot earn");
-                  return;
-                }
-              } catch (e) {}
-            }
-          }
-          
-          referrerShop = entry;
-          break;
-        }
-      } catch (e) {}
-    }
-    
-    if (!referrerShop) {
-      console.log("No matching paying referrer found for phone:", referralPhoneDigits, "or code:", referralCode);
-      return;
-    }
-    
-    var creditsFile = path.join(root, "referral-credits.jsonl");
-    var credit = {
-      at: new Date().toISOString(),
-      newShop: newShop,
-      newPhone: newPhone,
-      newSubscriptionId: newSubscriptionId,
-      referrerShop: referrerShop.shop,
-      referrerPhone: referrerShop.phone,
-      referrerSubscriptionId: referrerShop.subscriptionId,
-      months: 1,
-      status: "earned"
-    };
-    
-    fs.appendFileSync(creditsFile, JSON.stringify(credit) + "\n");
-    console.log("Referral credit earned:", referrerShop.shop, "referred", newShop);
-  } catch (e) {
-    console.error("Failed to process referral credit:", e);
-  }
-}
+async function createShopPage(stripe, subscriptionId, shop, zip, phone, email, slugHint, sessionMeta) {
+  sessionMeta = sessionMeta || {};
+  var subscription = await stripe.subscriptions.retrieve(subscriptionId);
+  var existing = (subscription.metadata || {});
+  var slug = makeSlug(existing.slug || slugHint || shop);
+  var url = shopOrigin(slug);
+  var editToken = existing.editToken || generateEditToken();
+  var nextMeta = Object.assign({}, existing, {
+    shop: shop || existing.shop || "",
+    zip: zip || existing.zip || "",
+    phone: phone || existing.phone || "",
+    email: email || existing.email || "",
+    slug: existing.slug || slug,
+    url: existing.url || url,
+    editToken: editToken,
+    createdAt: existing.createdAt || new Date().toISOString()
+  });
 
-async function createShopPage(stripe, subscriptionId, shop, zip, phone) {
-  try {
-    var slug = makeSlug(shop);
-    var url = "https://we-post-it-full.vercel.app/s/" + slug;
-    
-    var subscription = await stripe.subscriptions.retrieve(subscriptionId);
-    
-    if (subscription.metadata && subscription.metadata.slug) {
-      console.log("Shop page already exists for subscription:", subscriptionId);
-      return;
+  await stripe.subscriptions.update(subscriptionId, {
+    metadata: nextMeta
+  });
+
+  slug = nextMeta.slug;
+  var doc = (await store.getPublished(slug)) || (await store.getDraft(slug));
+  if (!doc || !(doc.business && doc.business.name)) {
+    doc = emptyDocument(slug);
+    doc.business.name = shop || "";
+    doc.business.zip = String(zip || "").replace(/\D/g, "").slice(0, 5);
+    doc.business.phone = phone || "";
+    doc.business.email = email || "";
+    await store.saveDraft(slug, doc);
+  } else if (email && doc && doc.business && !doc.business.email) {
+    doc.business.email = email;
+    try { await store.saveDraft(slug, doc); } catch (e) {}
+  }
+  var extra = { paid: true, ownerEmail: email || existing.email || "" };
+  if (email) {
+    var paidUser = await accounts.getByEmail(email);
+    if (!paidUser || (paidUser.emailVerified !== true && !paidUser.googleSub)) {
+      var { ensurePaidOwner } = require("../lib/paid-session");
+      paidUser = await ensurePaidOwner(email, slug);
+    } else {
+      await accounts.addShop(paidUser.id, slug);
     }
-    
-    await stripe.subscriptions.update(subscriptionId, {
-      metadata: {
-        shop: shop,
-        zip: zip,
-        phone: phone,
-        slug: slug,
-        url: url,
-        createdAt: new Date().toISOString()
-      }
+    if (paidUser) {
+      extra.ownerUserId = paidUser.id;
+      extra.ownerEmail = paidUser.email || extra.ownerEmail;
+    }
+  }
+  await store.saveAuth(slug, editToken, extra);
+  var customerId = "";
+  if (typeof subscription.customer === "string") customerId = subscription.customer;
+  else if (subscription.customer && subscription.customer.id) customerId = subscription.customer.id;
+  var marked = await store.markPaid(slug, subscriptionId, {
+    customerId: customerId,
+    phone: phone || existing.phone || (doc.business && doc.business.phone) || ""
+  });
+  if (!marked) throw new Error("markPaid failed for " + slug);
+  indexnow.pingShopLater(slug);
+  var last4 = "";
+  try {
+    var pm = subscription.default_payment_method;
+    if (typeof pm === "string" && pm) {
+      var method = await stripe.paymentMethods.retrieve(pm);
+      last4 = (method.card && method.card.last4) || "";
+    } else if (pm && pm.card && pm.card.last4) {
+      last4 = pm.card.last4;
+    }
+  } catch (e) {}
+  await usage.emit({ kind: "paid", slug: slug, email: email || extra.ownerEmail || "", surface: "keep", last4: last4 });
+  try {
+    await lifecycle.sendWelcome(slug, {
+      email: email || extra.ownerEmail || "",
+      customerId: customerId,
+      doc: (await store.getPublished(slug)) || doc
     });
-    
-    console.log("Created shop page:", shop, "at", url);
   } catch (e) {
-    console.error("Failed to create shop page:", e);
+    console.error("welcome mail", e);
   }
 }
 
-function markShopCancelled(subscriptionId) {
+function customerIdOf(obj) {
+  if (!obj) return "";
+  if (typeof obj.customer === "string") return obj.customer;
+  if (obj.customer && obj.customer.id) return obj.customer.id;
+  return "";
+}
+
+async function markShopCancelled(subscription) {
+  var subscriptionId = typeof subscription === "string" ? subscription : (subscription && subscription.id) || "";
   try {
     var root = destDir();
     var cancelFile = path.join(root, "cancelled-subscriptions.jsonl");
-
-    var entry = {
+    fs.appendFileSync(cancelFile, JSON.stringify({
       subscriptionId: subscriptionId,
       cancelledAt: new Date().toISOString()
-    };
+    }) + "\n");
+  } catch (e) {}
+  await finishCancel(subscription);
+}
 
-    fs.appendFileSync(cancelFile, JSON.stringify(entry) + "\n");
-    console.log("Marked subscription cancelled:", subscriptionId);
-    
-    pullReferralCredit(subscriptionId, root);
+async function finishCancel(subscription) {
+  var sub = subscription;
+  if (!sub || typeof sub === "string") {
+    var stripeCancel = new Stripe(process.env.STRIPE_SECRET_KEY);
+    sub = await stripeCancel.subscriptions.retrieve(typeof subscription === "string" ? subscription : subscriptionIdOf(subscription));
+  }
+  var slug = sub && sub.metadata && sub.metadata.slug;
+  if (!slug) throw new Error("cancel missing slug");
+  var customerId = customerIdOf(sub);
+  if (customerId) {
+    try {
+      var existing = (await store.getPublished(slug)) || (await store.getDraft(slug));
+      if (existing && existing.billing && !existing.billing.customerId) {
+        existing.billing.customerId = customerId;
+        await store.saveDraft(slug, existing);
+      }
+    } catch (e) {}
+  }
+  await usage.emit({ kind: "cancelled", slug: slug, email: (sub.metadata && sub.metadata.email) || "", surface: "keep" });
+  var doc = await store.markCancelled(slug);
+  if (!doc) throw new Error("markCancelled failed for " + slug);
+  try {
+    await lifecycle.sendCancelDone(slug, {
+      email: (sub.metadata && sub.metadata.email) || "",
+      customerId: customerId,
+      doc: doc
+    });
   } catch (e) {
-    console.error("Failed to mark subscription cancelled:", e);
+    console.error("cancel mail", e);
   }
 }
 
-function pullReferralCredit(subscriptionId, root) {
-  try {
-    var creditsFile = path.join(root, "referral-credits.jsonl");
-    if (!fs.existsSync(creditsFile)) {
-      return;
-    }
-    
-    var lines = fs.readFileSync(creditsFile, "utf8").split("\n").filter(function (l) { return l.trim(); });
-    
-    for (var i = 0; i < lines.length; i++) {
-      try {
-        var credit = JSON.parse(lines[i]);
-        if (credit.newSubscriptionId === subscriptionId && credit.status === "earned") {
-          var pulled = {
-            at: new Date().toISOString(),
-            newShop: credit.newShop,
-            newPhone: credit.newPhone,
-            newSubscriptionId: credit.newSubscriptionId,
-            referrerShop: credit.referrerShop,
-            referrerPhone: credit.referrerPhone,
-            referrerSubscriptionId: credit.referrerSubscriptionId,
-            months: credit.months,
-            status: "pulled",
-            originalEarnedAt: credit.at
-          };
-          fs.appendFileSync(creditsFile, JSON.stringify(pulled) + "\n");
-          console.log("Referral credit pulled for subscription:", subscriptionId);
-        }
-      } catch (e) {}
-    }
-  } catch (e) {
-    console.error("Failed to pull referral credit:", e);
+function subscriptionIdOf(sub) {
+  if (!sub) return "";
+  if (typeof sub === "string") return sub;
+  return sub.id || "";
+}
+
+async function handleInvoicePaymentFailed(stripe, invoice) {
+  var subId = invoice.subscription;
+  if (subId && typeof subId === "object") subId = subId.id;
+  if (!subId) return;
+  var sub = await stripe.subscriptions.retrieve(subId);
+  var slug = (sub.metadata && sub.metadata.slug) || "";
+  if (!slug) return;
+  await lifecycle.sendPastDue(slug, {
+    email: (sub.metadata && sub.metadata.email) || invoice.customer_email || "",
+    invoiceId: invoice.id || "",
+    customerId: customerIdOf(sub) || customerIdOf(invoice),
+    hostedInvoiceUrl: invoice.hosted_invoice_url || ""
+  });
+}
+
+async function handleSubscriptionUpdated(sub, previous) {
+  previous = previous || {};
+  var slug = sub && sub.metadata && sub.metadata.slug;
+  if (!slug) return;
+  if (sub.cancel_at_period_end) {
+    await lifecycle.sendCancelScheduled(slug, {
+      email: (sub.metadata && sub.metadata.email) || "",
+      periodEnd: sub.current_period_end,
+      customerId: customerIdOf(sub)
+    });
+    return;
   }
+  if (previous.cancel_at_period_end) {
+    await lifecycle.clearCancelScheduled(slug);
+  }
+}
+
+async function handleChargeRefunded(stripe, charge) {
+  var invoiceId = charge && charge.invoice;
+  if (invoiceId && typeof invoiceId === "object") invoiceId = invoiceId.id;
+  var sub = null;
+  if (invoiceId) {
+    try {
+      var invoice = await stripe.invoices.retrieve(invoiceId);
+      var subId = invoice.subscription;
+      if (subId && typeof subId === "object") subId = subId.id;
+      if (subId) sub = await stripe.subscriptions.retrieve(subId);
+    } catch (e) {}
+  }
+  var slug = (sub && sub.metadata && sub.metadata.slug) || "";
+  await usage.emit({
+    kind: "refunded",
+    slug: slug,
+    email: (sub && sub.metadata && sub.metadata.email) || "",
+    surface: "keep"
+  });
+  if (!sub || !slug) return;
+  var status = String(sub.status || "");
+  if (status === "canceled" || status === "cancelled" || status === "incomplete_expired") return;
+  await lifecycle.sendPastDue(slug, {
+    email: (sub.metadata && sub.metadata.email) || "",
+    invoiceId: invoiceId || charge.id || "refund",
+    customerId: customerIdOf(sub) || customerIdOf(charge),
+    hostedInvoiceUrl: ""
+  });
 }
 
 module.exports = async function handler(req, res) {
@@ -267,44 +301,48 @@ module.exports = async function handler(req, res) {
     if (event.type === "checkout.session.completed") {
       var session = event.data.object;
       var metadata = session.metadata || {};
+      if (!metadata.email) {
+        metadata.email = (session.customer_details && session.customer_details.email) || session.customer_email || "";
+      }
       var subscriptionId = session.subscription || "";
-      
-      markShopPaid(metadata, subscriptionId, stripe);
-      
+      if (subscriptionId && typeof subscriptionId === "object") subscriptionId = subscriptionId.id;
+      await markShopPaid(metadata, subscriptionId, stripe);
       res.status(200).json({ received: true });
       return;
     }
 
     if (event.type === "customer.subscription.deleted") {
-      var subscription = event.data.object;
-      markShopCancelled(subscription.id);
-      
+      await markShopCancelled(event.data.object);
       res.status(200).json({ received: true });
       return;
     }
-    
+
+    if (event.type === "customer.subscription.updated") {
+      await handleSubscriptionUpdated(event.data.object, event.data.previous_attributes || {});
+      res.status(200).json({ received: true });
+      return;
+    }
+
+    if (event.type === "invoice.payment_failed") {
+      await handleInvoicePaymentFailed(stripe, event.data.object);
+      res.status(200).json({ received: true });
+      return;
+    }
+
     if (event.type === "charge.refunded") {
-      var charge = event.data.object;
-      
-      if (charge.invoice) {
-        try {
-          var invoice = await stripe.invoices.retrieve(charge.invoice);
-          if (invoice.subscription) {
-            var root = destDir();
-            pullReferralCredit(invoice.subscription, root);
-          }
-        } catch (e) {
-          console.error("Failed to process refund for referral:", e);
-        }
-      }
-      
+      await handleChargeRefunded(stripe, event.data.object);
       res.status(200).json({ received: true });
       return;
     }
 
     res.status(200).json({ received: true });
   } catch (err) {
-    console.error("Webhook error:", err.message);
-    res.status(400).json({ error: "Webhook signature verification failed" });
+    if (err && err.type === "StripeSignatureVerificationError") {
+      console.error("Webhook error:", err.message);
+      res.status(400).json({ error: "Webhook signature verification failed" });
+      return;
+    }
+    console.error("Webhook handler", err && err.message || err);
+    res.status(500).json({ error: "Webhook handling failed" });
   }
 };
