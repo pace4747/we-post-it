@@ -4,17 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#14110f">
-<title>Compare We Post It — $9.99 vs Wix, Squarespace, Hootsuite</title>
-<meta name="description" content="We Post It is $9.99/month for a one-page website we build and host. Compare prices for Texas shops and local shops: Wix $17/mo, Squarespace $16/mo, Durable $22/mo.">
-<link rel="canonical" href="https://we-post-it.vercel.app/compare">
+<title>Compare Your Site — $9.99 vs Wix, Squarespace, Durable, and others</title>
+<meta name="description" content="Your Site is $9.99/month for a one-page website we host. Compare: Wix $17/mo, Squarespace $16/mo, Durable $22/mo, Hootsuite $99/mo, Thryv $99/mo. Website only.">
+<link rel="canonical" href="https://www.yoursite.site/compare">
 <meta name="robots" content="index,follow">
-<meta property="og:title" content="Compare We Post It — $9.99 vs Wix, Squarespace, Hootsuite">
-<meta property="og:description" content="We Post It is $9.99/month for a one-page website we build and host. Compare prices: Wix $17/mo, Squarespace $16/mo, Durable $22/mo.">
-<meta property="og:url" content="https://we-post-it.vercel.app/compare">
+<meta property="og:title" content="Compare Your Site — $9.99 vs Wix, Squarespace, Durable, and others">
+<meta property="og:description" content="Your Site is $9.99/month for a one-page website we host. Compare Wix, Squarespace, Durable, Hootsuite, and Thryv. Website only.">
+<meta property="og:url" content="https://www.yoursite.site/compare">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Compare We Post It — $9.99 vs Wix, Squarespace, Hootsuite">
-<meta name="twitter:description" content="We Post It is $9.99/month for a one-page website. Compare prices for website builders.">
+<meta property="og:image" content="https://www.yoursite.site/img/og-card.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="Your Site. Your online presence for only $9.99 a month.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.yoursite.site/img/og-card.png">
+<meta name="twitter:title" content="Compare Your Site — $9.99 vs Wix, Squarespace, Durable, and others">
+<meta name="twitter:description" content="Your Site is $9.99/month for a one-page website we host. Compare Wix, Squarespace, Durable, Hootsuite, and Thryv. Website only.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,6 +60,25 @@
   margin-bottom: .2rem;
   font-size: 1.05rem;
 }
+.comp-table a {
+  color: inherit;
+  text-decoration: underline;
+}
+.comp-table tr.ours {
+  background: var(--askbg);
+}
+.comp-ours-card {
+  display: none;
+  margin: 0 0 1.4rem;
+  padding: 1rem 1.1rem;
+  background: var(--askbg);
+  border-radius: 10px;
+}
+.comp-ours-card strong {
+  display: block;
+  font-size: 1.1rem;
+  margin: 0 0 .35rem;
+}
 @media (max-width: 680px) {
   .comp-table {
     font-size: .9rem;
@@ -63,6 +87,9 @@
   .comp-table td {
     padding: .55rem .5rem;
     font-size: .88rem;
+  }
+  .comp-ours-card {
+    display: block;
   }
 }
 </style>
@@ -75,38 +102,44 @@
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://we-post-it.vercel.app/"
+      "item": "https://www.yoursite.site/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Compare",
-      "item": "https://we-post-it.vercel.app/compare"
+      "item": "https://www.yoursite.site/compare"
     }
   ]
 }
 </script>
 </head>
 <body>
-<p class="sale" data-en="Online Presence for only $9.99 a month" data-es="Presencia en línea por solo $9.99 al mes">Online Presence for only $9.99 a month</p>
-<header class="top">
-  <a class="brand" href="/">We Post It</a>
-  <nav class="top-nav" aria-label="Site">
-    <a href="/" data-en="Home" data-es="Inicio">Home</a>
-    <a href="/how" data-en="How" data-es="Cómo">How</a>
-    <a href="/prices" data-en="Prices" data-es="Precios">Prices</a>
-    <a href="/faq" data-en="FAQ" data-es="FAQ">FAQ</a>
-  </nav>
-  <div class="top-actions">
-    <a class="btn" href="/start" style="min-height:44px;padding:.5rem .75rem;font-size:.82rem;width:auto" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
-    <button type="button" class="lang" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button>
+<header class="header">
+  <div class="header-inner">
+    <nav class="header-nav" aria-label="Site">
+      <a href="/" data-en="Your Site" data-es="Your Site">Your Site</a>
+      <a href="/how" data-en="How" data-es="Cómo">How</a>
+      <a href="/prices" data-en="Prices" data-es="Precios">Prices</a>
+      <a href="/compare" aria-current="page" data-en="Compare" data-es="Comparar">Compare</a>
+      <a href="/faq" data-en="FAQ" data-es="FAQ">FAQ</a>
+      <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a>
+    </nav>
+    <div class="header-sale" data-en="Online Presence for $9.99 a month" data-es="Presencia en línea por $9.99 al mes">Online Presence for $9.99 a month</div>
+    <div class="header-actions">
+      <a class="header-login" href="/login" data-en="Login" data-es="Iniciar sesión">Login</a>
+      <a class="header-start" href="/start" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
+      <button type="button" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button>
+    </div>
   </div>
 </header>
-<nav class="nav" aria-label="Site" hidden></nav>
 <main class="wrap" style="padding-top:1.6rem;padding-bottom:2rem">
   <p class="kicker" data-en="Compare" data-es="Comparar">Compare</p>
-  <h1 data-en="We Post It vs Wix, Squarespace, Durable" data-es="We Post It vs Wix, Squarespace, Durable">We Post It vs Wix, Squarespace, Durable</h1>
-  <p class="line" data-en="Honest price comparison. What they sell vs what we do for Texas shops and local shops." data-es="Comparación honesta de precios. Qué venden ellos vs lo que hacemos por negocios de Texas y locales.">Honest price comparison. What they sell vs what we do for Texas shops and local shops.</p>
+  <h1 data-en="Your Site vs Wix, Squarespace, Durable, and others" data-es="Your Site vs Wix, Squarespace, Durable y otros">Your Site vs Wix, Squarespace, Durable, and others</h1>
+  <p class="line" data-en="Your Site is $9.99 a month for a one-page website we host. Wix Light is $17/mo, Squarespace Personal is $16/mo, Durable Launch is $22/mo, Hootsuite is $99/mo, Thryv Starter is $99/mo. Website only. No Facebook or Google." data-es="Your Site es $9.99 al mes por un sitio de una página que alojamos. Wix Light es $17/mes, Squarespace Personal es $16/mes, Durable Launch es $22/mes, Hootsuite es $99/mes, Thryv Starter es $99/mes. Solo sitio web. Sin Facebook ni Google.">Your Site is $9.99 a month for a one-page website we host. Wix Light is $17/mo, Squarespace Personal is $16/mo, Durable Launch is $22/mo, Hootsuite is $99/mo, Thryv Starter is $99/mo. Website only. No Facebook or Google.</p>
+
+  <h2 style="font-size:1.2rem;margin:1.2rem 0 .5rem;font-weight:750;" data-en="Price table for Texas shops" data-es="Tabla de precios para negocios de Texas">Price table for Texas shops</h2>
+  <p data-en="Your Site hosts Online Presence for $9.99 a month. The table uses listed monthly prices from their public plans." data-es="Your Site aloja Presencia en línea por $9.99 al mes. La tabla usa precios mensuales de sus planes públicos.">Your Site hosts Online Presence for $9.99 a month. The table uses listed monthly prices from their public plans.</p>
 
   <div class="comp-table">
     <table>
@@ -115,56 +148,96 @@
           <th data-en="Name" data-es="Nombre">Name</th>
           <th data-en="What They Sell" data-es="Qué Venden">What They Sell</th>
           <th data-en="Monthly Price" data-es="Precio Mensual">Monthly Price</th>
-          <th data-en="We Do That for $9.99?" data-es="¿Hacemos Eso por $9.99?">We Do That for $9.99?</th>
+          <th data-en="In $9.99?" data-es="¿En $9.99?">In $9.99?</th>
           <th data-en="Notes" data-es="Notas">Notes</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>Wix Light</strong></td>
+          <td><strong><a href="/vs/wix">Wix Light</a></strong></td>
           <td data-en="Website builder. You build it yourself." data-es="Constructor de sitios web. Usted lo construye.">Website builder. You build it yourself.</td>
-          <td>$17/mo</td>
-          <td data-en="One-page site" data-es="Sitio de una página">One-page site</td>
-          <td data-en="They give you tools to build. We build the site for you and host it. You text photos. We update it." data-es="Ellos dan herramientas para construir. Nosotros construimos el sitio por usted y lo alojamos. Usted manda fotos. Lo actualizamos.">They give you tools to build. We build the site for you and host it. You text photos. We update it.</td>
+          <td data-en="$17/mo" data-es="$17/mes">$17/mo</td>
+          <td data-en="No. They sell a builder." data-es="No. Ellos venden un constructor.">No. They sell a builder.</td>
+          <td data-en="Wix Light is $17/mo. You use their tools to build a site." data-es="Wix Light es $17/mes. Usted usa sus herramientas para armar un sitio.">Wix Light is $17/mo. You use their tools to build a site.</td>
         </tr>
         <tr>
-          <td><strong>Squarespace Personal</strong></td>
+          <td><strong><a href="/vs/squarespace">Squarespace Personal</a></strong></td>
           <td data-en="Website builder. You build it yourself." data-es="Constructor de sitios web. Usted lo construye.">Website builder. You build it yourself.</td>
-          <td>$16/mo</td>
-          <td data-en="One-page site" data-es="Sitio de una página">One-page site</td>
-          <td data-en="They give you tools to build. We build the site for you and host it. You text photos. We update it." data-es="Ellos dan herramientas para construir. Nosotros construimos el sitio por usted y lo alojamos. Usted manda fotos. Lo actualizamos.">They give you tools to build. We build the site for you and host it. You text photos. We update it.</td>
+          <td data-en="$16/mo" data-es="$16/mes">$16/mo</td>
+          <td data-en="No. They sell a builder." data-es="No. Ellos venden un constructor.">No. They sell a builder.</td>
+          <td data-en="Squarespace Personal is $16/mo. You build the site with their tools." data-es="Squarespace Personal es $16/mes. Usted arma el sitio con sus herramientas.">Squarespace Personal is $16/mo. You build the site with their tools.</td>
         </tr>
         <tr>
-          <td><strong>Durable Launch</strong></td>
+          <td><strong><a href="/vs/durable">Durable Launch</a></strong></td>
           <td data-en="AI website builder. You still run it yourself." data-es="Constructor de sitios web con IA. Usted aún lo maneja.">AI website builder. You still run it yourself.</td>
-          <td>$22/mo</td>
-          <td data-en="One-page site" data-es="Sitio de una página">One-page site</td>
-          <td data-en="They make a site with AI. You still manage it. We build the site for you, host it, and update it when you text changes." data-es="Ellos hacen un sitio con IA. Usted aún lo maneja. Nosotros construimos el sitio por usted, lo alojamos y lo actualizamos cuando manda cambios.">They make a site with AI. You still manage it. We build the site for you, host it, and update it when you text changes.</td>
+          <td data-en="$22/mo" data-es="$22/mes">$22/mo</td>
+          <td data-en="No. They sell an AI builder." data-es="No. Ellos venden un constructor con IA.">No. They sell an AI builder.</td>
+          <td data-en="Durable Launch is $22/mo. AI makes a site. You still manage it." data-es="Durable Launch es $22/mes. La IA hace un sitio. Usted aún lo maneja.">Durable Launch is $22/mo. AI makes a site. You still manage it.</td>
         </tr>
         <tr>
-          <td><strong>We Post It</strong></td>
-          <td data-en="We build and host a one-page website. You text photos. We update it. Shop name, ZIP, phone, hours, photos." data-es="Construimos y alojamos un sitio web de una página. Usted manda fotos. Lo actualizamos. Nombre de negocio, código postal, teléfono, horario, fotos.">We build and host a one-page website. You text photos. We update it. Shop name, ZIP, phone, hours, photos.</td>
-          <td>$9.99/mo</td>
-          <td data-en="Yes" data-es="Sí">Yes</td>
-          <td data-en="We do the work. You text photos. Stop whenever." data-es="Nosotros hacemos el trabajo. Usted manda fotos. Pare cuando quiera.">We do the work. You text photos. Stop whenever.</td>
+          <td><strong><a href="/vs/hootsuite">Hootsuite</a></strong></td>
+          <td data-en="Social posting tools you run yourself. Not a shop website." data-es="Herramientas de redes que usted usa. No es un sitio de negocio.">Social posting tools you run yourself. Not a shop website.</td>
+          <td data-en="$99/mo" data-es="$99/mes">$99/mo</td>
+          <td data-en="No. We do not sell Facebook or Google." data-es="No. No vendemos Facebook ni Google.">No. We do not sell Facebook or Google.</td>
+          <td data-en="Hootsuite is $99/mo for posting tools. Your Site hosts a website only." data-es="Hootsuite es $99/mes por herramientas de publicación. Your Site solo aloja un sitio web.">Hootsuite is $99/mo for posting tools. Your Site hosts a website only.</td>
+        </tr>
+        <tr>
+          <td><strong><a href="/vs/thryv">Thryv Starter</a></strong></td>
+          <td data-en="Local business software you manage." data-es="Software de negocios locales que usted maneja.">Local business software you manage.</td>
+          <td data-en="$99/mo" data-es="$99/mes">$99/mo</td>
+          <td data-en="No. They sell software." data-es="No. Ellos venden software.">No. They sell software.</td>
+          <td data-en="Thryv Starter is $99/mo for software you run. We host one page." data-es="Thryv Starter es $99/mes por software que usted maneja. Nosotros alojamos una página.">Thryv Starter is $99/mo for software you run. We host one page.</td>
+        </tr>
+        <tr class="ours">
+          <td><strong><a href="/online-presence">Your Site</a></strong></td>
+          <td data-en="We host a one-page website. Shop name, ZIP, phone, hours, photos you add." data-es="Alojamos un sitio de una página. Nombre de negocio, código postal, teléfono, horario, fotos que usted agrega.">We host a one-page website. Shop name, ZIP, phone, hours, photos you add.</td>
+          <td data-en="$9.99/mo" data-es="$9.99/mes">$9.99/mo</td>
+          <td data-en="Yes. One-page site we host." data-es="Sí. Sitio de una página que alojamos.">Yes. One-page site we host.</td>
+          <td data-en="Start here and change the page before you pay, or keep a page we built if we texted you. We host it. Stop whenever." data-es="Empiece aquí y cambie la página antes de pagar, o conserve una página que armamos si le mandamos un mensaje. Nosotros lo alojamos. Pare cuando quiera.">Start here and change the page before you pay, or keep a page we built if we texted you. We host it. Stop whenever.</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <p class="note" data-en="All prices are listed monthly prices from their public plans. We Post It builds and hosts the site for you. We never take your password." data-es="Todos los precios son precios mensuales de sus planes públicos. We Post It construye y aloja el sitio por usted. Nunca tomamos su contraseña.">All prices are listed monthly prices from their public plans. We Post It builds and hosts the site for you. We never take your password.</p>
+  <div class="comp-ours-card">
+    <strong><a href="/online-presence">Your Site</a></strong>
+    <p style="margin:0 0 .4rem;" data-en="$9.99/mo. We host a one-page website. Shop name, ZIP, phone, hours, photos you add." data-es="$9.99/mes. Alojamos un sitio de una página. Nombre de negocio, código postal, teléfono, horario, fotos que usted agrega.">$9.99/mo. We host a one-page website. Shop name, ZIP, phone, hours, photos you add.</p>
+    <p style="margin:0;" data-en="Website only. No Facebook or Google. Stop whenever." data-es="Solo sitio web. Sin Facebook ni Google. Pare cuando quiera.">Website only. No Facebook or Google. Stop whenever.</p>
+  </div>
+
+  <h2 style="font-size:1.2rem;margin:1.2rem 0 .5rem;font-weight:750;" data-en="What $9.99 includes" data-es="Qué incluye $9.99">What $9.99 includes</h2>
+  <ul>
+    <li data-en="One-page website we host" data-es="Sitio de una página que alojamos">One-page website we host</li>
+    <li data-en="Website only. No Facebook or Google." data-es="Solo sitio web. Sin Facebook ni Google.">Website only. No Facebook or Google.</li>
+    <li data-en="Phone browser is enough. Stop whenever." data-es="El navegador del teléfono basta. Pare cuando quiera.">Phone browser is enough. Stop whenever.</li>
+  </ul>
+
+  <p class="note" data-en="All prices are listed monthly prices from their public plans. Your Site hosts the site. Start here and change the page before you pay, or keep a page we built if we texted you. We never take your password." data-es="Todos los precios son precios mensuales de sus planes públicos. Your Site aloja el sitio. Empiece aquí y cambie la página antes de pagar, o conserve una página que armamos si le mandamos un mensaje. Nunca tomamos su contraseña.">All prices are listed monthly prices from their public plans. Your Site hosts the site. Start here and change the page before you pay, or keep a page we built if we texted you. We never take your password.</p>
 
   <div class="row" style="margin-top:1.3rem">
     <a class="btn" href="/start" data-en="Start · $9.99/mo" data-es="Empezar · $9.99/mes">Start · $9.99/mo</a>
-    <a class="btn ghost" href="/how" data-en="How it works" data-es="Cómo funciona">How it works</a>
+    <a class="btn btn-ghost" href="/how" data-en="How it works" data-es="Cómo funciona">How it works</a>
+    <a class="btn btn-ghost" href="/online-presence" data-en="What you get" data-es="Qué recibe">What you get</a>
   </div>
 </main>
-<footer>
-  <p style="margin: 0 0 0.5rem;">We Post It · <a href="/faq">FAQ</a> · <a href="/about" data-en="About" data-es="Acerca">About</a> · <a href="/contact" data-en="Contact" data-es="Contacto">Contact</a> · <a href="/compare" data-en="Compare" data-es="Comparar">Compare</a> · <a href="/notice" data-en="Legal Notice" data-es="Aviso legal">Legal Notice</a> · <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a> · <a href="/terms" data-en="Terms" data-es="Términos">Terms</a> · <a href="/cookies">Cookies</a> · <a href="/legal">Legal</a></p>
-  <p style="margin: 0; color: var(--muted); font-size: 0.9rem;" data-en="© 2026 Sunset Gaming LLC dba We Post It · Texas." data-es="© 2026 Sunset Gaming LLC dba We Post It · Texas.">© 2026 Sunset Gaming LLC dba We Post It · Texas.</p>
+<footer class="foot">
+  <div class="wrap">
+    <span>Your Site</span>
+    <a href="/faq" data-en="FAQ" data-es="FAQ">FAQ</a>
+    <a href="/compare" data-en="Compare" data-es="Comparar">Compare</a>
+    <a href="/online-presence" data-en="Online Presence" data-es="Presencia en línea">Online Presence</a>
+    <a href="/feedback" data-en="Feedback" data-es="Feedback">Feedback</a>
+    <a href="/about" data-en="About" data-es="Acerca">About</a>
+    <a href="/contact" data-en="Contact" data-es="Contacto">Contact</a>
+    <a href="/notice" data-en="Legal Notice" data-es="Aviso legal">Legal Notice</a>
+    <a href="/privacy" data-en="Privacy" data-es="Privacidad">Privacy</a>
+    <a href="/terms" data-en="Terms" data-es="Términos">Terms</a>
+    <a href="/terms-of-service" data-en="Terms of Service" data-es="Términos del servicio">Terms of Service</a>
+    <a href="/cookies" data-en="Cookies" data-es="Cookies">Cookies</a>
+    <a href="/legal" data-en="Legal" data-es="Legal">Legal</a>
+  </div>
 </footer>
 <script src="/js/site.js"></script>
 <script src="/js/visit.js"></script>
-<script src="/js/help.js"></script>
 </body>
 </html>

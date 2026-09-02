@@ -4,8 +4,11 @@
   --muted: #333330;
   --line: #cfcfc8;
   --paper: #ffffff;
+  --paper-2: #e4e4dc;
+  --cream: #f7f7f4;
   --ask: #111111;
   --askbg: #ecece6;
+  --display: "Oswald", ui-sans-serif, system-ui, sans-serif;
 }
 
 * {
@@ -324,6 +327,16 @@ body {
   }
 }
 
+.price-vs-mobile {
+  display: none;
+}
+
+@media (max-width: 999px) {
+  .price-vs-mobile {
+    display: block;
+  }
+}
+
 /* Typography */
 h1 {
   font-size: 2.35rem;
@@ -336,7 +349,7 @@ h1 {
 h2 {
   font-size: 1.15rem;
   font-weight: 700;
-  margin: 0 0 0.45rem;
+  margin: 1.15rem 0 0.45rem;
 }
 
 p {
@@ -496,6 +509,19 @@ select option:disabled {
   background: #fff;
   color: #111;
   border: 1.5px solid #111;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: stretch;
+}
+
+.row .btn {
+  width: auto;
+  flex: 1 1 12rem;
+  margin: 0;
 }
 
 .fine {

@@ -3,10 +3,139 @@
   "functions": {
     "api/stripe-webhook.js": {
       "memory": 1024,
-      "maxDuration": 10
+      "maxDuration": 60
+    },
+    "api/host-expire.js": {
+      "memory": 1024,
+      "maxDuration": 60
+    },
+    "api/sitemap-index.js": {
+      "maxDuration": 60
     }
   },
+  "crons": [
+    {
+      "path": "/api/host-expire",
+      "schedule": "0 12 * * *"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/google",
+      "destination": "/how",
+      "permanent": true
+    },
+    {
+      "source": "/google.html",
+      "destination": "/how",
+      "permanent": true
+    },
+    {
+      "source": "/s/:slug",
+      "has": [{ "type": "host", "value": "www.yoursite.site" }],
+      "destination": "https://:slug.yoursite.site/",
+      "permanent": true
+    },
+    {
+      "source": "/s/:slug/:path*",
+      "has": [{ "type": "host", "value": "www.yoursite.site" }],
+      "destination": "https://:slug.yoursite.site/",
+      "permanent": true
+    },
+    {
+      "source": "/s/:slug",
+      "has": [{ "type": "host", "value": "yoursite.site" }],
+      "destination": "https://:slug.yoursite.site/",
+      "permanent": true
+    },
+    {
+      "source": "/s/:slug/:path*",
+      "has": [{ "type": "host", "value": "yoursite.site" }],
+      "destination": "https://:slug.yoursite.site/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/robots.txt",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<shop>(?!www)[^.]+)\\.yoursite\\.site"
+        }
+      ],
+      "destination": "/api/shop-robots?slug=:shop"
+    },
+    {
+      "source": "/sitemap.xml",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<shop>(?!www)[^.]+)\\.yoursite\\.site"
+        }
+      ],
+      "destination": "/api/shop-sitemap?slug=:shop"
+    },
+    {
+      "source": "/sitemap-index.xml",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.yoursite.site"
+        }
+      ],
+      "destination": "/api/sitemap-index"
+    },
+    {
+      "source": "/sitemap-index.xml",
+      "has": [
+        {
+          "type": "host",
+          "value": "yoursite.site"
+        }
+      ],
+      "destination": "/api/sitemap-index"
+    },
+    {
+      "source": "/llms.txt",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<shop>(?!www)[^.]+)\\.yoursite\\.site"
+        }
+      ],
+      "destination": "/api/shop-llms?slug=:shop"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<shop>(?!www)[^.]+)\\.yoursite\\.site"
+        }
+      ],
+      "destination": "/api/shop-page?slug=:shop"
+    },
+    {
+      "source": "/call",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<shop>(?!www)[^.]+)\\.yoursite\\.site"
+        }
+      ],
+      "destination": "/api/shop-page?slug=:shop"
+    },
+    {
+      "source": "/photos",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<shop>(?!www)[^.]+)\\.yoursite\\.site"
+        }
+      ],
+      "destination": "/api/shop-page?slug=:shop"
+    },
     {
       "source": "/api/geo",
       "destination": "/api/geo"
@@ -20,6 +149,14 @@
       "destination": "/api/start"
     },
     {
+      "source": "/api/start-site",
+      "destination": "/api/start-site"
+    },
+    {
+      "source": "/api/help",
+      "destination": "/api/help"
+    },
+    {
       "source": "/api/checkout",
       "destination": "/api/checkout"
     },
@@ -28,24 +165,92 @@
       "destination": "/api/checkout"
     },
     {
-      "source": "/api/help",
-      "destination": "/api/help"
-    },
-    {
       "source": "/api/feedback",
       "destination": "/api/feedback"
     },
     {
+      "source": "/api/keep",
+      "destination": "/api/keep"
+    },
+    {
+      "source": "/api/keep-page",
+      "destination": "/api/keep-page"
+    },
+    {
+      "source": "/api/host-expire",
+      "destination": "/api/host-expire"
+    },
+    {
+      "source": "/api/site-document",
+      "destination": "/api/site-document"
+    },
+    {
+      "source": "/api/site-publish",
+      "destination": "/api/site-publish"
+    },
+    {
+      "source": "/api/site-preview",
+      "destination": "/api/site-preview"
+    },
+    {
+      "source": "/api/site-upload",
+      "destination": "/api/site-upload"
+    },
+    {
+      "source": "/api/site-photo",
+      "destination": "/api/site-photo"
+    },
+    {
+      "source": "/api/auth",
+      "destination": "/api/auth"
+    },
+    {
+      "source": "/api/billing",
+      "destination": "/api/billing"
+    },
+    {
+      "source": "/api/edit-page",
+      "destination": "/api/edit-page"
+    },
+    {
+      "source": "/keep/:slug",
+      "destination": "/api/keep-page?slug=:slug"
+    },
+    {
+      "source": "/keep",
+      "destination": "/api/keep-page"
+    },
+    {
       "source": "/s/:slug/call",
-      "destination": "/api/shop-page?slug=:slug&look=call"
+      "destination": "/api/shop-page?slug=:slug"
     },
     {
       "source": "/s/:slug/photos",
-      "destination": "/api/shop-page?slug=:slug&look=photos"
+      "destination": "/api/shop-page?slug=:slug"
     },
     {
       "source": "/s/:slug",
       "destination": "/api/shop-page?slug=:slug"
+    },
+    {
+      "source": "/edit/:slug",
+      "destination": "/api/edit-page?slug=:slug"
+    },
+    {
+      "source": "/google:id([A-Za-z0-9_-]{8,}).html",
+      "destination": "/api/google-site-verify?id=:id"
+    },
+    {
+      "source": "/google:id([A-Za-z0-9_-]{8,})",
+      "destination": "/api/google-site-verify?id=:id"
+    },
+    {
+      "source": "/login",
+      "destination": "/login.html"
+    },
+    {
+      "source": "/account",
+      "destination": "/login.html"
     },
     {
       "source": "/feedback",
@@ -80,12 +285,20 @@
       "destination": "/terms.html"
     },
     {
+      "source": "/terms-of-service",
+      "destination": "/terms-of-service.html"
+    },
+    {
       "source": "/cookies",
       "destination": "/cookies.html"
     },
     {
       "source": "/compare",
       "destination": "/compare.html"
+    },
+    {
+      "source": "/online-presence",
+      "destination": "/online-presence.html"
     },
     {
       "source": "/vs/wix",
@@ -110,11 +323,56 @@
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/keep/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
-          "value": "index, follow"
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/keep",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/edit/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/edit.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/login",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/account",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
         }
       ]
     }
