@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<meta name="robots" content="noindex,nofollow">
+<title>Edit shop page — We Post It</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/editor.css">
+</head>
+<body class="editor-app">
+
+<header class="ed-top">
+  <a class="ed-brand" href="/">We Post It</a>
+  <div class="ed-shop" id="edShop" data-en="Shop page" data-es="Página del negocio">Shop page</div>
+  <div class="ed-top-actions">
+    <span class="ed-status" id="edStatus"></span>
+    <button type="button" class="ed-btn" id="edSave" data-en="Save draft" data-es="Guardar borrador">Save draft</button>
+    <button type="button" class="ed-btn solid" id="edPublish" data-en="Publish" data-es="Publicar">Publish</button>
+    <a class="ed-btn" id="edLive" href="/s/" target="_blank" rel="noopener" data-en="Live page" data-es="Página en vivo">Live page</a>
+    <button type="button" class="ed-btn" id="langBtn" data-aria-en="Spanish" data-aria-es="Inglés">ES</button>
+  </div>
+</header>
+
+<div class="ed-tabs" role="tablist">
+  <button type="button" class="ed-tab" id="tabEdit" role="tab" aria-selected="true" data-en="Edit" data-es="Editar">Edit</button>
+  <button type="button" class="ed-tab" id="tabPreview" role="tab" aria-selected="false" data-en="Preview" data-es="Vista previa">Preview</button>
+</div>
+
+<div class="ed-error" id="edGate" hidden></div>
+
+<div class="ed-shell" id="edShell" data-pane="edit" hidden>
+  <section class="ed-preview">
+    <div class="ed-preview-bar">
+      <label>
+        <input type="radio" name="edMode" value="draft" checked>
+        <span data-en="Unpublished draft" data-es="Borrador">Unpublished draft</span>
+      </label>
+      <label>
+        <input type="radio" name="edMode" value="live">
+        <span data-en="Live page" data-es="Página en vivo">Live page</span>
+      </label>
+    </div>
+    <div class="ed-frame-wrap">
+      <iframe id="edFrame" title="Shop preview"></iframe>
+    </div>
+  </section>
+  <aside class="ed-side" id="edSide">
+    <h2 data-en="Fill in your page" data-es="Complete su página">Fill in your page</h2>
+    <p class="ed-hint" data-en="This is not a drag-and-drop builder. Pick colors, type the words, add photos. We still post the photos you text — this editor is optional." data-es="Esto no es un constructor de arrastrar. Elija colores, escriba el texto, agregue fotos. Seguimos publicando las fotos que manda — este editor es opcional.">This is not a drag-and-drop builder. Pick colors, type the words, add photos. We still post the photos you text — this editor is optional.</p>
+    <div id="edForm"></div>
+  </aside>
+</div>
+
+<script src="/js/site.js"></script>
+<script src="/js/editor.js"></script>
+</body>
+</html>
